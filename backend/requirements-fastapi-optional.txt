@@ -1,0 +1,9 @@
+# OPTIONAL production-style FastAPI runtime.
+# V1.2 demo does not need this file.
+# The older pinned stack below should be used with Python 3.11-3.13, not Python 3.14.
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+openpyxl==3.1.5
+pydantic==2.11.7
+pytest==8.4.1
+httpx==0.28.1

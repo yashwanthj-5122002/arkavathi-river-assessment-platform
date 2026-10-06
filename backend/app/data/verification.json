@@ -1,0 +1,13 @@
+{
+  "validation_passed": true,
+  "issues": [],
+  "checks": {
+    "source_rows_match_merged_kmz": true,
+    "clip_count_matches_merged_kmz": true,
+    "reported_track_points_match_flight_descriptions": true,
+    "combined_duration_difference_seconds": 4,
+    "distance_difference_km": 0.0,
+    "all_flights_have_start_end": true
+  },
+  "note": "Merged.kmz reports 17,923 track points. The rendered LineString geometry contains 17,794 coordinate vertices because the KML flight-path geometry omits/reduces some repeated sampled points. The dashboard preserves the reported 17,923 KPI and separately exposes rendered vertices for technical verification."
+}

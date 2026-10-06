@@ -1,0 +1,89 @@
+# ============================================================
+# GENERATED / BACKUP / RUNTIME PROJECT DATA
+# ============================================================
+
+# Large backup archive
+_patch_backup.zip
+
+# Historical patch backups
+patch_backups/
+
+# Source-file backups
+*.backup_before_*
+*.backup_before*
+*.orig
+
+# Runtime uploaded documents/media
+backend/runtime/department_repository/
+backend/runtime/event_media/
+
+# Generated KIADB outputs
+scripts/kiadb_output/
+# ============================================================
+# FINAL LOCAL/PRIVATE EXCLUSIONS
+# ============================================================
+
+# Secrets and local environment
+.env
+.env.*
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.*
+config/production.env
+
+# Credential files
+*CREDENTIALS*.txt
+*credentials*.txt
+*credential*.txt
+*PASSWORD*.txt
+*password*.txt
+*SECRET*.txt
+*secret*.txt
+
+docs/CREDENTIALS_AND_ACCESS_GUIDE.md
+
+# Python environments
+.venv/
+venv/
+env/
+backend/.venv/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Node dependencies
+node_modules/
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Backup files
+_patch_backup/
+_patch_backup.zip
+patch_backups/
+production_data/backups/
+*.bak
+*.backup
+*.backup_before_*
+*.orig
+
+# Runtime uploaded/generated content
+backend/runtime/department_repository/
+backend/runtime/event_media/
+
+# Generated outputs
+scripts/kiadb_output/
+# Safe API/environment templates for developers
+!backend/.env.example
+!frontend/.env.example

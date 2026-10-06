@@ -1,0 +1,50 @@
+{
+  "days": {
+    "3": {
+      "flights": 30,
+      "clickable_points": 4226,
+      "reported_track_points": 4309,
+      "note": "Day 3 clickable points follow rendered KML vertices because the supplied Day 3 workbook has no time/frame columns.",
+      "max_source_time_delta_ms": 0.0
+    },
+    "4": {
+      "flights": 19,
+      "clickable_points": 1909,
+      "reported_track_points": 1909,
+      "note": "All reported timed KML samples matched to source XLSX telemetry rows.",
+      "max_source_time_delta_ms": 0.0
+    },
+    "5": {
+      "flights": 16,
+      "clickable_points": 2617,
+      "reported_track_points": 2617,
+      "note": "All reported timed KML samples matched to source XLSX telemetry rows.",
+      "max_source_time_delta_ms": 0.0
+    },
+    "6": {
+      "flights": 13,
+      "clickable_points": 2570,
+      "reported_track_points": 2570,
+      "note": "All reported timed KML samples matched to source XLSX telemetry rows.",
+      "max_source_time_delta_ms": 0.0
+    },
+    "7": {
+      "flights": 22,
+      "clickable_points": 3160,
+      "reported_track_points": 3160,
+      "note": "All reported timed KML samples matched to source XLSX telemetry rows.",
+      "max_source_time_delta_ms": 0.0
+    },
+    "8": {
+      "flights": 18,
+      "clickable_points": 3358,
+      "reported_track_points": 3358,
+      "note": "All reported timed KML samples matched to source XLSX telemetry rows.",
+      "max_source_time_delta_ms": 0.0
+    }
+  },
+  "total_clickable_points": 17840,
+  "timed_full_detail_points": 13614,
+  "day3_spatial_points": 4226,
+  "max_source_time_delta_ms": 0.0
+}
