@@ -97,12 +97,12 @@ export function ProjectEventsShowcase(){
       tabIndex={copyIndex===0?0:-1}
       aria-hidden={copyIndex===0?undefined:true}
       onClick={()=>setSelected(event)}
-      className="group w-[300px] shrink-0 overflow-hidden rounded-2xl border border-slate-200 bg-white text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg sm:w-[360px]"
+      className="ark-event-card group w-[300px] shrink-0 overflow-hidden rounded-2xl border border-slate-200 bg-white text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg sm:w-[360px]"
     >
       <div className="relative h-44 overflow-hidden bg-gradient-to-br from-navy-950 to-blue-700">
         {cover?<img src={cover.url} alt={event.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>:<div className="grid h-full place-items-center text-blue-100"><CalendarDays size={38}/></div>}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent"/>
-        <span className="absolute bottom-3 left-3 rounded-full border border-white/25 bg-slate-950/55 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white backdrop-blur">Completed</span>
+        <span className="ark-event-status absolute bottom-3 left-3 rounded-full border border-white/25 bg-slate-950/55 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white backdrop-blur">Completed</span>
       </div>
       <div className="p-4">
         <h3 className="line-clamp-2 text-base font-black leading-snug text-navy-950 group-hover:text-blue-700">{event.title}</h3>
@@ -116,7 +116,7 @@ export function ProjectEventsShowcase(){
     </button>
   }
 
-  return <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
+  return <section className="ark-events overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
     <div className="flex flex-col gap-3 bg-gradient-to-r from-navy-950 via-navy-900 to-blue-700 px-5 py-4 text-white sm:flex-row sm:items-center sm:justify-between">
       <div>
         <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[.18em] text-blue-200"><Sparkles size={13}/>Project Highlights</div>

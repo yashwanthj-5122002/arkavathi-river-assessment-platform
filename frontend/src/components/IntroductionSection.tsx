@@ -529,7 +529,7 @@ function IntroductionDetailLayout({
   children: ReactNode
 }) {
   return (
-    <div className="grid items-stretch gap-4 xl:grid-cols-[300px_minmax(0,1fr)] 2xl:grid-cols-[320px_minmax(0,1fr)]">
+    <div className="ark-introduction grid items-stretch gap-4 xl:grid-cols-[300px_minmax(0,1fr)] 2xl:grid-cols-[320px_minmax(0,1fr)]">
       <div className="h-full xl:sticky xl:top-4">
         <IntroductionSideNavigation
           activeView={activeView}
@@ -622,7 +622,7 @@ export function IntroductionSection() {
   }
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
+    <section className="ark-introduction overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
       <div className="flex flex-col gap-3 bg-gradient-to-r from-navy-950 via-navy-900 to-blue-700 px-5 py-4 text-white sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-200">Project Information</div>

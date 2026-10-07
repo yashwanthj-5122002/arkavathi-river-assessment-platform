@@ -22,8 +22,8 @@ export function Sidebar({user,permissions,activePage,onNavigate}:{user:AuthUser;
   if(has('AUDIT.VIEW'))items.push([History,'Audit History','audit-history'])
   if(user.role==='COMPANY_ADMIN')items.push([KeyRound,'Access Control','access-control'])
 
-  return <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col bg-gradient-to-b from-navy-950 to-navy-900 px-3 py-4 text-white lg:flex">
-    <div className="mb-5 flex h-[78px] items-center px-1.5 py-1">
+  return <aside className="ark-sidebar sticky top-0 hidden h-screen shrink-0 flex-col px-3 py-4 text-white lg:flex">
+    <div className="ark-sidebar-brand mb-5 flex items-center px-1.5 py-1">
       <img src="/branding/karnataka-emblem.png" alt="Government of Karnataka emblem" className="h-11 w-11 shrink-0 object-contain"/>
       <div className="ml-2.5 min-w-0 flex-1">
         <div className="text-[12px] font-black leading-[15px] text-white">Water Resources Department</div>
@@ -36,8 +36,8 @@ export function Sidebar({user,permissions,activePage,onNavigate}:{user:AuthUser;
       </div>
     </div>
 
-    <nav className="space-y-1 overflow-y-auto pr-1">{items.map(([Icon,label,page])=><button key={`${label}-${page}`} type="button" onClick={()=>onNavigate(page as DashboardPage)} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition ${activePage===page?'bg-white/15 font-bold text-white shadow-sm':'text-blue-50 hover:bg-white/10'}`}><Icon size={18}/>{label}</button>)}</nav>
-    <div className="mt-auto space-y-2 pt-4">
+    <nav className="ark-sidebar-nav space-y-1 overflow-y-auto pr-1">{items.map(([Icon,label,page])=><button key={`${label}-${page}`} type="button" onClick={()=>onNavigate(page as DashboardPage)} aria-current={activePage===page?'page':undefined} className={`ark-sidebar-link flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition ${activePage===page?'bg-white/15 font-bold text-white shadow-sm':'text-blue-50 hover:bg-white/10'}`}><Icon size={18}/>{label}</button>)}</nav>
+    <div className="ark-sidebar-foot mt-auto space-y-2 pt-4">
       <div className="rounded-xl border border-white/10 bg-white/8 p-3 text-xs leading-5 text-blue-100">
         <div className="flex items-center gap-2.5">
           <img src="/branding/nakshatech-mark.png" alt="Nakshatech" className="h-8 w-8 shrink-0 object-contain"/>

@@ -52,6 +52,23 @@ import type {
 
 export const API_BASE = ''
 
+export type NakshaSurveyDataset = {
+  id: string
+  name: string
+  source_name: string
+  group: 'Hydrology' | 'Project & Infrastructure' | 'Land & Context'
+  geometry_type: 'Point' | 'LineString' | 'Polygon' | 'MultiPoint' | null
+  feature_count: number
+  source_crs: string | null
+  available: boolean
+}
+
+export type NakshaSurveyGeoJson = {
+  type: 'FeatureCollection'
+  features: Array<{ type: 'Feature'; id?: string | number; properties?: Record<string, unknown>; geometry: { type: string; coordinates: unknown } | null }>
+  metadata: { dataset_id: string; source_name: string; source_crs: string; target_crs: 'EPSG:4326'; feature_count: number; bounds: [number, number, number, number] | null }
+}
+
 class ApiError extends Error {
   status: number
   code?: string
@@ -121,6 +138,8 @@ const dayQuery=(days:number[])=>days.length?`?days=${days.join(',')}`:''
 
 export const api={
   health:()=>requestJson<{status:string;service:string;version:string;auth?:string}>('/health'),
+  nakshaSurveyCatalogue:()=>requestJson<{datasets:NakshaSurveyDataset[]}>('/api/v1/gis/nakshatech-survey'),
+  nakshaSurveyDataset:(id:string)=>requestJson<NakshaSurveyGeoJson>(`/api/v1/gis/nakshatech-survey/${encodeURIComponent(id)}`),
   portalConfig:()=>requestJson<PortalConfig>('/api/v1/auth/portal-config'),
   me:()=>requestJson<{user:AuthUser}>('/api/v1/auth/me'),
   login:(payload:{portal:PortalId;email:string;password:string;institution_id?:string})=>requestJson<{user:AuthUser}>('/api/v1/auth/login',{method:'POST',body:JSON.stringify(payload)}),

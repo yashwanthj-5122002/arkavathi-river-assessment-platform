@@ -2,7 +2,7 @@ import { MapPinned } from 'lucide-react'
 
 export function StudyAreaMapPreview() {
   return (
-    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
+    <section className="ark-study-preview overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
       <div className="flex h-[260px] flex-col sm:h-[300px] lg:h-[340px] 2xl:h-[380px]">
         <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
           <div>

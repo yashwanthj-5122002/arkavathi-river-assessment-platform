@@ -112,6 +112,7 @@ from app.industry_intelligence import (
 )
 
 from app.media_store import list_showcase_videos, list_video_srt_pairs, media_pair_paths, media_status, showcase_video_path
+from app.nakshatech_survey import survey_catalogue, survey_geojson
 from app.production_config import (
     ALLOWED_ORIGINS,
     DEBUG_ERRORS,
@@ -584,6 +585,8 @@ class Handler(BaseHTTPRequestHandler):
                         "/api/v1/map/tracks",
                         "/api/v1/map/endpoints",
                         "/api/v1/map/points",
+                        "/api/v1/gis/nakshatech-survey",
+                        "/api/v1/gis/nakshatech-survey/{dataset_id}",
                         "/api/v1/institution/overview",
                         "/api/v1/admin/access-summary",
                         "/api/v1/scientific/summary",
@@ -1068,6 +1071,25 @@ class Handler(BaseHTTPRequestHandler):
                 user = self._require_company_admin()
                 if user:
                     self._send_json(list_access_summary())
+                return
+
+            survey_prefix = "/api/v1/gis/nakshatech-survey"
+            if path == survey_prefix or path.startswith(survey_prefix + "/"):
+                user = self._require_user()
+                if not user:
+                    return
+                if user.organization_type != "COMPANY" or user.role == "COMPANY_DEPARTMENT_USER":
+                    self._send_json({"detail": "NakshaTech survey data requires company GIS access", "code": "FORBIDDEN"}, status=403)
+                    return
+                if path == survey_prefix:
+                    self._send_json(survey_catalogue())
+                else:
+                    dataset_id = unquote(path[len(survey_prefix) + 1:])
+                    self._send_json(survey_geojson(dataset_id))
+                return
+
+            if path == "/production_data" or path.startswith("/production_data/"):
+                self._send_json({"detail": "Not Found"}, status=404)
                 return
 
             # PUBLIC_PRODUCTION_FRONTEND_BEFORE_AUTH

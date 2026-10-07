@@ -73,6 +73,7 @@ _patch_backup/
 _patch_backup.zip
 patch_backups/
 production_data/backups/
+production_data/gis/nakshatech-survey/
 *.bak
 *.backup
 *.backup_before_*
@@ -87,3 +88,5 @@ scripts/kiadb_output/
 # Safe API/environment templates for developers
 !backend/.env.example
 !frontend/.env.example
+frontend.zip
+ARKAVATHI_PUBLIC_LANDING_PAGE_PATCH.ps1
