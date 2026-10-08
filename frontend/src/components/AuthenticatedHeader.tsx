@@ -1,4 +1,4 @@
-import { LogOut, ShieldCheck, UserRound } from 'lucide-react'
+import { Bell, LogOut, ShieldCheck, UserRound } from 'lucide-react'
 import type { AuthUser } from '../lib/types'
 
 function portalLabel(user: AuthUser) {
@@ -80,6 +80,20 @@ function HeaderDivider() {
   return <div aria-hidden="true" className="ark-header-divider" />
 }
 
+function ProjectNotificationButton({ onNotifications }: { onNotifications: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onNotifications}
+      aria-label="Notifications"
+      title="Notifications"
+      className="ark-button-icon ark-header-logout grid shrink-0 place-items-center text-white transition focus:outline-none focus:ring-2 focus:ring-cyan-200/70"
+    >
+      <Bell size={24} strokeWidth={2} />
+    </button>
+  )
+}
+
 function ProjectLogoutButton({ onLogout }: { onLogout: () => void }) {
   return (
     <button
@@ -97,11 +111,13 @@ function ProjectLogoutButton({ onLogout }: { onLogout: () => void }) {
 export function AuthenticatedHeader({
   user,
   onLogout,
+  onNotifications,
   subtitle,
   projectBranding = false,
 }: {
   user: AuthUser
   onLogout: () => void
+  onNotifications?: () => void
   subtitle: string
   projectBranding?: boolean
 }) {
@@ -129,7 +145,10 @@ export function AuthenticatedHeader({
             <HeaderDivider />
             <JaiprakashLeadershipBlock />
             <HeaderDivider />
-            <div className="ark-project-logout-slot">
+            <div className="ark-project-logout-slot flex items-center gap-1">
+              {onNotifications && (
+                <ProjectNotificationButton onNotifications={onNotifications} />
+              )}
               <ProjectLogoutButton onLogout={onLogout} />
             </div>
           </div>
@@ -172,4 +191,3 @@ export function AuthenticatedHeader({
     </header>
   )
 }
-
