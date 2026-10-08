@@ -26,7 +26,7 @@ import {
   understandingPollutionPoints,
 } from '../data/projectOverview'
 
-type IntroductionView = 'menu' | 'about' | 'pollution' | 'action' | 'focus' | 'collaboration' | 'study-area' | 'vision-mission' | 'chairman-desk'
+type IntroductionView = 'menu' | 'about' | 'pollution' | 'action' | 'focus' | 'collaboration' | 'study-area' | 'vision' | 'mission' | 'chairman-desk' | 'project-team'
 
 const introductionItems = [
   { key: 'about', label: 'About Us', icon: Info },
@@ -35,8 +35,10 @@ const introductionItems = [
   { key: 'focus', label: 'Key Focus Areas', icon: Target },
   { key: 'collaboration', label: 'Collaboration', icon: UsersRound },
   { key: 'study-area', label: 'Study Area Map', icon: MapPinned },
-  { key: 'vision-mission', label: 'Vision & Mission', icon: Landmark },
+  { key: 'vision', label: 'Vision', icon: Landmark },
+  { key: 'mission', label: 'Mission', icon: Landmark },
   { key: 'chairman-desk', label: "Chairman's Desk", icon: CircleDot },
+  { key: 'project-team', label: 'Project Team', icon: UsersRound },
 ] as const
 
 const focusIcons = [Waves, Droplets, MapPinned, Factory, MapPinned, Landmark, CircleDot, Target]
@@ -212,7 +214,42 @@ function KeyFocusAreasView({ onBack }: { onBack: () => void }) {
   )
 }
 
-function VisionMissionView({ onBack }: { onBack: () => void }) {
+function VisionView({ onBack }: { onBack: () => void }) {
+  return (
+    <div>
+      <SectionHeader
+        title="Vision"
+        subtitle="A shared long-term direction for the Arkavathy River Basin."
+        onBack={onBack}
+      />
+
+      <div className="p-4 md:p-5">
+        <article className="rounded-2xl border border-blue-100 bg-blue-50/60 p-5">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-100 text-blue-700">
+              <Landmark size={19} />
+            </div>
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-700">
+                Vision
+              </div>
+              <h4 className="mt-1 text-base font-black text-slate-900">
+                Arkavathy River Basin
+              </h4>
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm leading-7 text-slate-700">
+            A clean, healthy and resilient Arkavathy River Basin through integrated pollution control,
+            ecological restoration and shared responsibility.
+          </p>
+        </article>
+      </div>
+    </div>
+  )
+}
+
+function MissionView({ onBack }: { onBack: () => void }) {
   const missionSteps = [
     'Identify pollution sources',
     'Prevent pollution at source',
@@ -224,43 +261,38 @@ function VisionMissionView({ onBack }: { onBack: () => void }) {
   return (
     <div>
       <SectionHeader
-        title="Vision & Mission"
-        subtitle="A shared direction for pollution control, ecological restoration and long-term river health."
+        title="Mission"
+        subtitle="From identification and prevention to monitoring and restoration."
         onBack={onBack}
       />
+
       <div className="p-4 md:p-5">
-        <article className="rounded-2xl border border-blue-100 bg-blue-50/60 p-5">
-          <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-100 text-blue-700">
-              <Landmark size={19} />
-            </div>
-            <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-700">Vision</div>
-              <h4 className="mt-1 text-base font-black text-slate-900">Arkavathy River Basin</h4>
-            </div>
+        <article className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-5">
+          <div className="text-[10px] font-black uppercase tracking-[0.15em] text-emerald-700">
+            Mission
           </div>
-
-          <p className="mt-4 text-sm leading-7 text-slate-700">
-            A clean, healthy and resilient Arkavathy River Basin through integrated pollution control,
-            ecological restoration and shared responsibility.
-          </p>
-
-          <div className="my-5 border-t border-blue-100" />
-
-          <div className="text-[10px] font-black uppercase tracking-[0.15em] text-emerald-700">Mission</div>
-          <h4 className="mt-1 text-base font-black text-slate-900">From identification to restoration</h4>
+          <h4 className="mt-1 text-base font-black text-slate-900">
+            From identification to restoration
+          </h4>
 
           <div className="mt-5 grid gap-2 lg:grid-cols-5">
             {missionSteps.map((step, index) => (
               <div key={step} className="relative">
                 <div className="flex min-h-[88px] items-center justify-center rounded-xl border border-emerald-100 bg-white px-3 py-4 text-center">
                   <div>
-                    <div className="mx-auto mb-2 grid h-7 w-7 place-items-center rounded-full bg-emerald-100 text-[11px] font-black text-emerald-800">{index + 1}</div>
-                    <div className="text-xs font-extrabold leading-5 text-slate-700">{step}</div>
+                    <div className="mx-auto mb-2 grid h-7 w-7 place-items-center rounded-full bg-emerald-100 text-[11px] font-black text-emerald-800">
+                      {index + 1}
+                    </div>
+                    <div className="text-xs font-extrabold leading-5 text-slate-700">
+                      {step}
+                    </div>
                   </div>
                 </div>
+
                 {index < missionSteps.length - 1 && (
-                  <div className="py-1 text-center text-lg font-black text-emerald-500 lg:absolute lg:-right-[9px] lg:top-1/2 lg:z-10 lg:-translate-y-1/2 lg:py-0">&rarr;</div>
+                  <div className="py-1 text-center text-lg font-black text-emerald-500 lg:absolute lg:-right-[9px] lg:top-1/2 lg:z-10 lg:-translate-y-1/2 lg:py-0">
+                    &rarr;
+                  </div>
                 )}
               </div>
             ))}
@@ -271,6 +303,35 @@ function VisionMissionView({ onBack }: { onBack: () => void }) {
   )
 }
 
+function ProjectTeamView({ onBack }: { onBack: () => void }) {
+  return (
+    <div>
+      <SectionHeader
+        title="Project Team"
+        subtitle="Project team information."
+        onBack={onBack}
+      />
+
+      <div className="p-4 md:p-5">
+        <article className="rounded-2xl border border-slate-200 bg-white p-5">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-700">
+              <UsersRound size={19} />
+            </div>
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-700">
+                Project Team
+              </div>
+              <h4 className="mt-1 text-base font-black text-slate-900">
+                Team information will be added here.
+              </h4>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  )
+}
 function ChairmanDeskView({ onBack }: { onBack: () => void }) {
   const objectives = [
     'Prevent pollution at source',
@@ -604,16 +665,22 @@ export function IntroductionSection() {
       </IntroductionDetailLayout>
     )
   }
-
-  if (view === 'vision-mission') {
+  if (view === 'vision') {
     return (
       <IntroductionDetailLayout activeView={view} onSelect={setView}>
-        <VisionMissionView onBack={() => setView('menu')} />
+        <VisionView onBack={() => setView('menu')} />
       </IntroductionDetailLayout>
     )
   }
 
-  if (view === 'chairman-desk') {
+  if (view === 'mission') {
+    return (
+      <IntroductionDetailLayout activeView={view} onSelect={setView}>
+        <MissionView onBack={() => setView('menu')} />
+      </IntroductionDetailLayout>
+    )
+  }
+if (view === 'chairman-desk') {
     return (
       <IntroductionDetailLayout activeView={view} onSelect={setView}>
         <ChairmanDeskView onBack={() => setView('menu')} />
@@ -621,6 +688,13 @@ export function IntroductionSection() {
     )
   }
 
+  if (view === 'project-team') {
+    return (
+      <IntroductionDetailLayout activeView={view} onSelect={setView}>
+        <ProjectTeamView onBack={() => setView('menu')} />
+      </IntroductionDetailLayout>
+    )
+  }
   return (
     <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
       <div className="flex flex-col gap-3 bg-gradient-to-r from-navy-950 via-navy-900 to-blue-700 px-5 py-4 text-white sm:flex-row sm:items-center sm:justify-between">
@@ -655,6 +729,7 @@ export function IntroductionSection() {
     </section>
   )
 }
+
 
 
 

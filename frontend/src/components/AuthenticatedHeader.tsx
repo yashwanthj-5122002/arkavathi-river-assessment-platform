@@ -1,4 +1,4 @@
-import { LogOut, ShieldCheck, UserRound } from 'lucide-react'
+﻿import { Bell, LogOut, ShieldCheck, UserRound } from 'lucide-react'
 import type { AuthUser } from '../lib/types'
 
 function portalLabel(user: AuthUser) {
@@ -80,6 +80,19 @@ function HeaderDivider() {
   return <div aria-hidden="true" className="hidden h-14 w-px shrink-0 bg-white/20 xl:block" />
 }
 
+function ProjectNotificationButton({ onNotifications }: { onNotifications: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onNotifications}
+      aria-label="Notifications"
+      title="Notifications"
+      className="grid h-[52px] w-[52px] shrink-0 place-items-center rounded-xl text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-200/70"
+    >
+      <Bell size={24} strokeWidth={2} />
+    </button>
+  )
+}
 function ProjectLogoutButton({ onLogout }: { onLogout: () => void }) {
   return (
     <button
@@ -97,11 +110,13 @@ function ProjectLogoutButton({ onLogout }: { onLogout: () => void }) {
 export function AuthenticatedHeader({
   user,
   onLogout,
+  onNotifications,
   subtitle,
   projectBranding = false,
 }: {
   user: AuthUser
   onLogout: () => void
+  onNotifications?: () => void
   subtitle: string
   projectBranding?: boolean
 }) {
@@ -129,7 +144,10 @@ export function AuthenticatedHeader({
             <HeaderDivider />
             <JaiprakashLeadershipBlock />
             <HeaderDivider />
-            <div className="pl-3">
+            <div className="flex items-center gap-1 pl-3">
+              {onNotifications && (
+                <ProjectNotificationButton onNotifications={onNotifications} />
+              )}
               <ProjectLogoutButton onLogout={onLogout} />
             </div>
           </div>
@@ -156,7 +174,7 @@ export function AuthenticatedHeader({
           <div className="min-w-0">
             <div className="max-w-[220px] truncate text-xs font-black">{user.display_name}</div>
             <div className="max-w-[220px] truncate text-[10px] text-blue-100">
-              {user.organization_name} Â· {user.role.replace(/_/g, ' ')}
+              {user.organization_name} Ã‚Â· {user.role.replace(/_/g, ' ')}
             </div>
           </div>
           <button
@@ -172,4 +190,5 @@ export function AuthenticatedHeader({
     </header>
   )
 }
+
 
