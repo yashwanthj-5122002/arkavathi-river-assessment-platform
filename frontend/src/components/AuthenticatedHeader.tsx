@@ -9,25 +9,20 @@ function portalLabel(user: AuthUser) {
 
 function NakshatechBrandBlock() {
   return (
-    <div className="ark-header-brand flex items-center">
-      <div className="min-w-0 w-full">
-        <div className="text-[13px] font-semibold leading-4 text-white">
-          Nakshatech Project Administration
+    <div className="flex h-[78px] w-[235px] shrink-0 items-center gap-3 px-3">
+      <img
+        src="/branding/nakshatech-mark.png"
+        alt="Nakshatech"
+        className="h-9 w-9 shrink-0 object-contain"
+      />
+
+      <div className="min-w-0">
+        <div className="whitespace-nowrap text-[19px] font-semibold leading-none tracking-[0.15em] text-white">
+          NAKSHATECH
         </div>
-        <div className="mt-2 flex items-center gap-3">
-          <img
-            src="/branding/nakshatech-mark.png"
-            alt="Nakshatech symbol"
-            className="h-10 w-10 shrink-0 object-contain"
-          />
-          <div className="min-w-0">
-            <div className="whitespace-nowrap text-[21px] font-medium leading-none tracking-[0.16em] text-cyan-100">
-              NAKSHATECH
-            </div>
-            <div className="mt-1 whitespace-nowrap text-[7px] font-semibold leading-none tracking-[0.22em] text-blue-100">
-              INSPIRING GEOSPATIAL STANDARDS
-            </div>
-          </div>
+
+        <div className="mt-1 whitespace-nowrap text-[6px] font-semibold uppercase leading-none tracking-[0.12em] text-blue-100">
+          GEOSPATIAL TECHNOLOGY PARTNER
         </div>
       </div>
     </div>
@@ -48,7 +43,7 @@ function LeadershipBlock({
       <div className="ark-header-portrait grid shrink-0 place-items-center overflow-hidden bg-white shadow-sm ring-1 ring-white/70">
         <img src={portrait} alt="" className="h-full w-full object-cover" />
       </div>
-      <div className="ml-3 min-w-0 flex-1">
+      <div className="ml-1 min-w-0 flex-1">
         <div className="text-[11px] font-black leading-[14px] text-white">{title}</div>
         <div className="mt-0.5 text-[9px] font-semibold leading-3 text-blue-100">Government of Karnataka</div>
         <div className="mt-0.5 text-[9px] font-bold leading-3 text-white/95">{name}</div>
@@ -67,10 +62,11 @@ function JaiprakashLeadershipBlock() {
           className="h-full w-full object-cover object-top"
         />
       </div>
-      <div className="ml-2 min-w-0 flex-1">
+      <div className="ml-0.5 min-w-0 flex-0.5">
         <div className="text-[11px] font-black leading-[14px] text-white">Dr. K. Jaiprakash</div>
         <div className="mt-0.5 text-[8.5px] font-semibold leading-[11px] text-blue-100">
-          Former Secretary, Government of Karnataka and Chairman, Committee for Studies on Arkavathi River Basin
+         <p> Former Secretary, Government of Karnataka and Chairman,</p> 
+         <p> Committee for Studies on Arkavathi River Basin</p>
         </div>
       </div>
     </div>
@@ -123,7 +119,7 @@ export function AuthenticatedHeader({
 }) {
   if (projectBranding) {
     return (
-      <header className="ark-auth-header ark-project-header px-4 py-3 text-white md:px-5">
+      <header className="ark-auth-header ark-project-header px-1 py-3 text-white md:px-0">
         <div className="ark-project-header-inner mx-auto max-w-[1700px]">
           <div className="ark-project-identity">
             <NakshatechBrandBlock />
@@ -159,7 +155,7 @@ export function AuthenticatedHeader({
 
   return (
     <header className="ark-auth-header px-4 py-4 text-white md:px-6">
-      <div className="mx-auto flex max-w-[1700px] flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-[1700px] flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div>
           <div className="flex items-center gap-2 text-sm font-semibold text-cyan-200">
             <ShieldCheck size={15} />

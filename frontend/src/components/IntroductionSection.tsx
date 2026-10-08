@@ -29,16 +29,26 @@ import {
 type IntroductionView = 'menu' | 'about' | 'pollution' | 'action' | 'focus' | 'collaboration' | 'study-area' | 'vision' | 'mission' | 'chairman-desk' | 'project-team'
 
 const introductionItems = [
+
   { key: 'about', label: 'About Us', icon: Info },
-  { key: 'pollution', label: 'Understanding the Pollution', icon: Waves },
-  { key: 'action', label: 'From Data to Action', icon: Workflow },
-  { key: 'focus', label: 'Key Focus Areas', icon: Target },
-  { key: 'collaboration', label: 'Collaboration', icon: UsersRound },
-  { key: 'study-area', label: 'Study Area Map', icon: MapPinned },
-  { key: 'vision', label: 'Vision', icon: Landmark },
-  { key: 'mission', label: 'Mission', icon: Landmark },
-  { key: 'chairman-desk', label: "Chairman's Desk", icon: CircleDot },
+
   { key: 'project-team', label: 'Project Team', icon: UsersRound },
+
+  { key: 'pollution', label: 'Understanding the Pollution', icon: Waves },
+
+  { key: 'action', label: 'From Data to Action', icon: Workflow },
+
+  { key: 'focus', label: 'Key Focus Areas', icon: Target },
+
+  { key: 'collaboration', label: 'Collaboration', icon: UsersRound },
+
+  { key: 'study-area', label: 'Study Area Map', icon: MapPinned },
+
+  { key: 'vision', label: 'Vision', icon: Landmark },
+
+  { key: 'mission', label: 'Mission', icon: Landmark },
+
+  { key: 'chairman-desk', label: "Chairman's Desk", icon: CircleDot },
 ] as const
 
 const focusIcons = [Waves, Droplets, MapPinned, Factory, MapPinned, Landmark, CircleDot, Target]
@@ -414,21 +424,34 @@ function CollaborationView({ onBack, config }: { onBack: () => void; config: Por
     <div>
       <SectionHeader
         title="Collaboration"
-        subtitle="Participating NGOs and institutes supporting the Arkavathi River Pollution Assessment Project."
+        subtitle="Participating NGOs, institutes and the Water Department supporting the Arkavathi River Pollution Assessment Project."
         onBack={onBack}
       />
-      <div className="grid gap-4 p-4 md:p-5 lg:grid-cols-2">
-        <section className="rounded-2xl border border-slate-200 bg-white p-5">
+
+      <div className="grid items-stretch gap-4 p-4 md:p-5 xl:grid-cols-3">
+        <section className="h-full rounded-2xl border border-slate-200 bg-white p-5">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><UsersRound size={19} /></div>
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700">
+              <UsersRound size={19} />
+            </div>
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.14em] text-emerald-700">Project Partners</div>
+              <div className="text-[10px] font-black uppercase tracking-[0.14em] text-emerald-700">
+                Project Partners
+              </div>
               <h4 className="font-black text-slate-900">Participating NGOs</h4>
             </div>
           </div>
+
           {participatingNgos.length > 0 ? (
             <div className="mt-4 grid gap-2">
-              {participatingNgos.map(name => <div key={name} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700">{name}</div>)}
+              {participatingNgos.map(name => (
+                <div
+                  key={name}
+                  className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700"
+                >
+                  {name}
+                </div>
+              ))}
             </div>
           ) : (
             <div className="mt-4 rounded-xl border border-amber-100 bg-amber-50 p-4 text-xs leading-5 text-amber-900">
@@ -437,20 +460,53 @@ function CollaborationView({ onBack, config }: { onBack: () => void; config: Por
           )}
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5">
+        <section className="h-full rounded-2xl border border-slate-200 bg-white p-5">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-blue-700"><School size={19} /></div>
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-blue-700">
+              <School size={19} />
+            </div>
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.14em] text-blue-700">Academic Collaboration</div>
+              <div className="text-[10px] font-black uppercase tracking-[0.14em] text-blue-700">
+                Academic Collaboration
+              </div>
               <h4 className="font-black text-slate-900">Participating Institutes</h4>
             </div>
           </div>
+
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            {institutions.map(name => <div key={name} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700">{name}</div>)}
+            {institutions.map(name => (
+              <div
+                key={name}
+                className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700"
+              >
+                {name}
+              </div>
+            ))}
           </div>
-          {config?.institution_names_status && (
-            <div className="mt-3 text-[11px] leading-5 text-slate-500">{config.institution_names_status}</div>
+
+          {!config?.institutions?.length && (
+            <div className="mt-3 text-[10px] text-slate-500">
+              placeholder_until_official_names_are_supplied
+            </div>
           )}
+        </section>
+
+        <section className="h-full rounded-2xl border border-slate-200 bg-white p-5">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-cyan-50 text-cyan-700">
+              <Droplets size={19} />
+            </div>
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-[0.14em] text-cyan-700">
+                Government Collaboration
+              </div>
+              <h4 className="font-black text-slate-900">Water Department</h4>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-xl border border-cyan-100 bg-cyan-50 p-4 text-xs leading-5 text-cyan-900">
+            Official Water Department details were not included in the supplied project package. This panel is ready for the approved department name and collaboration details without any backend change.
+          </div>
         </section>
       </div>
     </div>

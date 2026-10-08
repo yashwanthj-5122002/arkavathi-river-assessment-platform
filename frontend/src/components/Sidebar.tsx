@@ -22,16 +22,32 @@ export function Sidebar({user,permissions,activePage,onNavigate}:{user:AuthUser;
   if(user.role==='COMPANY_ADMIN')items.push([KeyRound,'Access Control','access-control'])
 
   return <aside className="ark-sidebar sticky top-0 hidden h-screen shrink-0 flex-col px-3 py-4 text-white lg:flex">
-    <div className="ark-sidebar-brand mb-5 flex items-center px-1.5 py-1">
-      <div className="flex w-12 shrink-0 flex-col items-center justify-center">
-        <img src="/branding/cnnl-logo.png" alt="CNNL logo" className="h-11 w-11 object-contain"/>
+    <div className="mb-5 flex h-[78px] items-center gap-2 px-1 py-1">
+
+      <img
+        src="/branding/cnnl-logo.png"
+        alt="CNNL logo"
+        className="h-11 w-11 shrink-0 object-contain"
+      />
+
+      <div className="min-w-0 flex-1">
+        <div className="text-[11px] font-black leading-[13px] text-white">
+          Cauvery Neeravari Nigama Limited
+        </div>
+
+        <div className="mt-1 text-[8px] font-semibold leading-[10px] text-blue-100">
+          Government of Karnataka
+        </div>
       </div>
-      <div className="mx-2 h-11 w-px shrink-0 bg-white/20"/>
-      <img src="/branding/karnataka-emblem.png" alt="Government of Karnataka emblem" className="h-11 w-11 shrink-0 object-contain"/>
-      <div className="ml-2.5 min-w-0 flex-1">
-        <div className="text-[12px] font-black leading-[15px] text-white">Cauvery Neeravari Nigama Limited</div>
-        <div className="mt-0.5 text-[9px] font-semibold leading-3 text-blue-100">Government of Karnataka</div>
-      </div>
+
+      <div className="h-11 w-px shrink-0 bg-white/20" />
+
+      <img
+        src="/branding/karnataka-emblem.png"
+        alt="Government of Karnataka emblem"
+        className="h-10 w-10 shrink-0 object-contain"
+      />
+
     </div>
 
     <nav className="ark-sidebar-nav space-y-1 overflow-y-auto pr-1">{items.map(([Icon,label,page])=><button key={`${label}-${page}`} type="button" onClick={()=>onNavigate(page as DashboardPage)} aria-current={activePage===page?'page':undefined} className={`ark-sidebar-link flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition ${activePage===page?'bg-white/15 font-bold text-white shadow-sm':'text-blue-50 hover:bg-white/10'}`}><Icon size={18}/>{label}</button>)}</nav>
