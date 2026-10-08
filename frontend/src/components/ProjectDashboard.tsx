@@ -1,12 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowLeft } from 'lucide-react'
 import { api } from '../lib/api'
 import type { AuthUser, DataAvailability, FlightDetail, FlightListItem, IndustryCandidate, IndustryDiscoveryResult, PermissionProfile, Summary, TrackPoint, Verification } from '../lib/types'
 import { Sidebar } from './Sidebar'
 import type { DashboardPage } from './Sidebar'
 import { SurveyMap } from './SurveyMap'
 import { ArkavathiGISAtlas } from './ArkavathiGISAtlas'
-import { FlightDetails } from './FlightDetails'
 import { FlightExplorer } from './FlightExplorer'
 import { DayCharts } from './DayCharts'
 import { AltitudeProfile } from './AltitudeProfile'
@@ -36,7 +34,6 @@ import { StreetViewPanel } from './StreetViewPanel'
 import type { VideoMapSyncState, VideoSeekRequest } from './StreetViewPanel'
 import { IndustryIntelligencePanel } from './IndustryIntelligencePanel'
 import { SrtFlightAnalyticsDashboard } from './SrtFlightAnalyticsDashboard'
-
 const validPages:DashboardPage[]=['overview','gis-map','street-view','industry-intelligence','event-handler','flight-explorer','analytics','data-readiness','civil-modules','scientific-modules','verification','department-data','civil-review','task-management','review-centre','approval-dashboard','notifications','audit-history','cnnl-approved','access-control']
 function initialPage():DashboardPage{const raw=window.location.hash.replace(/^#\/?/,'') as DashboardPage;return validPages.includes(raw)?raw:'overview'}
 const pageMeta:Record<DashboardPage,{title:string;subtitle:string}>={
@@ -183,12 +180,262 @@ export function ProjectDashboard({user,onLogout}:{user:AuthUser;onLogout:()=>voi
   if(!summary||!tracks||!endpoints||!trackPoints||!availability||!verification||!permissions)return <div className="grid min-h-screen place-items-center bg-slate-100 text-sm font-semibold text-slate-500">Loading authorized Arkavati project evidence and permissionsâ€¦</div>
   const meta=pageMeta[activePage]
   const workspaceFull=activePage==='street-view'&&streetWorkspaceFullscreen
-  return <div data-page={activePage} className={`ark-workspace flex bg-slate-100 ${workspaceFull?'h-screen overflow-hidden':'min-h-screen'}`}><Sidebar user={user} permissions={permissions} activePage={activePage} onNavigate={navigate}/><main className={`ark-workspace-main min-w-0 flex-1 ${workspaceFull?'flex h-screen min-h-0 flex-col overflow-hidden':''}`}><div className={workspaceFull?'shrink-0':''}><AuthenticatedHeader user={user} onLogout={onLogout} onNotifications={has('NOTIFICATION.VIEW') ? ()=>navigate('notifications') : undefined} subtitle={user.organization_type==='CNNL'?'Official monitoring Â· approved outputs & verified survey evidence':'Project administration Â· workflow, survey & GIS control'} projectBranding/></div><div className={workspaceFull?'min-h-0 flex-1 overflow-hidden p-2':activePage==='gis-map'?'ark-atlas-host':'ark-workspace-content mx-auto w-full max-w-[1700px] p-4 md:p-6'}>{activePage!=='gis-map'&&<div className={`${workspaceFull?'hidden':'block'} ark-page-heading mb-5 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm`}><div className="text-sm font-black uppercase tracking-[0.10em] text-black md:text-base">Arkavati River Population Assessment Project</div><h1 className="mt-1 text-2xl font-black text-navy-900">{meta.title}</h1><p className="mt-1 text-sm text-slate-500">{meta.subtitle}</p></div>}
+  return <div data-page={activePage} className={`ark-workspace flex bg-slate-100 ${workspaceFull?'h-screen overflow-hidden':'min-h-screen'}`}><Sidebar user={user} permissions={permissions} activePage={activePage} onNavigate={navigate}/><main className={`ark-workspace-main min-w-0 flex-1 ${workspaceFull?'flex h-screen min-h-0 flex-col overflow-hidden':''}`}><div className={workspaceFull?'shrink-0':''}><AuthenticatedHeader user={user} onLogout={onLogout} onNotifications={has('NOTIFICATION.VIEW') ? ()=>navigate('notifications') : undefined} subtitle={user.organization_type==='CNNL'?'Official monitoring Â· approved outputs & verified survey evidence':'Project administration Â· workflow, survey & GIS control'} projectBranding/></div><div className={workspaceFull?'min-h-0 flex-1 overflow-hidden p-2':activePage==='gis-map'?'ark-atlas-host':'ark-workspace-content mx-auto w-full max-w-[1700px] p-4 md:p-6'}>{activePage!=='gis-map'&&activePage!=='street-view'&&<div className={`${workspaceFull?'hidden':'block'} ark-page-heading mb-5 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm`}><div className="text-sm font-black uppercase tracking-[0.10em] text-black md:text-base">Arkavati River Population Assessment Project</div><h1 className="mt-1 text-2xl font-black text-navy-900">{meta.title}</h1><p className="mt-1 text-sm text-slate-500">{meta.subtitle}</p></div>}
   {activePage==='overview'&&<div className="ark-overview space-y-5"><div className="ark-overview-media grid gap-4 lg:grid-cols-[minmax(0,7fr)_minmax(300px,3fr)]"><ArkavathiVideoShowcase/><StudyAreaMapPreview/></div><section className="ark-access-note rounded-2xl border border-blue-100 bg-blue-50/70 px-4 py-3 text-xs leading-5 text-navy-900"><strong>{user.organization_type==='CNNL'?'CNNL monitoring access':'Nakshatech controlled access'}:</strong> V1.8 permissions are enforced by the backend. Task review, technical approval, final approval and integration are separate auditable actions.</section><RiverOverviewFacts/><IntroductionSection/><ProjectEventsShowcase/><section className="ark-overview-build rounded-2xl bg-navy-950 p-5 text-white"><h3 className="font-black">Current authenticated build Â· V1.9.3 / V29.4</h3><p className="mt-2 max-w-5xl text-sm leading-6 text-blue-100">Department uploads remain passkey-protected. Institution data stays isolated. Nakshatech controls technical review, final approval and central integration. CNNL receives only final-approved/integrated workflow outputs.</p></section></div>}
   {activePage==='industry-intelligence'&&<IndustryIntelligence user={user}/>}
   {activePage==='event-handler'&&<EventHandler user={user}/>}
-  {activePage==='gis-map'&&<ArkavathiGISAtlas tracks={tracks} points={trackPoints} nakshaSurveyAccess={user.organization_type==='COMPANY'&&user.role!=='COMPANY_DEPARTMENT_USER'}/>}
-  {activePage==='street-view'&&<section className={workspaceFull?'h-full min-h-0 overflow-hidden':'space-y-4'}><div className={`${workspaceFull?'hidden':'flex'} flex-col gap-3 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-xs leading-5 text-sky-950 md:flex-row md:items-center md:justify-between`}><div><strong>Street View + Video/SRT:</strong> Google 360 and KartaView are separate street-imagery tools. In Video + SRT mode, video time is matched only to SRT GPS samples: the selected SRT route is drawn on the left satellite map and the current GPS marker moves with video playback. V29.6.3 keeps the Video 1 UI and the V29.6.1 Video 2 movement model unchanged, and now activates the captured K-GIS/KIADB ArcGIS plot layer plus official allottee lookup; OpenStreetMap remains the fallback when KIADB has no matching plot.</div><button type="button" onClick={exitStreetView} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-sky-300 bg-white px-3 py-2 text-xs font-black text-navy-900 shadow-sm hover:bg-sky-100"><ArrowLeft size={15}/>Back to GIS Map</button></div><div className={`grid min-h-0 items-stretch ${workspaceFull?'h-full grid-cols-2 gap-2':'gap-4 2xl:grid-cols-2'}`}><div className={`min-w-0 ${workspaceFull?'h-full min-h-0':'self-start'}`}><SurveyMap summary={summary} tracks={tracks} endpoints={endpoints} points={trackPoints} selectedFlight={selectedFlight} selectedPoint={selectedPoint} onSelectFlight={selectFlight} onSelectPoint={selectPoint} streetViewMode={!videoMapSync.active} streetViewLocation={streetViewLocation} onStreetViewLocationChange={selectStreetViewLocation} videoSyncMode={videoMapSync.active} videoSyncTrack={videoMapSync.route} videoSyncLocation={videoMapSync.location} videoSyncHeading={videoMapSync.heading} videoSyncCurrentTime={videoMapSync.currentTime} videoSyncDuration={videoMapSync.duration} videoSyncPlaying={videoMapSync.playing} videoSyncLabel={[videoMapSync.videoName,videoMapSync.srtName].filter(Boolean).join(' â†” ')} industryCandidates={routeIndustryCandidates} industryRadiusM={industryRadiusM} industryRiverRadiusM={industryRiverRadiusM} industryRiverContext={industryDiscovery?.river_context??null} currentRiverDistanceM={currentRiverDistanceM} primaryIndustryId={primaryIndustryCandidate?.id??null} industryFocus={industryFocus} workspaceFullscreen={workspaceFull}/></div><div className={`min-w-0 ${workspaceFull?'h-full min-h-0':'self-start'}`}><StreetViewPanel location={streetViewLocation} onLocationChange={selectStreetViewLocation} active={streetViewSelectionReady} onExit={exitStreetView} onVideoMapSyncChange={setVideoMapSync} videoSeekRequest={videoSeekRequest} workspaceFullscreen={workspaceFull} onWorkspaceFullscreenChange={setStreetWorkspaceMode}/></div></div><div className={`${workspaceFull?'hidden':'grid'} gap-4 2xl:grid-cols-2`}><FlightDetails flight={selectedFlight}/><PointInspector point={selectedPoint}/></div>{!workspaceFull&&<IndustryIntelligencePanel result={industryDiscovery} loading={industryLoading} error={industryError} radiusM={industryRadiusM} onRadiusChange={setIndustryRadiusM} riverRadiusM={industryRiverRadiusM} onRiverRadiusChange={setIndustryRiverRadiusM} currentRiverDistanceM={currentRiverDistanceM} onRefresh={()=>void discoverCurrentIndustries(true)} onFocus={focusIndustry} onSeek={seekIndustryVideo} liveCandidates={liveIndustryCandidates} currentTime={videoMapSync.currentTime} currentVideoName={videoMapSync.videoName}/>}{!workspaceFull&&<SrtFlightAnalyticsDashboard active={videoMapSync.active} route={videoMapSync.route} location={videoMapSync.location} heading={videoMapSync.heading} currentTime={videoMapSync.currentTime} duration={videoMapSync.duration} playing={videoMapSync.playing} videoName={videoMapSync.videoName} srtName={videoMapSync.srtName} industries={industryDiscovery?.candidates??[]} liveIndustries={liveIndustryCandidates} radiusM={industryRadiusM} riverRadiusM={industryRiverRadiusM} onFocusIndustry={focusIndustry} onSeekIndustry={seekIndustryVideo}/>}</section>}
+  {activePage==='gis-map'&&
+  <div className="relative h-full min-h-0">
+<ArkavathiGISAtlas
+      tracks={tracks}
+      points={trackPoints}
+      nakshaSurveyAccess={
+        user.organization_type==='COMPANY' &&
+        user.role!=='COMPANY_DEPARTMENT_USER'
+      }
+    />
+  </div>
+}
+
+  {activePage==='street-view'&&
+  <section
+    className={
+      workspaceFull
+        ? 'relative h-full min-h-0 overflow-hidden'
+        : 'relative space-y-4'
+    }
+  >
+<div
+      className={`grid min-h-0 items-stretch ${
+        workspaceFull
+          ? 'h-full grid-cols-2 gap-2'
+          : 'grid-cols-1 gap-4 2xl:grid-cols-2'
+      }`}
+    >
+
+      {/* ================================================
+          MAP
+
+          Same outer dimensions as Street View.
+          ================================================ */}
+
+      <div
+        className={
+          workspaceFull
+            ? 'min-w-0 h-full min-h-0'
+            : 'ark-dual-view-box min-w-0'
+        }
+      >
+        <SurveyMap
+          summary={summary}
+          tracks={tracks}
+          endpoints={endpoints}
+          points={trackPoints}
+          selectedFlight={selectedFlight}
+          selectedPoint={selectedPoint}
+          onSelectFlight={selectFlight}
+          onSelectPoint={selectPoint}
+          streetViewMode={!videoMapSync.active}
+          streetViewLocation={streetViewLocation}
+          onStreetViewLocationChange={
+            selectStreetViewLocation
+          }
+          videoSyncMode={videoMapSync.active}
+          videoSyncTrack={videoMapSync.route}
+          videoSyncLocation={videoMapSync.location}
+          videoSyncHeading={videoMapSync.heading}
+          videoSyncCurrentTime={
+            videoMapSync.currentTime
+          }
+          videoSyncDuration={
+            videoMapSync.duration
+          }
+          videoSyncPlaying={
+            videoMapSync.playing
+          }
+          videoSyncLabel={
+            [
+              videoMapSync.videoName,
+              videoMapSync.srtName,
+            ]
+              .filter(Boolean)
+              .join(' / ')
+          }
+          industryCandidates={
+            routeIndustryCandidates
+          }
+          industryRadiusM={
+            industryRadiusM
+          }
+          industryRiverRadiusM={
+            industryRiverRadiusM
+          }
+          industryRiverContext={
+            industryDiscovery?.river_context ?? null
+          }
+          currentRiverDistanceM={
+            currentRiverDistanceM
+          }
+          primaryIndustryId={
+            primaryIndustryCandidate?.id ?? null
+          }
+          industryFocus={
+            industryFocus
+          }
+          workspaceFullscreen={
+            workspaceFull
+          }
+        />
+      </div>
+
+
+      {/* ================================================
+          STREET VIEW
+
+          Same exact outer dimensions as Map.
+          ================================================ */}
+
+      <div
+        className={
+          workspaceFull
+            ? 'min-w-0 h-full min-h-0'
+            : 'ark-dual-view-box min-w-0'
+        }
+      >
+        <StreetViewPanel
+          location={streetViewLocation}
+          onLocationChange={
+            selectStreetViewLocation
+          }
+          active={
+            streetViewSelectionReady
+          }
+          onExit={
+            exitStreetView
+          }
+          onVideoMapSyncChange={
+            setVideoMapSync
+          }
+          videoSeekRequest={
+            videoSeekRequest
+          }
+          workspaceFullscreen={
+            workspaceFull
+          }
+          onWorkspaceFullscreenChange={
+            setStreetWorkspaceMode
+          }
+        />
+      </div>
+
+    </div>
+
+
+    {/* ================================================
+        SELECTED POINT INFORMATION
+
+        FlightDetails card has intentionally been
+        removed from Street View.
+
+        This appears only after a point is selected.
+        ================================================ */}
+
+    {!workspaceFull && selectedPoint && (
+      <div className="overflow-hidden rounded-2xl">
+        <PointInspector
+          point={selectedPoint}
+        />
+      </div>
+    )}
+
+
+    {/* ================================================
+        EXISTING INDUSTRY INTELLIGENCE
+        PRESERVED
+        ================================================ */}
+
+    {!workspaceFull && (
+      <IndustryIntelligencePanel
+        result={industryDiscovery}
+        loading={industryLoading}
+        error={industryError}
+        radiusM={industryRadiusM}
+        onRadiusChange={setIndustryRadiusM}
+        riverRadiusM={industryRiverRadiusM}
+        onRiverRadiusChange={
+          setIndustryRiverRadiusM
+        }
+        currentRiverDistanceM={
+          currentRiverDistanceM
+        }
+        onRefresh={()=>
+          void discoverCurrentIndustries(true)
+        }
+        onFocus={focusIndustry}
+        onSeek={seekIndustryVideo}
+        liveCandidates={
+          liveIndustryCandidates
+        }
+        currentTime={
+          videoMapSync.currentTime
+        }
+        currentVideoName={
+          videoMapSync.videoName
+        }
+      />
+    )}
+
+
+    {/* ================================================
+        EXISTING VIDEO / SRT ANALYTICS
+        PRESERVED
+        ================================================ */}
+
+    {!workspaceFull && (
+      <SrtFlightAnalyticsDashboard
+        active={videoMapSync.active}
+        route={videoMapSync.route}
+        location={videoMapSync.location}
+        heading={videoMapSync.heading}
+        currentTime={
+          videoMapSync.currentTime
+        }
+        duration={
+          videoMapSync.duration
+        }
+        playing={
+          videoMapSync.playing
+        }
+        videoName={
+          videoMapSync.videoName
+        }
+        srtName={
+          videoMapSync.srtName
+        }
+        industries={
+          industryDiscovery?.candidates ?? []
+        }
+        liveIndustries={
+          liveIndustryCandidates
+        }
+        radiusM={
+          industryRadiusM
+        }
+        riverRadiusM={
+          industryRiverRadiusM
+        }
+        onFocusIndustry={
+          focusIndustry
+        }
+        onSeekIndustry={
+          seekIndustryVideo
+        }
+      />
+    )}
+
+  </section>
+}
+
   {activePage==='flight-explorer'&&<FlightExplorer flights={flights} selectedId={selectedFlight?.id} onSelect={selectFlight}/>} {activePage==='analytics'&&<div className="space-y-4"><DayCharts days={summary.days}/><AltitudeProfile flight={selectedFlight}/></div>}{activePage==='data-readiness'&&<DataReadiness data={availability}/>} {activePage==='verification'&&<VerificationPanel data={verification}/>} {activePage==='department-data'&&user.organization_type==='COMPANY'&&user.role==='COMPANY_ADMIN'&&<DepartmentDataHub user={user}/>} {activePage==='civil-review'&&(user.role==='COMPANY_ADMIN'||user.role==='COMPANY_REVIEWER')&&<CivilReviewQueue/>}{activePage==='task-management'&&(has('TASK.VIEW_ALL')||has('TASK.VIEW_ASSIGNED'))&&<TaskWorkspace title={user.organization_type==='COMPANY'?'Task Management':'My Tasks'} subtitle={user.organization_type==='COMPANY'?'Create, assign, review and close project tasks across Nakshatech and participating institutions.':'Tasks assigned to your account or organization.'}/>} {activePage==='review-centre'&&has('WORKFLOW.REVIEW')&&<ReviewCentreV18/>} {activePage==='approval-dashboard'&&(has('WORKFLOW.FINAL_APPROVE')||has('WORKFLOW.INTEGRATE'))&&<ApprovalDashboard/>} {activePage==='notifications'&&has('NOTIFICATION.VIEW')&&<NotificationsCentre/>} {activePage==='audit-history'&&has('AUDIT.VIEW')&&<AuditHistory/>} {activePage==='cnnl-approved'&&has('CNNL.VIEW_APPROVED')&&<CnnlApprovedData/>} {activePage==='access-control'&&user.role==='COMPANY_ADMIN'&&<AccessManagement/>}
   {activePage==='scientific-modules'&&<ScientificModules user={user}/>}
   {activePage==='civil-modules'&&<div className="space-y-5"><section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card"><div className="mb-4"><h2 className="text-xl font-black text-slate-900">Civil engineering modules and institution data workflow</h2><p className="text-sm text-slate-500">Institution field-data entry is active. Submitted datasets now move through the V1.8 technical/final approval workflow.</p></div><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">{['River & Drain Survey','Hydraulic Structures','Drains & Outfalls','Water Sampling','Critical Locations','12 Institutions','Hydrology & Hydraulics','Remedial Measures / DPR'].map((m,i)=><div key={m} className="rounded-xl border border-slate-200 bg-slate-50 p-4"><div className="text-[10px] font-black uppercase tracking-wider text-amber-700">Module {String(i+1).padStart(2,'0')}</div><div className="mt-2 font-bold text-slate-800">{m}</div></div>)}</div></section>{(user.organization_type==='CNNL'||user.organization_type==='COMPANY')&&<ApprovedCivilRecords/>}</div>}

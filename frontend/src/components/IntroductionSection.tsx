@@ -30,6 +30,8 @@ type IntroductionView = 'menu' | 'about' | 'pollution' | 'action' | 'focus' | 'c
 
 const introductionItems = [
   { key: 'about', label: 'About Us', icon: Info },
+  { key: 'project-team', label: 'Project Team', icon: UsersRound },
+  { key: 'chairman-desk', label: "Chairman's Desk", icon: CircleDot },
   { key: 'pollution', label: 'Understanding the Pollution', icon: Waves },
   { key: 'action', label: 'From Data to Action', icon: Workflow },
   { key: 'focus', label: 'Key Focus Areas', icon: Target },
@@ -37,8 +39,6 @@ const introductionItems = [
   { key: 'study-area', label: 'Study Area Map', icon: MapPinned },
   { key: 'vision', label: 'Vision', icon: Landmark },
   { key: 'mission', label: 'Mission', icon: Landmark },
-  { key: 'chairman-desk', label: "Chairman's Desk", icon: CircleDot },
-  { key: 'project-team', label: 'Project Team', icon: UsersRound },
 ] as const
 
 const focusIcons = [Waves, Droplets, MapPinned, Factory, MapPinned, Landmark, CircleDot, Target]
@@ -410,14 +410,59 @@ function CollaborationView({ onBack, config }: { onBack: () => void; config: Por
     ? config.institutions.map(institution => institution.name)
     : Array.from({ length: 12 }, (_, index) => `Institution ${String(index + 1).padStart(2, '0')}`)
 
+
+  const governmentDepartments = Array.from(
+    { length: 6 },
+    (_, index) =>
+      `Government Department ${String(index + 1).padStart(2, '0')}`
+  )
+
+
   return (
     <div>
       <SectionHeader
         title="Collaboration"
-        subtitle="Participating NGOs and institutes supporting the Arkavathi River Pollution Assessment Project."
+        subtitle="Government departments, participating NGOs and institutes supporting the Arkavathi River Pollution Assessment Project."
         onBack={onBack}
       />
-      <div className="grid gap-4 p-4 md:p-5 lg:grid-cols-2">
+      <div className="grid gap-4 p-4 md:p-5 lg:grid-cols-2 xl:grid-cols-3">
+
+        <section className="rounded-2xl border border-slate-200 bg-white p-5">
+          <div className="flex items-center gap-3">
+
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-violet-50 text-violet-700">
+              <Landmark size={19} />
+            </div>
+
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-[0.14em] text-violet-700">
+                Government Collaboration
+              </div>
+
+              <h4 className="font-black text-slate-900">
+                Government Departments
+              </h4>
+            </div>
+
+          </div>
+
+          <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
+            {governmentDepartments.map(name => (
+              <div
+                key={name}
+                className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700"
+              >
+                {name}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-3 text-[11px] leading-5 text-slate-500">
+            Placeholder labels are shown until the official
+            participating department names are supplied.
+          </div>
+        </section>
+
         <section className="rounded-2xl border border-slate-200 bg-white p-5">
           <div className="flex items-center gap-3">
             <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><UsersRound size={19} /></div>

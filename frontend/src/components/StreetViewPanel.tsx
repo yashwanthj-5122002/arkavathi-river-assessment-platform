@@ -3,8 +3,7 @@ import type { ChangeEvent, FormEvent, SyntheticEvent } from 'react'
 import {
   AlertCircle, ArrowLeft, Camera, CheckCircle2, ChevronLeft, ChevronRight, ExternalLink, Factory,
   FileText, FileVideo, Loader2, MapPin, Maximize2, Minimize2, Navigation, Pause, PersonStanding,
-  Play, RefreshCw, Save, Search, Square, Trash2, Upload, X
-} from 'lucide-react'
+  Play, RefreshCw, Save, Search, Square, Trash2, Upload, X, Globe2, Video, Images, LocateFixed} from 'lucide-react'
 import { StreetPanorama360 } from './StreetPanorama360'
 import { api } from '../lib/api'
 import type { IndustryCategory, IndustryDischargeStatus } from '../lib/types'
@@ -766,11 +765,11 @@ function SurveyVideoWorkspace({onMapSyncChange,active,onModeChange,onExit,videoS
         <div className="min-w-0"><div className="truncate text-xs font-black">{selectedVideo?.file.name??'Video + SRT Map Sync'}</div><div className="mt-0.5 font-mono text-[10px] text-slate-300">{formatClock(currentTime)} / {formatClock(duration)}{syncPoint?` · ${syncPoint.location.lat.toFixed(6)}, ${syncPoint.location.lng.toFixed(6)}`:''}</div></div>
       </div>
       <div className="pointer-events-auto flex flex-wrap justify-end gap-2 rounded-xl border border-white/15 bg-slate-950/90 p-2 shadow-xl backdrop-blur">
-        <button type="button" onClick={()=>onModeChange('google')} className="rounded-lg bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20">Google 360</button>
-        <button type="button" className="rounded-lg bg-white px-3 py-2 text-[11px] font-black text-navy-950">Video + SRT</button>
-        <button type="button" onClick={()=>onModeChange('kartaview')} className="rounded-lg bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20">KartaView</button>
+        <button type="button" onClick={()=>onModeChange('google')} className="rounded-lg bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20" data-street-control="google360" aria-label="Google 360" title="Google 360"><Globe2 size={19} strokeWidth={2} /></button>
+        <button type="button" className="rounded-lg bg-white px-3 py-2 text-[11px] font-black text-navy-950" data-street-control="video-srt" aria-label="Video + SRT" title="Video + SRT"><Video size={19} strokeWidth={2} /></button>
+        <button type="button" onClick={()=>onModeChange('kartaview')} className="rounded-lg bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20" data-street-control="kartaview" aria-label="KartaView" title="KartaView"><Images size={19} strokeWidth={2} /></button>
         <button type="button" onClick={()=>setShowSetup(v=>!v)} className="rounded-lg border border-blue-300/40 bg-blue-500/20 px-3 py-2 text-[11px] font-black text-blue-50 hover:bg-blue-500/30">{showSetup?'Hide files':'Files / Pairing'}</button>
-        {onWorkspaceFullscreenChange&&<button type="button" aria-pressed={workspaceFullscreen} onClick={()=>onWorkspaceFullscreenChange(!workspaceFullscreen)} className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300/45 bg-amber-400/15 px-3 py-2 text-[11px] font-black text-amber-100 hover:bg-amber-400/25" title={workspaceFullscreen?'Exit full workspace':'Fill the dashboard workspace while keeping the top header and left sidebar'}>{workspaceFullscreen?<Minimize2 size={14}/>:<Maximize2 size={14}/>} {workspaceFullscreen?'Exit Full Screen':'Full Screen'}</button>}
+        {onWorkspaceFullscreenChange&&<button type="button" aria-pressed={workspaceFullscreen} onClick={()=>onWorkspaceFullscreenChange(!workspaceFullscreen)} className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300/45 bg-amber-400/15 px-3 py-2 text-[11px] font-black text-amber-100 hover:bg-amber-400/25" title={workspaceFullscreen?'Exit full workspace':'Fill the dashboard workspace while keeping the top header and left sidebar'} data-street-control="fullscreen" aria-label="Toggle Full Screen"><Maximize2 size={19} strokeWidth={2} /></button>}
         {onExit&&<button type="button" onClick={onExit} className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20"><ArrowLeft size={14}/>Exit</button>}
       </div>
     </div>
@@ -983,19 +982,15 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
       <div className="flex flex-wrap items-center gap-2">
         {(['google','video','kartaview'] as ProviderMode[]).map(mode=><button key={mode} type="button" onClick={()=>setProviderMode(mode)} className={`rounded-lg px-3 py-2 text-[11px] font-black transition ${providerMode===mode?'bg-white text-navy-950':'bg-white/10 text-white hover:bg-white/15'}`}>{mode==='google'?'Google 360':mode==='video'?'Video + SRT':'KartaView'}</button>)}
         {onWorkspaceFullscreenChange&&<button type="button" aria-pressed={workspaceFullscreen} onClick={()=>onWorkspaceFullscreenChange(!workspaceFullscreen)} className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300/45 bg-amber-400/15 px-3 py-2 text-[11px] font-black text-amber-100 hover:bg-amber-400/25" title={workspaceFullscreen?'Exit full workspace':'Fill the dashboard workspace while keeping the top header and left sidebar'}>{workspaceFullscreen?<Minimize2 size={14}/>:<Maximize2 size={14}/>} {workspaceFullscreen?'Exit Full Screen':'Full Screen'}</button>}
-        {onExit&&<button type="button" onClick={onExit} className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20"><ArrowLeft size={14}/>Exit Street View</button>}
+        {onExit&&<button type="button" onClick={onExit} className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20" data-street-control="exit" aria-label="Exit Street View" title="Exit Street View"><ArrowLeft size={19} strokeWidth={2} /></button>}
       </div>
     </div>
 
-    <div className={`${providerMode==='video'||workspaceFullscreen?'hidden':'block'} border-b border-slate-200 bg-slate-50 px-4 py-2.5 text-[11px] leading-5 text-slate-600`}>
-      <strong className="text-slate-800">V26 aligned video/map behavior:</strong> Google 360 remains a separate native Street View tool. <strong>Video + SRT</strong> uses only the uploaded video clock and SRT GPS samples to draw the route and move the current-position marker on the LEFT satellite map. It does not synchronize Google Street View. {googleApiKey?'Google API key detected for the separate Google 360 tab.':'Google API key not detected yet - this does not affect Video + SRT satellite-map playback.'}
-    </div>
-
-    {providerMode!=='video'&&<>
+        {providerMode!=='video'&&<>
       <form onSubmit={submitLocation} className={`${workspaceFullscreen?'hidden':'grid'} gap-2 border-b border-slate-200 bg-white p-3 sm:grid-cols-[1fr_1fr_auto]`}>
         <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Latitude<input value={latInput} onChange={e=>setLatInput(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-semibold text-slate-800 outline-none focus:border-navy-700"/></label>
         <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Longitude<input value={lngInput} onChange={e=>setLngInput(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-semibold text-slate-800 outline-none focus:border-navy-700"/></label>
-        <button type="submit" className="mt-auto inline-flex h-[34px] items-center justify-center gap-1.5 rounded-lg bg-navy-900 px-3 text-xs font-black text-white"><Search size={14}/>Locate</button>
+        <button type="submit" className="mt-auto inline-flex h-[34px] items-center justify-center gap-1.5 rounded-lg bg-navy-900 px-3 text-xs font-black text-white" data-street-control="locate" aria-label="Locate" title="Locate"><LocateFixed size={18} strokeWidth={2} /></button>
       </form>
 
       <div ref={fullscreenNode} className={`relative overflow-hidden bg-slate-950 ${workspaceFullscreen?'min-h-[300px] flex-1':'h-[470px]'}`}>

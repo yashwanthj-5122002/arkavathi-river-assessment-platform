@@ -7,6 +7,7 @@ import { ProjectDashboard } from './components/ProjectDashboard'
 import { InstitutionPortal } from './components/InstitutionPortal'
 import { DepartmentPortal } from './components/DepartmentPortal'
 import { UpcomingEventPopup } from './components/UpcomingEventPopup'
+import { SecureScreenProvider } from './security/SecureScreenProvider'
 
 function App(){
   const [config,setConfig]=useState<PortalConfig|null>(null)
@@ -53,10 +54,11 @@ function App(){
       ? <DepartmentPortal user={user} onLogout={logout}/>
       : <ProjectDashboard user={user} onLogout={logout}/>
 
-  return <>
+  return <SecureScreenProvider key={user.id} user={user}>
     {portal}
     <UpcomingEventPopup open={showUpcomingEvent} onClose={()=>setShowUpcomingEvent(false)}/>
-  </>
+
+    </SecureScreenProvider>
 }
 
 export default App

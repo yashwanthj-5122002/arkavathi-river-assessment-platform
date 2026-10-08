@@ -85,3 +85,69 @@ button, input, select { font: inherit; }
 .ge-extra-row span { color:#64748b; }
 .ge-extra-row strong { text-align:right; overflow-wrap:anywhere; }
 .ge-popup-footer { padding: 8px 14px 11px; border-top:1px solid #e5e7eb; color:#64748b; font-size:10px; font-weight:600; }
+
+
+/* ============================================================
+   MAP_STREET_VIEW_EQUAL_PANEL_V1
+
+   Map and Street View use the same structural viewport height.
+   Their internal features remain independent.
+   ============================================================ */
+
+.ark-dual-view-box {
+  height: 610px;
+  min-height: 610px;
+}
+
+.ark-dual-view-box > * {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .ark-dual-view-box {
+    height: 520px;
+    min-height: 520px;
+  }
+}
+
+
+/* ============================================================
+   STREET_VIEW_ICON_CONTROLS_V1
+
+   Compact icon-only Street View controls.
+   Existing active/inactive colors remain controlled by JSX.
+   ============================================================ */
+
+button[data-street-control] {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  flex: 0 0 42px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+
+  display: inline-grid !important;
+  place-items: center !important;
+
+  border-radius: 10px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+button[data-street-control] svg {
+  width: 19px;
+  height: 19px;
+  flex: none;
+}
+
+button[data-street-control="locate"] {
+  width: 42px !important;
+  min-width: 42px !important;
+}
+
+button[data-street-control]:focus-visible {
+  outline: 2px solid rgba(103, 232, 249, 0.95);
+  outline-offset: 2px;
+}
