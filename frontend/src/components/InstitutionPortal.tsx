@@ -107,7 +107,7 @@ export function InstitutionPortal({user,onLogout}:{user:AuthUser;onLogout:()=>vo
   }
   useEffect(()=>{load();const fn=()=>setView(viewFromHash());window.addEventListener('hashchange',fn);return()=>window.removeEventListener('hashchange',fn)},[])
 
-  return <div className="min-h-screen bg-slate-100">
+  return <div className="ark-role-portal min-h-screen bg-slate-100" data-role="institution" data-role-view={view}>
     <AuthenticatedHeader user={user} onLogout={onLogout} subtitle="Institution field-data entry, submission & tracking portal"/>
     <div className="mx-auto flex max-w-[1700px] gap-5 p-4 md:p-6">
       <aside className="sticky top-4 hidden h-[calc(100vh-2rem)] w-64 shrink-0 flex-col rounded-2xl bg-navy-950 p-3 text-white shadow-card lg:flex">

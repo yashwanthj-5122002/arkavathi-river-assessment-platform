@@ -604,9 +604,10 @@ type Props = {
   primaryIndustryId?: string|null
   industryFocus?: {id:string;lat:number;lng:number;nonce:number}|null
   workspaceFullscreen?: boolean
+  stretchHeight?: boolean
 }
 
-export function SurveyMap({summary,tracks,endpoints,points,selectedFlight,selectedPoint,onSelectFlight,onSelectPoint,streetViewMode=false,streetViewLocation=null,onStreetViewLocationChange,videoSyncMode=false,videoSyncTrack=[],videoSyncLocation=null,videoSyncHeading=null,videoSyncCurrentTime=0,videoSyncDuration=0,videoSyncPlaying=false,videoSyncLabel='',industryCandidates=[],industryRadiusM=250,industryRiverRadiusM=250,industryRiverContext=null,currentRiverDistanceM=null,primaryIndustryId=null,industryFocus=null,workspaceFullscreen=false}:Props) {
+export function SurveyMap({summary,tracks,endpoints,points,selectedFlight,selectedPoint,onSelectFlight,onSelectPoint,streetViewMode=false,streetViewLocation=null,onStreetViewLocationChange,videoSyncMode=false,videoSyncTrack=[],videoSyncLocation=null,videoSyncHeading=null,videoSyncCurrentTime=0,videoSyncDuration=0,videoSyncPlaying=false,videoSyncLabel='',industryCandidates=[],industryRadiusM=250,industryRiverRadiusM=250,industryRiverContext=null,currentRiverDistanceM=null,primaryIndustryId=null,industryFocus=null,workspaceFullscreen=false,stretchHeight=false}:Props) {
   const node=useRef<HTMLDivElement|null>(null)
   const mapRef=useRef<MlMap|null>(null)
   const markerRef=useRef<maplibregl.Marker|null>(null)
@@ -1014,7 +1015,7 @@ export function SurveyMap({summary,tracks,endpoints,points,selectedFlight,select
     const frame=requestAnimationFrame(()=>map.resize())
     const timer=window.setTimeout(()=>map.resize(),180)
     return()=>{cancelAnimationFrame(frame);window.clearTimeout(timer)}
-  },[workspaceFullscreen])
+  },[workspaceFullscreen,stretchHeight])
 
   const fitAll=()=>mapRef.current?.fitBounds([[summary.bbox[0],summary.bbox[1]],[summary.bbox[2],summary.bbox[3]]],{padding:55,duration:600})
   const visiblePointCount=points?.features?.length??0
@@ -1022,8 +1023,8 @@ export function SurveyMap({summary,tracks,endpoints,points,selectedFlight,select
   const riverReady=Boolean(industryRiverContext?.available)
   const riverSource=industryRiverContext?.source==='KIADB'?'KIADB river GIS':industryRiverContext?.source==='OPENSTREETMAP'?'OSM river fallback':'River GIS unavailable'
 
-  return <div className={`relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 shadow-card ${workspaceFullscreen?'h-full min-h-0':'h-auto'}`}>
-    <div ref={node} className={`${workspaceFullscreen?'h-full min-h-[320px]':'h-[610px]'} w-full`}/>
+  return <div className={`relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 shadow-card ${workspaceFullscreen||stretchHeight?'h-full min-h-0':'h-auto'}`}>
+    <div ref={node} className={`${workspaceFullscreen||stretchHeight?'h-full min-h-[320px]':'h-[610px]'} w-full`}/>
     <svg ref={videoRouteSvgRef} aria-hidden="true" className={`${videoSyncMode?'block':'hidden'} pointer-events-none absolute inset-0 z-[5] h-full w-full overflow-visible`}/>
     <div className="absolute left-3 top-3 z-30 flex max-w-[calc(100%-60px)] flex-wrap gap-2 rounded-xl bg-white/95 p-2 shadow-lg backdrop-blur">
       <button onClick={()=>{if(!videoSyncMode)setBase(base==='satellite'?'street':'satellite')}} className={`flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 ${videoSyncMode?'cursor-default':''}`}><Layers3 size={15}/>{videoSyncMode?'Satellite':base==='satellite'?'Satellite':'Street'}</button>

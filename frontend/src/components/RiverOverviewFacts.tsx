@@ -14,17 +14,17 @@ const tones = {
 
 export function RiverOverviewFacts() {
   return (
-    <section aria-label="Arkavathi river overview facts" className="overflow-x-auto pb-1">
-      <div className="grid min-w-[1180px] grid-cols-6 gap-3">
+    <section aria-label="Arkavathi river overview facts" className="ark-overview-facts pb-1">
+      <div className="ark-facts-grid grid gap-3">
         {riverOverviewFacts.map((fact, index) => {
           const Icon = icons[index]
           const tone = tones[fact.tone]
           return (
-            <article key={fact.label} className="min-h-[148px] rounded-2xl border border-slate-200 bg-white p-4 shadow-card">
+            <article key={fact.label} className="ark-fact-card rounded-2xl border border-slate-200 bg-white p-4 shadow-card">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
-                  <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500">{fact.label}</div>
-                  <div className="mt-1 text-2xl font-black leading-tight text-slate-900">{fact.value}</div>
+                  <div className="ark-fact-label text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500">{fact.label}</div>
+                  <div className="ark-fact-value mt-1 text-2xl font-black leading-tight text-slate-900">{fact.value}</div>
                   {'detail' in fact && fact.detail && <div className="mt-2 text-xs leading-5 text-slate-500">{fact.detail}</div>}
                   {'detailLines' in fact && fact.detailLines && (
                     <div className="mt-2 space-y-0.5 text-[11px] leading-4 text-slate-600">
@@ -32,7 +32,7 @@ export function RiverOverviewFacts() {
                     </div>
                   )}
                 </div>
-                <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border ${tone}`}>
+                <div className={`ark-fact-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl border ${tone}`}>
                   <Icon size={19} />
                 </div>
               </div>

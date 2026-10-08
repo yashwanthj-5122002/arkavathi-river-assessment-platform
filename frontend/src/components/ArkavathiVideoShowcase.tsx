@@ -60,7 +60,7 @@ export function ArkavathiVideoShowcase() {
   }, [ensurePlayback])
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-navy-950 shadow-card">
+    <section className="ark-overview-video overflow-hidden rounded-2xl border border-slate-200 bg-navy-950 shadow-card">
       <div className="relative h-[260px] overflow-hidden bg-navy-950 sm:h-[300px] lg:h-[340px] 2xl:h-[380px]">
         <video
           ref={videoRef}
