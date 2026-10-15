@@ -54,12 +54,22 @@ backend\.venv\Scripts\python.exe -m pip install -r backend\requirements-fastapi-
 Copy-Item config\production.env.example config\production.env
 
 # 4) Install frontend dependencies (ALWAYS run npm inside frontend\)
+#    --include=dev is required because typescript/vite are devDependencies;
+#    on machines with NODE_ENV=production a plain "npm ci" skips them and
+#    "npm run build" fails with "'tsc' is not recognized".
 cd frontend
-npm ci
+npm ci --include=dev
 cd ..
+
+# 5) Initialize the database and apply required schema migrations
+#    init_auth.py creates backend\runtime\auth.db if it does not exist,
+#    then the two migration scripts must run before the server's first start
+backend\.venv\Scripts\python.exe backend\scripts\init_auth.py
+backend\.venv\Scripts\python.exe backend\scripts\migrate_v18_phase1.py --db backend\runtime\auth.db
+backend\.venv\Scripts\python.exe backend\scripts\migrate_v18_phase2.py --db backend\runtime\auth.db
 ```
 
-Alternatively, run `.\PRODUCTION_SETUP.ps1` from the repository root — it performs steps 1–4 plus migrations and readiness checks.
+Alternatively, run `.\PRODUCTION_SETUP.ps1` from the repository root — it performs steps 1–4 plus migrations and readiness checks (run the database initialization in step 5 first if `backend\runtime\auth.db` does not exist yet, because the migration scripts require the database file to be present).
 
 **Important:** `package.json` lives in `frontend\`, not in the repository root or `backend\`. Running `npm install` anywhere else produces `npm ERR! ENOENT: no such file or directory, package.json`.
 
@@ -83,11 +93,14 @@ Maps/Places/Mapillary keys are obtained from your project lead — they are not 
 
 ## 6. Database initialization (safe, automatic)
 
-No database file is shipped in Git. On **first backend start** the application:
+No database file is shipped in Git. During initialization (step 5, or implicitly on first backend start) the application:
 
 1. Creates `backend\runtime\auth.db` with the full schema.
 2. Seeds 14 organizations/institutions and administrator accounts with **randomly generated passwords**.
 3. Writes the plaintext passwords once to `PRODUCTION_INITIAL_CREDENTIALS.txt` in the repository root (git-ignored).
+
+If you skip the migration commands in step 5, the first backend start creates the database and then stops with
+`RuntimeError: V1.8 Phase-1 database migration is required before Phase-2` — that is expected; run the two migration commands from step 5 and start the server again.
 
 Handle that credentials file securely: distribute passwords through a secure channel, then delete the file after first password rotation. To re-seed or reset later:
 
@@ -185,7 +198,9 @@ Do all of your work on `feature/colleague-development` (or branches you create f
 - **pyproj/pyshp install failures** — use Python 3.10–3.13, or install a prebuilt wheel for your version.
 - **Port 8765 vs 8766 confusion** — 8766 is the current default (backend config, `config\production.env.example`, Vite proxy). 8765 appears only in legacy demo scripts (`scripts\start_backend.bat`, `scripts\check_system.bat`).
 - **Login failures on a copied database** — passwords are hash-verified; reset with `scripts\manage_users.py reset-password --email <email> --generate`.
-- **Rebuild frontend from scratch** — delete `frontend\node_modules` and rerun `npm ci`.
+- **Backend stops with `V1.8 Phase-1 database migration is required before Phase-2`** — run the two migration commands from step 5, then start the server again.
+- **`'tsc' is not recognized` or `vite` not found during `npm run build`** — devDependencies were skipped, usually because `NODE_ENV=production` is set on the machine. Reinstall with `npm ci --include=dev`.
+- **Rebuild frontend from scratch** — delete `frontend\node_modules` and rerun `npm ci --include=dev`.
 
 ## 12. Where to read next
 
