@@ -1,0 +1,219 @@
+{
+  "dataset_id": "elevation-bands",
+  "title": "Arkavathi Elevation Bands",
+  "generated_by": "scripts/prepare_arkavathi_gis_data.py elevation",
+  "generated_at": "2026-10-15T09:53:16+00:00",
+  "source": {
+    "path": "C:\\Users\\NT01231\\Downloads\\AI Team\\Elevation Band\\Arkavathi_Dem1.tif",
+    "file_name": "Arkavathi_Dem1.tif",
+    "size_bytes": 29364198,
+    "sha256": "170c070a29691ca1a89baa47f2ed09423fe51cd7a249ecb21335f6c638e6ec08"
+  },
+  "raster": {
+    "width": 1755,
+    "height": 4028,
+    "band_count": 1,
+    "data_type": "float32",
+    "nodata": 32767.0,
+    "crs": "EPSG:4326",
+    "geotransform": [
+      77.203194444,
+      0.00027777777777777615,
+      0.0,
+      13.387916667,
+      0.0,
+      -0.00027777777777777577
+    ],
+    "pixel_size_degrees": 0.00027777777777777615,
+    "pixel_size_arc_seconds": 1.0,
+    "bounds": [
+      77.203194444,
+      12.26902777811112,
+      77.690694444,
+      13.387916667
+    ],
+    "vertical_units": "m",
+    "vertical_units_note": "The GeoTIFF encodes only horizontal GeoKeys (GTRasterTypeGeoKey and GeographicTypeGeoKey = EPSG:4326). No VerticalUnitsGeoKey, VerticalCSTypeGeoKey and no vertical unit metadata item are present, so the vertical unit is NOT declared by the file. The valid range (361-1452) matches Arkavathi basin topography (Nandi Hills headwaters near 1400 m down to the Cauvery confluence near 350 m) and the legacy band legend, so the values are interpreted and displayed as metres (m). This is a documented interpretation, not a file-declared datum.",
+    "statistics": {
+      "min": 361.0,
+      "max": 1452.0,
+      "mean": 804.2964,
+      "std": 106.3715,
+      "valid_pixels": 4481033,
+      "total_pixels": 7069140,
+      "valid_percent": 63.389
+    },
+    "auxiliary_approximate_statistics": {
+      "STATISTICS_MINIMUM": "367",
+      "STATISTICS_MAXIMUM": "1402",
+      "STATISTICS_MEAN": "804.06300711921",
+      "STATISTICS_STDDEV": "106.47372023315",
+      "STATISTICS_VALID_PERCENT": "63.47"
+    }
+  },
+  "classification": {
+    "method": "equal-interval",
+    "class_width": 100,
+    "units": "m",
+    "range": [
+      300,
+      1500
+    ],
+    "breaks": [
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000,
+      1100,
+      1200,
+      1300,
+      1400,
+      1500
+    ],
+    "nodata_policy": "NoData pixels (value 32767) are written with alpha 0 and stay fully transparent.",
+    "coverage_note": "Exact valid minimum 361 m and maximum 1452 m both fall inside the 300-1500 m range, so no valid value is clipped or truncated.",
+    "classes": [
+      {
+        "index": 0,
+        "label": "300-400 m",
+        "min": 300,
+        "max": 400,
+        "color": "#1b6b3e",
+        "pixel_count": 4643,
+        "percent_of_valid": 0.1036
+      },
+      {
+        "index": 1,
+        "label": "400-500 m",
+        "min": 400,
+        "max": 500,
+        "color": "#25824a",
+        "pixel_count": 20968,
+        "percent_of_valid": 0.4679
+      },
+      {
+        "index": 2,
+        "label": "500-600 m",
+        "min": 500,
+        "max": 600,
+        "color": "#3d9a52",
+        "pixel_count": 105517,
+        "percent_of_valid": 2.3547
+      },
+      {
+        "index": 3,
+        "label": "600-700 m",
+        "min": 600,
+        "max": 700,
+        "color": "#6ab15a",
+        "pixel_count": 741886,
+        "percent_of_valid": 16.5561
+      },
+      {
+        "index": 4,
+        "label": "700-800 m",
+        "min": 700,
+        "max": 800,
+        "color": "#9ac363",
+        "pixel_count": 1097249,
+        "percent_of_valid": 24.4865
+      },
+      {
+        "index": 5,
+        "label": "800-900 m",
+        "min": 800,
+        "max": 900,
+        "color": "#c8cc66",
+        "pixel_count": 1525382,
+        "percent_of_valid": 34.0409
+      },
+      {
+        "index": 6,
+        "label": "900-1000 m",
+        "min": 900,
+        "max": 1000,
+        "color": "#e8c862",
+        "pixel_count": 966844,
+        "percent_of_valid": 21.5764
+      },
+      {
+        "index": 7,
+        "label": "1000-1100 m",
+        "min": 1000,
+        "max": 1100,
+        "color": "#f2ac59",
+        "pixel_count": 12373,
+        "percent_of_valid": 0.2761
+      },
+      {
+        "index": 8,
+        "label": "1100-1200 m",
+        "min": 1100,
+        "max": 1200,
+        "color": "#ec8d52",
+        "pixel_count": 4115,
+        "percent_of_valid": 0.0918
+      },
+      {
+        "index": 9,
+        "label": "1200-1300 m",
+        "min": 1200,
+        "max": 1300,
+        "color": "#dd6f4a",
+        "pixel_count": 1257,
+        "percent_of_valid": 0.0281
+      },
+      {
+        "index": 10,
+        "label": "1300-1400 m",
+        "min": 1300,
+        "max": 1400,
+        "color": "#c35743",
+        "pixel_count": 672,
+        "percent_of_valid": 0.015
+      },
+      {
+        "index": 11,
+        "label": "1400-1500 m",
+        "min": 1400,
+        "max": 1500,
+        "color": "#9c4238",
+        "pixel_count": 127,
+        "percent_of_valid": 0.0028
+      }
+    ]
+  },
+  "output": {
+    "image": "elevation-dem1.png",
+    "width": 1755,
+    "height": 4028,
+    "format": "PNG RGBA",
+    "size_bytes": 213230,
+    "sha256": "d9396c2f8f709cf57877b314e87fea195c0d80aef88656d088f1813bcd80fade",
+    "maplibre_source": {
+      "type": "image",
+      "coordinates": [
+        [
+          77.203194444,
+          12.26902777811112
+        ],
+        [
+          77.203194444,
+          13.387916667
+        ],
+        [
+          77.690694444,
+          13.387916667
+        ],
+        [
+          77.690694444,
+          12.26902777811112
+        ]
+      ]
+    }
+  }
+}
