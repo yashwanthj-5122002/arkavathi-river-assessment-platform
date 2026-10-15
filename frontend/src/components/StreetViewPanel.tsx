@@ -12,6 +12,23 @@ type StreetLocation = { lat:number; lng:number }
 type ProviderMode = 'google'|'video'|'kartaview'
 type ActiveProvider = 'google'|'kartaview'|null
 
+// Keep automatic Street View matching local to the point the user actually
+// clicked. A distant provider hit is more confusing than an honest "no image".
+const MAX_STREET_MATCH_DISTANCE_M = 300
+const GOOGLE_RUNTIME_TIMEOUT_MS = 10000
+const GOOGLE_PANORAMA_TIMEOUT_MS = 8000
+const KARTAVIEW_LOOKUP_TIMEOUT_MS = 12000
+
+function withTimeout<T>(promise:Promise<T>,timeoutMs:number,message:string):Promise<T>{
+  return new Promise<T>((resolve,reject)=>{
+    let settled=false
+    const finishResolve=(value:T)=>{if(settled)return;settled=true;window.clearTimeout(timer);resolve(value)}
+    const finishReject=(error:unknown)=>{if(settled)return;settled=true;window.clearTimeout(timer);reject(error)}
+    const timer=window.setTimeout(()=>finishReject(new Error(message)),timeoutMs)
+    promise.then(finishResolve,finishReject)
+  })
+}
+
 type GoogleMatch = {
   lat:number
   lng:number
@@ -89,6 +106,19 @@ export type VideoSeekRequest = {
   videoName?:string
 }
 
+export type PanoramaView = {
+  position:StreetLocation
+  heading:number|null
+  povHeading:number|null
+  pitch:number|null
+  zoom:number|null
+  provider:ActiveProvider|null
+  panoId:string|null
+  googleMatch:GoogleMatch|null
+  kartaPhoto:KartaPhoto|null
+  status:'idle'|'loading'|'ready'|'missing'|'error'
+}
+
 type Props = {
   location:StreetLocation
   onLocationChange:(location:StreetLocation)=>void
@@ -98,6 +128,9 @@ type Props = {
   videoSeekRequest?:VideoSeekRequest|null
   workspaceFullscreen?:boolean
   onWorkspaceFullscreenChange?:(value:boolean)=>void
+  providers?:ProviderMode[]
+  defaultProvider?:ProviderMode
+  onPanoramaChange?:(view:PanoramaView|null)=>void
 }
 
 declare global {
@@ -114,7 +147,7 @@ let googleAuthFailureError:Error|null=null
 function loadGoogleMaps(apiKey:string):Promise<any>{
   if(googleAuthFailureError)return Promise.reject(googleAuthFailureError)
   if(window.google?.maps?.importLibrary)return Promise.resolve(window.google.maps)
-  if(googleMapsPromise)return googleMapsPromise
+  if(googleMapsPromise)return withTimeout(googleMapsPromise,GOOGLE_RUNTIME_TIMEOUT_MS,'Google Maps JavaScript API timed out while initializing. Check the API key, billing, HTTP-referrer restrictions and internet access.')
 
   googleMapsPromise=new Promise((resolve,reject)=>{
     const existing=document.querySelector('script[data-arkavathi-google-maps]') as HTMLScriptElement|null
@@ -153,7 +186,9 @@ function loadGoogleMaps(apiKey:string):Promise<any>{
     script.onerror=()=>{clearCallback();googleMapsPromise=null;reject(new Error('Google Maps JavaScript API could not be loaded. Check the API key, billing, internet access and HTTP-referrer restrictions.'))}
     document.head.appendChild(script)
   })
-  return googleMapsPromise
+  const pending=googleMapsPromise
+  return withTimeout(pending,GOOGLE_RUNTIME_TIMEOUT_MS,'Google Maps JavaScript API timed out while initializing. Check the API key, billing, HTTP-referrer restrictions and internet access.')
+    .catch(error=>{if(googleMapsPromise===pending)googleMapsPromise=null;throw error})
 }
 
 function googleMapsUrl(location:StreetLocation){
@@ -325,7 +360,7 @@ async function findNearbyKartaView(location:StreetLocation,signal:AbortSignal):P
       if(gathered.length)break
     }catch(error){if((error as any)?.name==='AbortError')throw error;lastError=error}
   }
-  const nearby=gathered.filter(row=>row.distanceM<=800)
+  const nearby=gathered.filter(row=>row.distanceM<=MAX_STREET_MATCH_DISTANCE_M)
   if(!nearby.length){if(!successfulRequest&&lastError)throw lastError;return []}
   nearby.sort((a,b)=>a.distanceM-b.distanceM)
   const nearest=nearby[0]
@@ -828,12 +863,13 @@ function SurveyVideoWorkspace({onMapSyncChange,active,onModeChange,onExit,videoS
   </div>
 }
 
-export function StreetViewPanel({location,onLocationChange,active=true,onExit,onVideoMapSyncChange,videoSeekRequest=null,workspaceFullscreen=false,onWorkspaceFullscreenChange}:Props){
+export function StreetViewPanel({location,onLocationChange,active=true,onExit,onVideoMapSyncChange,videoSeekRequest=null,workspaceFullscreen=false,onWorkspaceFullscreenChange,providers,defaultProvider,onPanoramaChange}:Props){
   const googleNode=useRef<HTMLDivElement|null>(null)
   const googlePanoramaRef=useRef<any>(null)
   const fullscreenNode=useRef<HTMLDivElement|null>(null)
   const requestSerial=useRef(0)
-  const [providerMode,setProviderMode]=useState<ProviderMode>('google')
+  const availableProviders:ProviderMode[]=providers&&providers.length?providers:['google','video','kartaview']
+  const [providerMode,setProviderMode]=useState<ProviderMode>(defaultProvider??'google')
   const [activeProvider,setActiveProvider]=useState<ActiveProvider>(null)
   useEffect(()=>{if(videoSeekRequest)setProviderMode('video')},[videoSeekRequest?.id])
   const [status,setStatus]=useState<'idle'|'loading'|'ready'|'missing'|'error'>('idle')
@@ -848,19 +884,102 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
   const [lngInput,setLngInput]=useState(location.lng.toFixed(6))
   const googleApiKey=(import.meta.env.VITE_GOOGLE_MAPS_API_KEY??'').trim()
 
+  // ---- Live-state mirrors used by the panorama listeners ------------------
+  // The Google panorama listeners are registered once, on the shared panorama
+  // instance, so their closure would otherwise keep the render (and the
+  // requestSerial value) that existed when the panorama was first created.
+  // Every value the report needs is therefore read through a ref that is
+  // refreshed on every render, and the listener never compares a captured
+  // serial against requestSerial.current.
+  const activeRef=useRef(active);activeRef.current=active
+  const statusRef=useRef(status);statusRef.current=status
+  const activeProviderRef=useRef(activeProvider);activeProviderRef.current=activeProvider
+  const googleMatchRef=useRef(googleMatch);googleMatchRef.current=googleMatch
+  const locationRef=useRef(location);locationRef.current=location
+  const onPanoramaChangeRef=useRef(onPanoramaChange);onPanoramaChangeRef.current=onPanoramaChange
+  const emitViewReportRef=useRef<()=>void>(()=>{})
+  const currentKartaRef=useRef<KartaPhoto|null>(null)
+  const activeHeadingRef=useRef<number|null>(null)
+
   useEffect(()=>{setLatInput(location.lat.toFixed(6));setLngInput(location.lng.toFixed(6))},[location.lat,location.lng])
   useEffect(()=>{setKartaUrlIndex(0);setRatioPanoramaUrl('')},[kartaIndex,kartaPhotos])
-  useEffect(()=>()=>{try{googlePanoramaRef.current?.setVisible?.(false)}catch{};googlePanoramaRef.current=null},[])
+  // Moving to an adjacent KartaView capture changes the confirmed imagery
+  // position, so the single map marker has to follow it. Google already
+  // reports through its own pov/position/zoom panorama listeners.
   useEffect(()=>{
-    const timer=window.setTimeout(()=>{try{window.google?.maps?.event?.trigger?.(googlePanoramaRef.current,'resize')}catch{}},180)
+    if(activeProvider!=='kartaview'||status!=='ready')return
+    scheduleViewReport(0)
+  },[kartaIndex,activeProvider,status])
+  const viewReportTimeoutRef = useRef<number|null>(null)
+  const lastReportRef = useRef<string>('')
+
+  function emitViewReport(){
+    if(!activeRef.current)return
+    const reportStatus=statusRef.current
+    // Only a confirmed panorama is reported as a position. Loading / missing /
+    // error reports are sent explicitly by run(), never inferred here.
+    if(reportStatus!=='ready')return
+    const provider=activeProviderRef.current
+    const karta=currentKartaRef.current
+    const gmatch=googleMatchRef.current
+    const requested=locationRef.current
+    const pano=googlePanoramaRef.current
+    let povHeading:number|null=null,pitch:number|null=null,zoom:number|null=null
+    let gPos:StreetLocation|null=null
+    if(provider==='google'){
+      try{const pov=pano?.getPov?.();if(pov){povHeading=typeof pov.heading==='number'?pov.heading:((pov as any).heading?.toFixed?Number(pov.heading):null);pitch=typeof pov.pitch==='number'?pov.pitch:null};zoom=typeof pano?.getZoom?.()==='number'?pano.getZoom():null}catch{}
+      try{const ll=pano?.getPosition?.();if(ll){const lat=typeof ll.lat==='function'?ll.lat():Number(ll.lat);const lng=typeof ll.lng==='function'?ll.lng():Number(ll.lng);if(isFinite(lat)&&isFinite(lng))gPos={lat,lng}}}catch{}
+    }
+    // Google reports the live viewing direction from the panorama POV.
+    // KartaView exposes no live camera orientation, but every capture carries
+    // the heading the camera actually had when the photo was taken; that
+    // provider-supplied value is reported instead of a fabricated one, and it
+    // stays null whenever the provider did not send one.
+    const pos=provider==='kartaview'?(karta?{lat:karta.lat,lng:karta.lng}:requested):(gPos||gmatch||requested)
+    const headingToReport=provider==='google'?povHeading
+      :(provider==='kartaview'&&karta&&typeof karta.heading==='number'&&Number.isFinite(karta.heading))?karta.heading:null
+    const key=`${pos.lat.toFixed(7)}|${pos.lng.toFixed(7)}|${headingToReport??'null'}|${provider}|${reportStatus}`
+    if(key===lastReportRef.current)return
+    lastReportRef.current=key
+    onPanoramaChangeRef.current?.({
+      position:{lat:pos.lat,lng:pos.lng},
+      heading:headingToReport,
+      povHeading, pitch, zoom,
+      provider,
+      panoId:provider==='google'?gmatch?.panoId??null:karta?.id??null,
+      googleMatch:gmatch, kartaPhoto:karta,
+      status:reportStatus
+    })
+  }
+  // Always call the newest closure so reports never use a stale render.
+  emitViewReportRef.current=emitViewReport
+  function scheduleViewReport(delay=120){
+    if(viewReportTimeoutRef.current)window.clearTimeout(viewReportTimeoutRef.current)
+    viewReportTimeoutRef.current=window.setTimeout(()=>emitViewReportRef.current(),delay)
+  }
+
+   useEffect(()=>()=>{try{googlePanoramaRef.current?.setVisible?.(false)}catch{};googlePanoramaRef.current=null;if(viewReportTimeoutRef.current)window.clearTimeout(viewReportTimeoutRef.current);onPanoramaChangeRef.current?.(null)},[])
+  useEffect(()=>{
+    const timer=window.setTimeout(()=>{
+      try{
+        const pano=googlePanoramaRef.current
+        if(activeProvider==='google'&&status==='ready')pano?.setVisible?.(true)
+        window.google?.maps?.event?.trigger?.(pano,'resize')
+      }catch{}
+    },80)
     return()=>window.clearTimeout(timer)
-  },[workspaceFullscreen,providerMode])
+  },[workspaceFullscreen,providerMode,activeProvider,status,location.lat,location.lng])
 
   const targetLabel=useMemo(()=>`${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}`,[location.lat,location.lng])
   const currentKarta=kartaPhotos[kartaIndex]??null
   const currentKartaUrl=currentKarta?.urls[Math.min(kartaUrlIndex,Math.max(0,currentKarta.urls.length-1))]??''
   const currentKarta360=Boolean(currentKarta&&(isKarta360(currentKarta)||ratioPanoramaUrl===currentKartaUrl))
   const currentKartaPanoramaUrl=currentKarta360?panoramaSafeKartaUrl(currentKartaUrl):currentKartaUrl
+  // KartaView exposes the capture heading only; StreetPanorama360 exposes no
+  // live orientation callback, so a live viewing heading is unsupported there.
+  const activeHeading=activeProvider==='kartaview'?currentKarta?.heading:null
+  currentKartaRef.current=currentKarta
+  activeHeadingRef.current=activeHeading
 
   useEffect(()=>{
     if(providerMode==='video'){
@@ -872,6 +991,12 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
       setStatus('idle');setMessage('Drag the yellow Street View person or click a road on the project map.');setActiveProvider(null);setGoogleMatch(null);setKartaPhotos([]);setKartaIndex(0)
       return
     }
+    // A new map click or provider change always restarts from loading.
+    // Without this reset a previous success leaves status as 'ready', so the
+    // new run never enters its loading state and a failed Google lookup never
+    // reaches the KartaView fallback path below.
+    setStatus('loading')
+    setMessage('')
     const serial=++requestSerial.current
     const controller=new AbortController()
     let cancelled=false
@@ -880,22 +1005,26 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
       if(!googleApiKey)return false
       if(!googleNode.current)throw new Error('Google Street View container is unavailable.')
       const maps=await loadGoogleMaps(googleApiKey)
-      const streetView=await maps.importLibrary('streetView')
+      const streetView=await withTimeout(Promise.resolve(maps.importLibrary('streetView')),GOOGLE_RUNTIME_TIMEOUT_MS,'Google Street View library timed out while initializing.')
       if(googleAuthFailureError)throw googleAuthFailureError
       if(cancelled||serial!==requestSerial.current)return false
       if(!googlePanoramaRef.current){
         googlePanoramaRef.current=new streetView.StreetViewPanorama(googleNode.current,{
           addressControl:true,clickToGo:true,fullscreenControl:true,linksControl:true,motionTracking:false,panControl:true,showRoadLabels:true,zoomControl:true,visible:false
         })
+        const pano=googlePanoramaRef.current
+        pano.addListener('pov_changed',()=>{scheduleViewReport()})
+        pano.addListener('position_changed',()=>{scheduleViewReport()})
+        pano.addListener('zoom_changed',()=>{scheduleViewReport()})
       }
       const service=new streetView.StreetViewService()
-      const radii=[50,150,500,1000]
+      const radii=[50,150,MAX_STREET_MATCH_DISTANCE_M]
       let found:any=null
       let foundRadius=0
       for(const radius of radii){
-        const result=await new Promise<{data:any;status:any}>(resolve=>{
+        const result=await withTimeout(new Promise<{data:any;status:any}>(resolve=>{
           service.getPanorama({location,radius,preference:streetView.StreetViewPreference.NEAREST,sources:[streetView.StreetViewSource.GOOGLE]},(data:any,resultStatus:any)=>resolve({data,status:resultStatus}))
-        })
+        }),GOOGLE_PANORAMA_TIMEOUT_MS,`Google Street View search timed out at ${radius} m.`)
         if(cancelled||serial!==requestSerial.current)return false
         if(result.status===streetView.StreetViewStatus.OK&&result.data){found=result.data;foundRadius=radius;break}
         if(result.status!==streetView.StreetViewStatus.ZERO_RESULTS)throw new Error(`Google Street View request failed with status: ${String(result.status)}`)
@@ -905,14 +1034,16 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
       const matched={lat:Number(panoLocation?.lat?.()??location.lat),lng:Number(panoLocation?.lng?.()??location.lng)}
       const panorama=googlePanoramaRef.current
       panorama.setPano(found.location?.pano);panorama.setPov({heading:0,pitch:0});panorama.setZoom(1);panorama.setVisible(true)
-      setGoogleMatch({lat:matched.lat,lng:matched.lng,distanceM:distanceMeters(location,matched),radiusM:foundRadius,description:String(found.location?.shortDescription??found.location?.description??'Google Street View'),imageDate:String(found.imageDate??''),panoId:String(found.location?.pano??'')})
+      const gmMatch={lat:matched.lat,lng:matched.lng,distanceM:distanceMeters(location,matched),radiusM:foundRadius,description:String(found.location?.shortDescription??found.location?.description??'Google Street View'),imageDate:String(found.imageDate??''),panoId:String(found.location?.pano??'')}
+      setGoogleMatch(gmMatch)
       setKartaPhotos([]);setKartaIndex(0);setActiveProvider('google');setStatus('ready')
       setMessage('Official Google Street View panorama loaded. Drag inside the panorama for full 360-degree viewing and use the road arrows to move along coverage.')
+      scheduleViewReport(50)
       return true
     }
 
     async function tryKartaView(){
-      const photos=await findNearbyKartaView(location,controller.signal)
+      const photos=await withTimeout(findNearbyKartaView(location,controller.signal),KARTAVIEW_LOOKUP_TIMEOUT_MS,'KartaView lookup timed out. Try another road or retry the provider.')
       if(cancelled||serial!==requestSerial.current)return false
       if(!photos.length)return false
       let start=0,bestDistance=Number.POSITIVE_INFINITY
@@ -920,25 +1051,64 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
       try{googlePanoramaRef.current?.setVisible?.(false)}catch{}
       setGoogleMatch(null);setKartaPhotos(photos);setKartaIndex(start);setKartaUrlIndex(0);setActiveProvider('kartaview');setStatus('ready')
       setMessage('KartaView street imagery loaded. True spherical captures automatically open in interactive 360-degree mode; standard captures stay as normal street photos.')
+      scheduleViewReport(50)
       return true
     }
 
     async function run(){
+      // A new request invalidates every pending report from the previous one.
+      lastReportRef.current=''
+      if(viewReportTimeoutRef.current)window.clearTimeout(viewReportTimeoutRef.current)
       setStatus('loading');setMessage(providerMode==='google'?'Searching official Google Street View...':'Searching KartaView...')
       try{googlePanoramaRef.current?.setVisible?.(false)}catch{}
-      setActiveProvider(null);setGoogleMatch(null);setKartaPhotos([]);setKartaIndex(0);setKartaUrlIndex(0)
+      setActiveProvider(null);setGoogleMatch(null);setKartaPhotos([]);setKartaIndex(0);setKartaUrlIndex(0);onPanoramaChangeRef.current?.({position:location,heading:null,povHeading:null,pitch:null,zoom:null,provider:null,panoId:null,googleMatch:null,kartaPhoto:null,status:'loading'})
+      const reportMissing=()=>{setStatus('missing');onPanoramaChangeRef.current?.({position:location,heading:null,povHeading:null,pitch:null,zoom:null,provider:null,panoId:null,googleMatch:null,kartaPhoto:null,status:'missing'})}
+      const reportError=(text:string)=>{setStatus('error');setMessage(text);onPanoramaChangeRef.current?.({position:location,heading:null,povHeading:null,pitch:null,zoom:null,provider:null,panoId:null,googleMatch:null,kartaPhoto:null,status:'error'})}
       try{
         if(providerMode==='google'){
-          if(!googleApiKey){setStatus('error');setMessage('Google Street View needs VITE_GOOGLE_MAPS_API_KEY in frontend/.env or frontend/.env.local. Add the key and restart Vite.');return}
-          const ok=await tryGoogle()
-          if(!ok){setStatus('missing');setMessage('No official Google Street View panorama was found within 1 km of this target. Try another road or use KartaView.');return}
-          return
+          // The GIS atlas offers Google first, but Arkavathi river roads often
+          // sit outside Google coverage, so a Google miss automatically falls
+          // back to KartaView instead of stranding the panel on "missing".
+          if(!googleApiKey){
+            const kartaOk=await tryKartaView()
+            if(kartaOk){
+              setProviderMode('kartaview')
+              setMessage('Google Street View needs VITE_GOOGLE_MAPS_API_KEY in frontend/.env.local (Vite restarted afterwards). Showing KartaView coverage instead.')
+              return
+            }
+            reportError('Google Street View needs VITE_GOOGLE_MAPS_API_KEY in frontend/.env or frontend/.env.local. Add the key and restart Vite. KartaView also has no image near this location.')
+            return
+          }
+          try{
+            const ok=await tryGoogle()
+            if(ok)return
+            const kartaOk=await tryKartaView()
+            if(kartaOk){
+              setProviderMode('kartaview')
+              setMessage('No official Google Street View panorama was found close to this target. Showing the nearest KartaView capture instead.')
+              return
+            }
+            reportMissing();setMessage('No official Google Street View panorama was found close to this target, and KartaView has no public image nearby. Try another road.');return
+          }catch(error){
+            // Auth, quota and network failures surface here; a cached auth
+            // failure would otherwise repeat the same Google error forever.
+            // Give KartaView one automatic attempt before reporting an error.
+            try{
+              const kartaOk=await tryKartaView()
+              if(kartaOk){
+                setProviderMode('kartaview')
+                setMessage(`Google Street View failed (${error instanceof Error?error.message:String(error)}). Showing the nearest KartaView capture instead.`)
+                return
+              }
+            }catch{/* fall through to the Google error below */}
+            throw error
+          }
         }
         const ok=await tryKartaView()
-        if(!ok){setStatus('missing');setMessage('KartaView responded successfully, but it has no public street image near this location. Try Google 360 or another road.');return}
+        if(!ok){reportMissing();setMessage('KartaView responded successfully, but it has no public street image near this location. Try Google 360 or another road.');return}
       }catch(error){
         if(cancelled||(error as any)?.name==='AbortError')return
-        setStatus('error');setMessage(error instanceof Error?error.message:String(error))
+        setStatus('error');setMessage(error instanceof Error?error.message:String(error));onPanoramaChangeRef.current?.({position:location,heading:null,povHeading:null,pitch:null,zoom:null,provider:null,panoId:null,googleMatch:null,kartaPhoto:null,status:'error'})
       }
     }
     run()
@@ -948,7 +1118,9 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
   function onKartaImageError(){
     if(!currentKarta)return
     if(kartaUrlIndex+1<currentKarta.urls.length){setKartaUrlIndex(index=>index+1);return}
-    setStatus('error');setMessage('KartaView found a capture, but every image URL supplied by the provider failed to load. Retry once or choose an adjacent capture.')
+    const text='KartaView found a capture, but every image URL supplied by the provider failed to load. Retry once or choose an adjacent capture.'
+    setStatus('error');setMessage(text)
+    onPanoramaChangeRef.current?.({position:locationRef.current,heading:null,povHeading:null,pitch:null,zoom:null,provider:null,panoId:null,googleMatch:null,kartaPhoto:null,status:'error'})
   }
   function onKartaImageLoad(event:SyntheticEvent<HTMLImageElement>){
     if(!currentKarta||!currentKartaUrl||isKarta360(currentKarta))return
@@ -973,14 +1145,13 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
   const providerLabel=activeProvider==='google'?'Google Street View':activeProvider==='kartaview'?'KartaView':'Street View'
   const activeDistance=activeProvider==='google'?googleMatch?.distanceM:activeProvider==='kartaview'?currentKarta?.distanceM:null
   const activeDate=activeProvider==='google'?googleMatch?.imageDate:activeProvider==='kartaview'?currentKarta?.shotDate:''
-  const activeHeading=activeProvider==='kartaview'?currentKarta?.heading:null
 
   return <section className={`overflow-hidden rounded-2xl border border-slate-200 shadow-card ${workspaceFullscreen?'flex h-full min-h-0 flex-col':'self-start'} ${providerMode==='video'?'bg-slate-950':'bg-white'}`}>
     <div className={providerMode==='video'?(workspaceFullscreen?'block h-full min-h-0 flex-1':'block'):'hidden'}><SurveyVideoWorkspace onMapSyncChange={onVideoMapSyncChange} active={providerMode==='video'} onModeChange={setProviderMode} onExit={onExit} videoSeekRequest={videoSeekRequest} workspaceFullscreen={workspaceFullscreen} onWorkspaceFullscreenChange={onWorkspaceFullscreenChange}/></div>
     <div className={`${providerMode==='video'?'hidden':'flex'} flex-col gap-3 bg-navy-950 px-4 py-3 text-white lg:flex-row lg:items-center lg:justify-between`}>
       <div className="flex items-center gap-3"><div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10"><PersonStanding size={20}/></div><div><h2 className="font-black">Street View</h2><p className="text-xs text-blue-100">Google 360 + Video/SRT satellite-map playback + KartaView</p></div></div>
       <div className="flex flex-wrap items-center gap-2">
-        {(['google','video','kartaview'] as ProviderMode[]).map(mode=><button key={mode} type="button" onClick={()=>setProviderMode(mode)} className={`rounded-lg px-3 py-2 text-[11px] font-black transition ${providerMode===mode?'bg-white text-navy-950':'bg-white/10 text-white hover:bg-white/15'}`}>{mode==='google'?'Google 360':mode==='video'?'Video + SRT':'KartaView'}</button>)}
+        {availableProviders.map(mode=><button key={mode} type="button" onClick={()=>setProviderMode(mode)} className={`rounded-lg px-3 py-2 text-[11px] font-black transition ${providerMode===mode?'bg-white text-navy-950':'bg-white/10 text-white hover:bg-white/15'}`}>{mode==='google'?'Google 360':mode==='video'?'Video + SRT':'KartaView'}</button>)}
         {onWorkspaceFullscreenChange&&<button type="button" aria-pressed={workspaceFullscreen} onClick={()=>onWorkspaceFullscreenChange(!workspaceFullscreen)} className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300/45 bg-amber-400/15 px-3 py-2 text-[11px] font-black text-amber-100 hover:bg-amber-400/25" title={workspaceFullscreen?'Exit full workspace':'Fill the dashboard workspace while keeping the top header and left sidebar'}>{workspaceFullscreen?<Minimize2 size={14}/>:<Maximize2 size={14}/>} {workspaceFullscreen?'Exit Full Screen':'Full Screen'}</button>}
         {onExit&&<button type="button" onClick={onExit} className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-[11px] font-black text-white hover:bg-white/20" data-street-control="exit" aria-label="Exit Street View" title="Exit Street View"><ArrowLeft size={19} strokeWidth={2} /></button>}
       </div>
@@ -994,7 +1165,7 @@ export function StreetViewPanel({location,onLocationChange,active=true,onExit,on
       </form>
 
       <div ref={fullscreenNode} className={`relative overflow-hidden bg-slate-950 ${workspaceFullscreen?'min-h-[300px] flex-1':'h-[470px]'}`}>
-        <div ref={googleNode} className={`absolute inset-0 h-full w-full ${activeProvider==='google'&&status==='ready'?'visible pointer-events-auto':'invisible pointer-events-none'}`}/>
+        <div ref={googleNode} className={`absolute inset-0 h-full w-full ${(providerMode==='google'&&status==='loading')||(activeProvider==='google'&&status==='ready')?'visible pointer-events-auto':'invisible pointer-events-none'}`}/>
         {activeProvider==='kartaview'&&currentKarta&&status==='ready'&&currentKartaUrl&&<div className="relative h-full w-full bg-black">
           {currentKarta360?<StreetPanorama360 key={currentKartaPanoramaUrl} src={currentKartaPanoramaUrl} heading={currentKarta.heading} onImageError={onKartaImageError}/>:<img key={currentKartaUrl} src={currentKartaUrl} alt="KartaView street-level capture" onLoad={onKartaImageLoad} onError={onKartaImageError} className="h-full w-full object-contain"/>}
           <div className={`absolute left-3 ${currentKarta360?'top-12':'top-3'} rounded-lg px-2.5 py-1.5 text-[10px] font-black text-white backdrop-blur ${currentKarta360?'bg-emerald-700/85':'bg-black/70'}`}>{currentKarta360?'360° PANORAMA':'STANDARD STREET IMAGE'}{currentKarta.projection?` · ${currentKarta.projection}`:''}{typeof currentKarta.fieldOfView==='number'?` · FOV ${Math.round(currentKarta.fieldOfView)}°`:''}</div>

@@ -1,20 +1,46 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
-import maplibregl, { Map as MapLibreMap } from 'maplibre-gl'
+import type { MouseEvent as ReactMouseEvent } from 'react'
+import maplibregl, { Map as MapLibreMap, MapMouseEvent } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { ChevronDown, ChevronRight, Database, Layers3, LocateFixed, Pause, Play, RotateCcw, Search, Upload, X } from 'lucide-react'
+import { ChevronDown, ChevronRight, Database, Layers3, LocateFixed, Pause, PersonStanding, Play, RotateCcw, Search, Upload, X } from 'lucide-react'
 import { api, type NakshaSurveyDataset, type NakshaSurveyGeoJson } from '../lib/api'
 import { parseSurveyFile, type SurveyDataset, type SurveyTrack } from '../lib/surveyRouteParser'
 import { PLAYBACK_SPEEDS, formatClock, useSurveyPlaybackEngine, type PlaybackSample, type SurveyPlaybackEngine } from '../lib/surveyPlayback'
+import { StreetViewPanel, type PanoramaView } from './StreetViewPanel'
 import './arkavathi-gis-atlas.css'
 
 type Geometry = { type: string; coordinates: unknown }
 type AtlasFeature = { type: 'Feature'; id?: string | number; properties?: Record<string, unknown> | null; geometry: Geometry | null }
 type Collection = { type: 'FeatureCollection'; features: AtlasFeature[] }
-type Kind = 'fill' | 'line' | 'point' | 'mixed'
+type Kind = 'fill' | 'line' | 'point' | 'mixed' | 'raster'
 type Group = 'Basin' | 'River System' | 'Pollution & Evidence' | 'Environmental Pressure' | 'Planning & Administration' | 'Verified Survey'
 type AtlasLayer = { key: string; name: string; group: Group; file?: string; kind: Kind; color: string; defaultOn?: boolean; description?: string }
 type Selection = { layer: AtlasLayer; feature: AtlasFeature }
 type NakshaSelection = { dataset: NakshaSurveyDataset; feature: AtlasFeature }
+type ElevationClass = { index: number; label: string; min: number; max: number; color: string }
+type ElevationManifest = {
+  dataset_id: string
+  title: string
+  source: { file_name: string; sha256?: string }
+  raster: { crs: string; bounds: number[]; vertical_units: string; statistics: Record<string, number>; vertical_units_note?: string }
+  classification: { method: string; units: string; range: number[]; class_width: number; classes: ElevationClass[]; coverage_note?: string }
+}
+type StreetStage = 'off' | 'selecting' | 'viewing'
+type StreetPoint = { lat: number; lng: number }
+type StreetSnapshot = {
+  center: [number, number]
+  zoom: number
+  basemap: 'street' | 'satellite'
+  visible: Record<string, boolean>
+  nakshaVisible: Record<string, boolean>
+  routeVisible: boolean
+  surveyPointsVisible: boolean
+  panelOpen: boolean
+  nakshaOpen: boolean
+}
+
+// Street View provider preference follows the same env key the panel itself uses.
+const HAS_GOOGLE_MAPS_KEY = ((import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? '') as string).trim().length > 0
 
 const NAKSHA_GROUPS: NakshaSurveyDataset['group'][] = ['Hydrology', 'Project & Infrastructure', 'Land & Context']
 const NAKSHA_COLORS: Record<string, string> = {
@@ -31,14 +57,72 @@ const nakshaLayerId = (id: string, kind: string) => `naksha-${id}-${kind}`
 
 const DATA_PATH = '/gis/arkavathi/'
 const EMPTY: Collection = { type: 'FeatureCollection', features: [] }
+
+// ---------------------------------------------------------------------------
+// "Arkavathi River Data" panel - display order and labels only.
+// Every row keeps its real dataset id (NakshaTech catalogue) or atlas layer
+// key; nothing is renamed server side and no id is invented.
+// ---------------------------------------------------------------------------
+type PanelLeaf = { kind: 'leaf'; id: string; label: string; atlasKey?: string; swatch?: string }
+type PanelGroup = { kind: 'group'; id: string; label: string; children: PanelLeaf[] }
+type PanelSection = { kind: 'section'; label: string; children: PanelLeaf[] }
+type PanelRow = PanelLeaf | PanelGroup | PanelSection
+
+const PANEL_ROWS: PanelRow[] = [
+  { kind: 'leaf', id: 'arkavathi-boundary', label: 'Arkavathi Boundary' },
+  {
+    kind: 'group', id: 'sub-catchments', label: 'Sub-Catchments',
+    children: [
+      { kind: 'leaf', id: 'suvarnamuthi-boundary', label: 'Suvarnamuthi Catchment' },
+      { kind: 'leaf', id: 'vrishabavathi-boundary', label: 'Vrishabavathi Catchment' },
+      { kind: 'leaf', id: 'kumudavthi-boundary', label: 'Kumudavthi Catchment' },
+    ],
+  },
+  {
+    kind: 'group', id: 'arkavathi-chainages', label: 'Arkavathi Chainages',
+    children: [
+      { kind: 'leaf', id: 'arkavathi-chainage', label: 'Arkavathi Chainage' },
+      { kind: 'leaf', id: 'suvarnamuthi-chainage', label: 'Suvarnamuthi Chainage' },
+      { kind: 'leaf', id: 'kumudavthi-chainage', label: 'Kumudavthi Chainage' },
+      { kind: 'leaf', id: 'vrishabavathi-chainage', label: 'Vrishabavathi Chainage' },
+    ],
+  },
+  { kind: 'leaf', id: 'river-stream', label: 'River System' },
+  { kind: 'leaf', id: 'reservoirs', label: 'Reservoirs' },
+  { kind: 'leaf', id: 'drainage', label: 'Drainage Network', atlasKey: 'drainage', swatch: '#0e7f96' },
+  { kind: 'leaf', id: 'elevation', label: 'Elevation Bands', atlasKey: 'elevation', swatch: '#b8a378' },
+  { kind: 'leaf', id: 'road', label: 'Roads' },
+  { kind: 'leaf', id: 'industrial', label: 'Industrial Areas' },
+  { kind: 'leaf', id: 'hydro-power-plant', label: 'Hydro Power Plant' },
+  { kind: 'leaf', id: 'temple', label: 'Temple' },
+  { kind: 'leaf', id: 'forest', label: 'Forest' },
+  { kind: 'section', label: 'Land & Context', children: [{ kind: 'leaf', id: 'tamil-nadu', label: 'Tamil Nadu' }] },
+  // Cauvery is a real catalogue dataset whose placement was not part of the
+  // requested order. Its id, geometry and access are untouched; it stays in a
+  // clearly separated trailing group instead of being deleted or merged.
+  { kind: 'section', label: 'Basin Context', children: [{ kind: 'leaf', id: 'cauvery', label: 'Cauvery' }] },
+]
+// Atlas layers owned exclusively by the data panel (never listed in the
+// River Layer Explorer while the data panel is available to the user).
+const DATA_PANEL_ATLAS_KEYS = PANEL_ROWS.flatMap(row =>
+  row.kind === 'leaf' ? (row.atlasKey ? [row.atlasKey] : [])
+    : row.children.filter(child => child.atlasKey).map(child => child.atlasKey as string))
+
 const GROUPS: Group[] = ['Basin', 'River System', 'Pollution & Evidence', 'Environmental Pressure', 'Planning & Administration', 'Verified Survey']
+// Thematic layers: every entry starts HIDDEN. The map loads with the normal
+// basemap only and a thematic overlay appears exclusively when its checkbox is
+// selected, so renderer visibility and checkbox state can never disagree.
 const LAYERS: AtlasLayer[] = [
-  { key: 'boundary', name: 'Basin Boundary', group: 'Basin', file: 'boundary.geojson', kind: 'fill', color: '#234e3d', defaultOn: true },
-  { key: 'sheds', name: 'Sub-Hydrosheds', group: 'Basin', file: 'sub-hydrosheds.geojson', kind: 'fill', color: '#6e9b79', defaultOn: true },
-  { key: 'elevation', name: 'Elevation Bands', group: 'Basin', file: 'elevation-bands.geojson', kind: 'fill', color: '#b8a378' },
-  { key: 'rivers', name: 'Rivers', group: 'River System', file: 'rivers.geojson', kind: 'line', color: '#147b91', defaultOn: true },
-  { key: 'drainage', name: 'Drainage Network', group: 'River System', file: 'drainage.geojson', kind: 'line', color: '#64a7ac', defaultOn: true },
-  { key: 'major-water', name: 'Major Waterbodies', group: 'River System', file: 'waterbodies-major.geojson', kind: 'fill', color: '#6db2bd', defaultOn: true },
+  { key: 'boundary', name: 'Basin Boundary', group: 'Basin', file: 'boundary.geojson', kind: 'fill', color: '#234e3d' },
+  { key: 'sheds', name: 'Sub-Hydrosheds', group: 'Basin', file: 'sub-hydrosheds.geojson', kind: 'fill', color: '#6e9b79' },
+  // Elevation Bands is now a georeferenced raster overlay generated from the
+  // supplied Arkavathi_Dem1.tif (see scripts/prepare_arkavathi_gis_data.py).
+  { key: 'elevation', name: 'Elevation Bands', group: 'Basin', kind: 'raster', color: '#b8a378' },
+  { key: 'rivers', name: 'Rivers', group: 'River System', file: 'rivers.geojson', kind: 'line', color: '#147b91' },
+  // Drainage Network is re-pointed at the supplied Drainage_Network.shp export.
+  // The previous renderer (drainage.geojson) is preserved on disk but unused.
+  { key: 'drainage', name: 'Drainage Network', group: 'River System', file: 'drainage-network.geojson', kind: 'line', color: '#0e7f96' },
+  { key: 'major-water', name: 'Major Waterbodies', group: 'River System', file: 'waterbodies-major.geojson', kind: 'fill', color: '#6db2bd' },
   { key: 'minor-water', name: 'Minor Waterbodies', group: 'River System', file: 'waterbodies-minor.geojson', kind: 'fill', color: '#a0cbd0' },
   { key: 'prs-drains', name: 'Polluting Drains', group: 'Pollution & Evidence', file: 'prs-drains.geojson', kind: 'point', color: '#ad5d43' },
   { key: 'evidence', name: 'Evidence Points', group: 'Pollution & Evidence', file: 'evidence-points.geojson', kind: 'point', color: '#a17438' },
@@ -52,8 +136,8 @@ const LAYERS: AtlasLayer[] = [
   { key: 'flight-points', name: 'Telemetry Points', group: 'Verified Survey', kind: 'point', color: '#926ead' },
 ]
 const BY_KEY = Object.fromEntries(LAYERS.map(layer => [layer.key, layer])) as Record<string, AtlasLayer>
-const ELEVATION_COLORS = ['#dce8cd', '#c3d6aa', '#a5c78e', '#84b283', '#689c7e', '#4d7d72', '#315a61']
-const ELEVATION_BANDS = ['360-620 m', '620-720 m', '720-800 m', '800-860 m', '860-920 m', '920-980 m', '980 m +']
+const ELEVATION_MANIFEST_PATH = `${DATA_PATH}elevation-dem1.manifest.json`
+const ELEVATION_IMAGE_PATH = `${DATA_PATH}elevation-dem1.png`
 const INITIAL_VISIBLE = Object.fromEntries(LAYERS.map(layer => [layer.key, Boolean(layer.defaultOn)])) as Record<string, boolean>
 const FIELDS: Record<string, string[]> = {
   rivers: ['name', 'riverId'], sheds: ['name', 'shedId'], 'prs-drains': ['name', 'kind', 'description', 'bodDec2020', 'stretch'],
@@ -79,6 +163,7 @@ const BASE_STYLE: maplibregl.StyleSpecification = {
 
 function sourceId(key: string) { return `atlas-source-${key}` }
 function layerIds(layer: AtlasLayer) {
+  if (layer.kind === 'raster') return []
   return layer.kind === 'fill' ? [`atlas-${layer.key}-fill`, `atlas-${layer.key}-outline`]
     : layer.kind === 'mixed' ? [`atlas-${layer.key}-fill`, `atlas-${layer.key}-outline`, `atlas-${layer.key}-point`]
     : [`atlas-${layer.key}-${layer.kind}`]
@@ -110,12 +195,13 @@ function boundsFor(geometry: Geometry | null): maplibregl.LngLatBounds | null {
   return bounds.isEmpty() ? null : bounds
 }
 function layerColor(layer: AtlasLayer): unknown {
-  if (layer.key === 'elevation') return ['match', ['get', 'band'], ...ELEVATION_BANDS.flatMap((band, index) => [band, ELEVATION_COLORS[index]]), ELEVATION_COLORS[0]]
   if (layer.key === 'gaps') return ['match', ['get', 'severity'], 'high', '#a54945', 'medium', '#b78a43', 'low', '#719672', layer.color]
   if (layer.key.startsWith('flight-')) return ['match', ['get', 'day'], 3, '#22d3ee', 4, '#3b82f6', 5, '#22c55e', 6, '#f59e0b', 7, '#ef4444', 8, '#a855f7', layer.color]
   return layer.color
 }
 function addAtlasLayers(map: MapLibreMap, layer: AtlasLayer) {
+  // Raster overlays carry no GeoJSON source; loadElevationOverlay() wires them.
+  if (layer.kind === 'raster') return
   const source = sourceId(layer.key)
   if (!map.getSource(source)) map.addSource(source, { type: 'geojson', data: EMPTY as any })
   const visibility = layer.defaultOn ? 'visible' : 'none'
@@ -124,7 +210,7 @@ function addAtlasLayers(map: MapLibreMap, layer: AtlasLayer) {
     map.addLayer({ id: `atlas-${layer.key}-fill`, type: 'fill', source, filter: ['==', ['geometry-type'], 'Polygon'], layout: { visibility }, paint: { 'fill-color': layerColor(layer) as any, 'fill-opacity': opacity } })
     map.addLayer({ id: `atlas-${layer.key}-outline`, type: 'line', source, filter: ['==', ['geometry-type'], 'Polygon'], layout: { visibility }, paint: { 'line-color': layerColor(layer) as any, 'line-width': layer.key === 'boundary' ? 2.5 : 1.1, 'line-opacity': layer.key === 'boundary' ? .95 : .78 } })
   }
-  if (layer.kind === 'line') map.addLayer({ id: `atlas-${layer.key}-line`, type: 'line', source, layout: { visibility }, paint: { 'line-color': layerColor(layer) as any, 'line-width': layer.key === 'rivers' ? 3.2 : layer.key === 'drainage' ? 1.15 : 2.4, 'line-opacity': layer.key === 'drainage' ? .78 : .96 } })
+  if (layer.kind === 'line') map.addLayer({ id: `atlas-${layer.key}-line`, type: 'line', source, layout: { visibility }, paint: { 'line-color': layerColor(layer) as any, 'line-width': layer.key === 'rivers' ? 3.2 : layer.key === 'drainage' ? 1.8 : 2.4, 'line-opacity': layer.key === 'drainage' ? .9 : .96 } })
   if (layer.kind === 'point' || layer.kind === 'mixed') map.addLayer({ id: `atlas-${layer.key}-point`, type: 'circle', source, filter: ['==', ['geometry-type'], 'Point'], layout: { visibility }, paint: { 'circle-color': layerColor(layer) as any, 'circle-radius': layer.key === 'flight-points' ? 3.5 : 6, 'circle-stroke-color': '#fffefa', 'circle-stroke-width': 1.7, 'circle-opacity': .94 } })
 }
 function addNakshaLayers(map: MapLibreMap, dataset: NakshaSurveyDataset, data: Collection, visible: boolean): string[] {
@@ -200,6 +286,28 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
   const [loading, setLoading] = useState<Record<string, boolean>>({})
   const fitted = useRef(false)
   visibilityRef.current = visible
+
+  // ---- Arkavathi River Data panel ------------------------------------------
+  // `nakshaOpen` / `nakshaVisible` keep their original names because they also
+  // drive the map snapshot logic and the catalogue loader; they now describe
+  // the renamed "Arkavathi River Data" panel.
+  const [dataGroupOpen, setDataGroupOpen] = useState<Record<string, boolean>>({ 'sub-catchments': true, 'arkavathi-chainages': true })
+  const [elevationManifest, setElevationManifest] = useState<ElevationManifest | null>(null)
+  const [elevationFailed, setElevationFailed] = useState('')
+  const [atlasReloadNonce, setAtlasReloadNonce] = useState(0)
+  const [nakshaReloadNonce, setNakshaReloadNonce] = useState(0)
+  const elevationBoundsRef = useRef<[number, number, number, number] | null>(null)
+  const elevationPendingRef = useRef<Promise<void> | null>(null)
+
+  // ---- Street View selection workflow ----------------------------------------
+  const [streetStage, setStreetStage] = useState<StreetStage>('off')
+  const [streetLocation, setStreetLocation] = useState<StreetPoint | null>(null)
+  const streetStageRef = useRef<StreetStage>('off')
+  const streetSnapshot = useRef<StreetSnapshot | null>(null)
+  const streetLocationRef = useRef<StreetPoint | null>(null)
+  const selectStreetLocationRef = useRef<(point: StreetPoint) => void>(() => {})
+  streetStageRef.current = streetStage
+  streetLocationRef.current = streetLocation
 
   const [nakshaCatalogue, setNakshaCatalogue] = useState<NakshaSurveyDataset[]>([])
   const [nakshaOpen, setNakshaOpen] = useState(false)
@@ -313,7 +421,33 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
       map.addLayer({ id: 'atlas-survey-points', type: 'circle', source: 'atlas-survey-points', layout: { visibility: 'visible' }, paint: { 'circle-color': '#9e86ff', 'circle-radius': 3.5, 'circle-stroke-color': '#fffefa', 'circle-stroke-width': 1, 'circle-opacity': .9 } })
       map.addLayer({ id: 'atlas-survey-position-halo', type: 'circle', source: 'atlas-survey-position', layout: { visibility: 'visible' }, paint: { 'circle-color': '#7c4dff', 'circle-radius': 12, 'circle-opacity': .22 } })
       map.addLayer({ id: 'atlas-survey-position', type: 'circle', source: 'atlas-survey-position', layout: { visibility: 'visible' }, paint: { 'circle-color': '#7c4dff', 'circle-radius': 7, 'circle-stroke-color': '#fffefa', 'circle-stroke-width': 2.5 } })
+
+      // Street View marker is rendered as MapLibre geometry instead of a DOM
+      // Marker. That keeps its position tied to map coordinates and prevents
+      // CSS/HMR from leaving the marker at the canvas origin.
+      map.addSource('atlas-street-view-marker', { type: 'geojson', data: EMPTY as any })
+      map.addLayer({
+        id: 'atlas-street-view-marker-halo', type: 'circle', source: 'atlas-street-view-marker',
+        paint: {
+          'circle-radius': 21,
+          'circle-color': ['match', ['get', 'state'], 'confirmed', '#22c55e', 'missing', '#ef4444', '#fbbf24'] as any,
+          'circle-opacity': .22,
+          'circle-stroke-width': 0,
+        },
+      })
+      map.addLayer({
+        id: 'atlas-street-view-marker-dot', type: 'circle', source: 'atlas-street-view-marker',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': ['match', ['get', 'state'], 'confirmed', '#22c55e', 'missing', '#ef4444', '#fbbf24'] as any,
+          'circle-opacity': .96,
+          'circle-stroke-color': '#fffefa',
+          'circle-stroke-width': 3,
+        },
+      })
       setReady(true)
+      // DEM-derived Elevation Bands overlay (Arkavathi_Dem1.tif).
+      loadElevationOverlay()
     }
     const queryLayers = (hover: boolean) => [
       ...LAYERS.filter(layer => visibilityRef.current[layer.key] && (!hover || !['drainage', 'minor-water'].includes(layer.key))).flatMap(layer => layerIds(layer)),
@@ -321,6 +455,7 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
     ].filter(id => Boolean(map.getLayer(id)))
     map.on('load', onLoad)
     map.on('click', event => {
+      if (streetStageRef.current !== 'off') return
       const layers = queryLayers(false)
       if (!layers.length) return
       const hit = map.queryRenderedFeatures(event.point, { layers })[0]
@@ -344,18 +479,27 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
       ;(map.getSource('atlas-selection') as maplibregl.GeoJSONSource).setData({ type: 'FeatureCollection', features: [feature] } as any)
     })
     map.on('mousemove', event => {
+      const stage = streetStageRef.current
+      if (stage === 'selecting' || stage === 'viewing') { map.getCanvas().style.cursor = 'crosshair'; return }
       const layers = queryLayers(true)
       map.getCanvas().style.cursor = layers.length && map.queryRenderedFeatures(event.point, { layers }).length ? 'pointer' : ''
     })
     const observer = new ResizeObserver(() => map.resize())
     observer.observe(mapNode.current)
-    return () => { disposed = true; observer.disconnect(); map.remove(); mapRef.current = null; setReady(false) }
+      return () => {
+        disposed = true
+        observer.disconnect()
+        map.remove()
+        mapRef.current = null
+        setReady(false)
+      }
   }, [])
 
   useEffect(() => {
     const map = mapRef.current
     if (!ready || !map) return
     for (const layer of LAYERS) for (const id of layerIds(layer)) map.setLayoutProperty(id, 'visibility', visible[layer.key] ? 'visible' : 'none')
+    if (map.getLayer('atlas-elevation-raster')) map.setLayoutProperty('atlas-elevation-raster', 'visibility', visible.elevation ? 'visible' : 'none')
     for (const layer of LAYERS.filter(item => item.file && (visible[item.key] || item.key === 'boundary'))) {
       if (dataCache.current.has(layer.key) || pending.current.has(layer.key)) continue
       setLoading(old => ({ ...old, [layer.key]: true }))
@@ -374,7 +518,7 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
         .finally(() => { pending.current.delete(layer.key); setLoading(old => ({ ...old, [layer.key]: false })) })
       pending.current.set(layer.key, request)
     }
-  }, [visible, ready])
+  }, [visible, ready, atlasReloadNonce])
 
   useEffect(() => {
     const map = mapRef.current
@@ -421,7 +565,7 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
         .finally(() => { nakshaPending.current.delete(dataset.id); setNakshaLoading(old => ({ ...old, [dataset.id]: false })) })
       nakshaPending.current.set(dataset.id, request)
     }
-  }, [nakshaCatalogue, nakshaVisible, ready, nakshaSurveyAccess])
+  }, [nakshaCatalogue, nakshaVisible, ready, nakshaSurveyAccess, nakshaReloadNonce])
 
   // Push the selected track into the route/points sources (whole sequence, no downsampling).
   useEffect(() => {
@@ -455,36 +599,229 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
   // Snapshot published by the engine (~80ms while playing) lives in SurveySurveyCard,
   // so playback updates re-render only the card, never the whole atlas.
 
-  const activeLayers = useMemo(() => LAYERS.filter(layer => visible[layer.key]), [visible])
+  // Layers listed in the River Layer Explorer. Drainage Network and Elevation
+  // Bands are owned by the Arkavathi River Data panel whenever that panel is
+  // available, so they are never listed (or silently toggled) in both places.
+  const explorerLayers = useMemo(
+    () => (nakshaSurveyAccess ? LAYERS.filter(layer => !DATA_PANEL_ATLAS_KEYS.includes(layer.key)) : LAYERS),
+    [nakshaSurveyAccess],
+  )
+  const activeLayers = useMemo(() => explorerLayers.filter(layer => visible[layer.key]), [explorerLayers, visible])
 
   const clearRiverLayers = () => {
     clearSelection()
-    setVisible(Object.fromEntries(LAYERS.map(layer => [layer.key, false])) as Record<string, boolean>)
+    setVisible(old => {
+      const next = { ...old }
+      for (const layer of explorerLayers) next[layer.key] = false
+      return next
+    })
   }
+
+  // ---- Arkavathi River Data panel: one control path per row ----------------
+  // Each row either toggles a NakshaTech catalogue dataset or an atlas layer
+  // key, so the checkbox, the map overlay and the summary can never disagree.
+  const isPanelRowOn = (leaf: PanelLeaf) => Boolean(leaf.atlasKey ? visible[leaf.atlasKey] : nakshaVisible[leaf.id])
+  const setPanelRowOn = (leaf: PanelLeaf, value: boolean) => {
+    if (leaf.atlasKey) { setVisible(old => ({ ...old, [leaf.atlasKey as string]: value })); return }
+    if (value && nakshaSelection?.dataset.id === leaf.id) clearNakshaSelection()
+    setNakshaVisible(old => ({ ...old, [leaf.id]: value }))
+  }
+  const groupState = (group: PanelGroup) => {
+    const on = group.children.filter(isPanelRowOn).length
+    return { on, total: group.children.length, checked: on === group.children.length, indeterminate: on > 0 && on < group.children.length }
+  }
+  const allPanelLeaves: PanelLeaf[] = PANEL_ROWS.flatMap(row => (row.kind === 'leaf' ? [row] : row.children))
+  const activePanelLeaves = allPanelLeaves.filter(isPanelRowOn)
+  // Leaf datasets actually drawn on the map: explorer layers plus this panel's
+  // rows. Parent headings and internal MapLibre layers are never counted.
+  const visibleLeafCount = activeLayers.length + (nakshaSurveyAccess ? activePanelLeaves.length : 0)
+
+  // Exit removes every Street View resource and restores normal GIS click
+  // handling. Nothing else is reverted: basemap, layer selections and open
+  // panels deliberately stay as the user left them, so entering or leaving
+  // Street View never resets layer state or map context.
+  const removeStreetMarker = () => {
+    const source = mapRef.current?.getSource('atlas-street-view-marker') as maplibregl.GeoJSONSource | undefined
+    source?.setData(EMPTY as any)
+  }
+
+  // One map-native marker source. Yellow = exact user click/loading, green =
+  // confirmed provider position, red = no usable imagery/error. The provider
+  // heading is retained as feature metadata for future directional rendering.
+  const showStreetMarker = (point: StreetPoint, state: 'pending' | 'confirmed' | 'missing', heading: number | null) => {
+    const map = mapRef.current
+    if (!map || streetStageRef.current === 'off') return
+    const source = map.getSource('atlas-street-view-marker') as maplibregl.GeoJSONSource | undefined
+    if (!source) return
+    source.setData({
+      type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [point.lng, point.lat] },
+        properties: { state, heading: typeof heading === 'number' && Number.isFinite(heading) ? heading : null },
+      }],
+    } as any)
+  }
+
+
+  const selectStreetLocation = (point: StreetPoint) => {
+    // Move the pending marker synchronously to the exact MapLibre click
+    // coordinates before the imagery request begins. The stage ref is updated
+    // first because showStreetMarker refuses to draw while the stage is 'off',
+    // and the React state update only reaches the ref on the next render.
+    streetStageRef.current = 'viewing'
+    streetLocationRef.current = point
+    showStreetMarker(point, 'pending', null)
+    setStreetLocation(point)
+    setStreetStage('viewing')
+  }
+  selectStreetLocationRef.current = selectStreetLocation
+
+  // Capture the actual canvas click at the React map-area boundary. This fires
+  // before MapLibre's own synthetic click handling and survives Fast Refresh,
+  // so Street View cannot remain stuck in the selecting banner.
+  const handleStreetMapClickCapture = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (streetStageRef.current === 'off') return
+    const map = mapRef.current
+    if (!map) return
+    const canvas = map.getCanvas()
+    // Ignore Google/KartaView canvases and every other overlay/control. Only
+    // the actual MapLibre canvas is allowed to choose a GIS Street View point.
+    if (event.target !== canvas) return
+    const rect = canvas.getBoundingClientRect()
+    if (!rect.width || !rect.height) return
+    const lngLat = map.unproject([event.clientX - rect.left, event.clientY - rect.top])
+    const point = { lat: Number(lngLat.lat), lng: Number(lngLat.lng) }
+    if (!Number.isFinite(point.lat) || !Number.isFinite(point.lng)) return
+    selectStreetLocationRef.current(point)
+  }
+
+  const exitStreetView = () => {
+    streetSnapshot.current = null
+    streetStageRef.current = 'off'
+    streetLocationRef.current = null
+    removeStreetMarker()
+    setStreetLocation(null)
+    setStreetStage('off')
+  }
+
+  const toggleStreetView = () => {
+    if (streetStageRef.current !== 'off') { exitStreetView(); return }
+    streetStageRef.current = 'selecting'
+    streetLocationRef.current = null
+    setStreetLocation(null)
+    setStreetStage('selecting')
+  }
+
+  // Escape cancels the selection step and exits Street View (unless the browser
+  // itself is in fullscreen, in which case Escape only leaves fullscreen).
+  useEffect(() => {
+    if (streetStage === 'off') return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !document.fullscreenElement) exitStreetView()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [streetStage])
+
+  // Selection/viewing mode keeps the crosshair cursor. Click ownership stays
+  // in the permanent MapLibre handler above, so no second click listener can
+  // race, duplicate, or disappear between selecting and viewing states.
+  useEffect(() => {
+    const map = mapRef.current
+    if (!ready || !map || streetStage === 'off') return
+    const canvas = map.getCanvas()
+    const previousCursor = canvas.style.cursor
+    canvas.style.cursor = 'crosshair'
+    return () => { canvas.style.cursor = previousCursor }
+  }, [ready, streetStage])
 
   const clearSelection = () => { setSelection(null); (mapRef.current?.getSource('atlas-selection') as maplibregl.GeoJSONSource | undefined)?.setData(EMPTY as any) }
   const clearNakshaSelection = () => { setNakshaSelection(null); (mapRef.current?.getSource('atlas-selection') as maplibregl.GeoJSONSource | undefined)?.setData(EMPTY as any) }
-  const toggleNaksha = (id: string) => {
-    if (nakshaVisible[id] && nakshaSelection?.dataset.id === id) clearNakshaSelection()
-    setNakshaVisible(old => ({ ...old, [id]: !old[id] }))
+  // Clears only this panel's thematic selections and their map overlays. The
+  // basemap, the session, Street View and the River Layer Explorer are all
+  // left untouched.
+  const clearDataPanelLayers = () => {
+    clearNakshaSelection()
+    setNakshaVisible({})
+    setVisible(old => {
+      const next = { ...old }
+      for (const key of DATA_PANEL_ATLAS_KEYS) next[key] = false
+      return next
+    })
   }
-  const clearNakshaLayers = () => { clearNakshaSelection(); setNakshaVisible({}) }
-  const activeNaksha = nakshaCatalogue.filter(item => nakshaVisible[item.id])
-  const fitSelectedNaksha = () => {
+  // Fit Selected uses the combined extent of every selected, available leaf
+  // dataset, including grouped children and the raster-derived elevation layer.
+  // Layers that are still streaming in are awaited first, so a freshly checked
+  // row always contributes to the fit instead of being skipped silently.
+  const fitSelectedDataPanel = async () => {
     const map = mapRef.current
-    if (!map || !activeNaksha.length) return
+    if (!map || !activePanelLeaves.length) return
+    const inFlight: Promise<unknown>[] = []
+    for (const leaf of activePanelLeaves) {
+      if (leaf.atlasKey) {
+        if (leaf.atlasKey === 'elevation') {
+          if (!elevationBoundsRef.current) inFlight.push(loadElevationOverlay())
+          continue
+        }
+        if (!dataCache.current.has(leaf.atlasKey)) {
+          const request = pending.current.get(leaf.atlasKey)
+          if (request) inFlight.push(request)
+        }
+        continue
+      }
+      const dataset = nakshaCatalogueRef.current.find(item => item.id === leaf.id)
+      if (!dataset?.available || nakshaCache.current.has(dataset.id)) continue
+      const request = nakshaPending.current.get(dataset.id)
+      if (request) inFlight.push(request)
+    }
+    if (inFlight.length) await Promise.allSettled(inFlight)
+    if (mapRef.current !== map || streetStageRef.current !== 'off') return
     const bounds = new maplibregl.LngLatBounds()
-    for (const dataset of activeNaksha) {
+    let used = 0
+    for (const leaf of activePanelLeaves) {
+      if (leaf.atlasKey) {
+        if (leaf.atlasKey === 'elevation') {
+          const box = elevationBoundsRef.current
+          if (box) { bounds.extend([box[0], box[1]]); bounds.extend([box[2], box[3]]); used += 1 }
+          continue
+        }
+        for (const feature of dataCache.current.get(leaf.atlasKey)?.features || []) {
+          const featureBounds = boundsFor(feature.geometry || null)
+          if (featureBounds) { bounds.extend(featureBounds.getSouthWest()); bounds.extend(featureBounds.getNorthEast()); used += 1; break }
+        }
+        continue
+      }
+      const dataset = nakshaCatalogueRef.current.find(item => item.id === leaf.id)
+      if (!dataset?.available) continue
       const box = nakshaCache.current.get(dataset.id)?.metadata.bounds
-      if (box) { bounds.extend([box[0], box[1]]); bounds.extend([box[2], box[3]]) }
+      if (box) { bounds.extend([box[0], box[1]]); bounds.extend([box[2], box[3]]); used += 1 }
     }
     if (!bounds.isEmpty()) map.fitBounds(bounds, { padding: 65, maxZoom: 13, duration: 500 })
+    else if (!used) return
   }
   const focusBasin = () => {
     const boundary = dataCache.current.get('boundary')?.features[0]
     const bounds = boundsFor(boundary?.geometry || null)
     if (bounds) mapRef.current?.fitBounds(bounds, { padding: 48, maxZoom: 12, duration: 450 })
   }
+  const handlePanoramaChange = (view: PanoramaView | null) => {
+    const map = mapRef.current
+    if (!map) return
+    // A report that arrives after exit must never resurrect the marker.
+    if (streetStageRef.current === 'off') { removeStreetMarker(); return }
+    if (!view) { removeStreetMarker(); return }
+    const requested = streetLocationRef.current
+    if (view.status === 'ready') {
+      const pos = view.position
+      const heading = typeof view.heading === 'number' && isFinite(view.heading) ? view.heading : null
+      showStreetMarker({ lat: pos.lat, lng: pos.lng }, 'confirmed', heading)
+      return
+    }
+    if (!requested) return
+    showStreetMarker(requested, view.status === 'loading' ? 'pending' : 'missing', null)
+  }
+
   const zoomSelection = () => {
     const bounds = boundsFor(selection?.feature.geometry || null)
     if (!bounds) return
@@ -492,13 +829,189 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
     else mapRef.current?.fitBounds(bounds, { padding: 90, maxZoom: 13, duration: 450 })
   }
 
+  // Loads (or reloads) the DEM-derived elevation overlay. The raster sits
+  // directly below the rivers line layer so every line and point layer, the
+  // selection highlight and the Street View marker stay readable on top.
+  // The PNG is preloaded first so a missing/broken asset surfaces as an
+  // explicit panel error with Retry instead of a silently blank overlay.
+  const loadElevationOverlay = (): Promise<void> => {
+    if (elevationPendingRef.current) return elevationPendingRef.current
+    const map = mapRef.current
+    if (!map) return Promise.resolve()
+    const task = fetch(ELEVATION_MANIFEST_PATH)
+      .then(response => { if (!response.ok) throw new Error(`Elevation overlay manifest unavailable (HTTP ${response.status})`); return response.json() })
+      .then((manifest: ElevationManifest) => new Promise<void>((resolve, reject) => {
+        const bounds = manifest?.raster?.bounds
+        if (!Array.isArray(bounds) || bounds.length !== 4 || bounds.some(value => !Number.isFinite(value))) {
+          reject(new Error('Elevation overlay manifest has no usable bounds'))
+          return
+        }
+        const [west, south, east, north] = bounds as number[]
+        const image = new Image()
+        image.onload = () => {
+          resolve()
+          if (mapRef.current !== map) return
+          elevationBoundsRef.current = [west, south, east, north]
+          setElevationManifest(manifest)
+          setElevationFailed('')
+          if (!map.getSource('atlas-source-elevation-raster')) {
+            map.addSource('atlas-source-elevation-raster', {
+              type: 'image',
+              url: ELEVATION_IMAGE_PATH,
+              coordinates: [[west, north], [east, north], [east, south], [west, south]],
+            })
+          }
+          if (!map.getLayer('atlas-elevation-raster')) {
+            const before = map.getLayer('atlas-rivers-line') ? 'atlas-rivers-line' : undefined
+            map.addLayer({
+              id: 'atlas-elevation-raster',
+              type: 'raster',
+              source: 'atlas-source-elevation-raster',
+              layout: { visibility: visibilityRef.current.elevation ? 'visible' : 'none' },
+              paint: { 'raster-opacity': 0.62, 'raster-resampling': 'nearest' },
+            }, before)
+          } else {
+            map.setLayoutProperty('atlas-elevation-raster', 'visibility', visibilityRef.current.elevation ? 'visible' : 'none')
+          }
+        }
+        image.onerror = () => reject(new Error('Elevation overlay image could not be loaded'))
+        image.src = ELEVATION_IMAGE_PATH
+      }))
+      .catch(error => {
+        setElevationFailed(error instanceof Error ? error.message : 'Elevation overlay could not be loaded')
+      })
+      .finally(() => { elevationPendingRef.current = null })
+    elevationPendingRef.current = task
+    return task
+  }
+
+  // Targeted retry for one row only; the rest of the group keeps working.
+  const retryPanelLeaf = (leaf: PanelLeaf) => {
+    if (leaf.atlasKey === 'elevation') { setElevationFailed(''); loadElevationOverlay(); return }
+    if (leaf.atlasKey) {
+      const key = leaf.atlasKey
+      dataCache.current.delete(key)
+      pending.current.delete(key)
+      setErrors(old => { const next = { ...old }; delete next[key]; return next })
+      setVisible(old => ({ ...old, [key]: true }))
+      setAtlasReloadNonce(nonce => nonce + 1)
+      return
+    }
+    nakshaCache.current.delete(leaf.id)
+    nakshaPending.current.delete(leaf.id)
+    setNakshaErrors(old => { const next = { ...old }; delete next[leaf.id]; return next })
+    if (!nakshaVisible[leaf.id]) setNakshaVisible(old => ({ ...old, [leaf.id]: true }))
+    setNakshaReloadNonce(nonce => nonce + 1)
+  }
+
+  // ---- Arkavathi River Data panel: row helpers ----------------------------
+  const panelDataset = (leaf: PanelLeaf) => (leaf.atlasKey ? null : nakshaCatalogue.find(item => item.id === leaf.id) ?? null)
+  const panelLeafError = (leaf: PanelLeaf) =>
+    leaf.atlasKey === 'elevation' ? elevationFailed
+      : leaf.atlasKey ? (errors[leaf.atlasKey] || '')
+        : (nakshaErrors[leaf.id] || '')
+  const panelLeafBusy = (leaf: PanelLeaf) =>
+    leaf.atlasKey ? Boolean(loading[leaf.atlasKey]) : Boolean(nakshaLoading[leaf.id])
+  const panelLeafSwatch = (leaf: PanelLeaf) =>
+    leaf.swatch || (leaf.atlasKey ? BY_KEY[leaf.atlasKey]?.color : NAKSHA_COLORS[leaf.id]) || '#416d69'
+  const panelLeafShape = (leaf: PanelLeaf) => {
+    const dataset = panelDataset(leaf)
+    if (dataset?.geometry_type) return dataset.geometry_type
+    const kind = leaf.atlasKey ? BY_KEY[leaf.atlasKey]?.kind : undefined
+    return kind === 'line' ? 'LineString' : kind === 'fill' ? 'Polygon' : 'Point'
+  }
+  const panelLeafAvailable = (leaf: PanelLeaf) => {
+    const dataset = panelDataset(leaf)
+    return dataset ? Boolean(dataset.available) : true
+  }
+  const setGroupOn = (group: PanelGroup, value: boolean) => {
+    for (const child of group.children) {
+      if (!panelLeafAvailable(child)) continue
+      setPanelRowOn(child, value)
+    }
+  }
+
+  const renderPanelLeaf = (leaf: PanelLeaf) => {
+    const on = isPanelRowOn(leaf)
+    const error = panelLeafError(leaf)
+    const busy = panelLeafBusy(leaf)
+    const dataset = panelDataset(leaf)
+    const status = busy ? 'Loading'
+      : error ? 'Error'
+        : dataset ? (dataset.available ? String(dataset.feature_count) : 'Unavailable')
+          : ''
+    return (
+      <label className={`ark-atlas-naksha-row ${on ? 'is-active' : ''}`} key={leaf.id}>
+        <input
+          type="checkbox"
+          checked={on}
+          disabled={busy || !panelLeafAvailable(leaf)}
+          onChange={event => setPanelRowOn(leaf, event.target.checked)}
+          aria-label={leaf.label}
+        />
+        <i className={`ark-atlas-naksha-symbol ${panelLeafShape(leaf)}`} style={{ backgroundColor: panelLeafSwatch(leaf) }} />
+        <span>{leaf.label}</span>
+        {status && <small>{status}</small>}
+        {error && (
+          <em className="ark-atlas-naksha-row-error">
+            {error}{' '}
+            <button
+              type="button"
+              aria-label={`Retry loading ${leaf.label}`}
+              onClick={event => { event.preventDefault(); event.stopPropagation(); retryPanelLeaf(leaf) }}
+            >
+              Retry
+            </button>
+          </em>
+        )}
+      </label>
+    )
+  }
+
+  const renderPanelGroup = (group: PanelGroup) => {
+    const state = groupState(group)
+    const open = Boolean(dataGroupOpen[group.id])
+    return (
+      <div className={`ark-atlas-naksha-group is-expandable ${open ? 'is-open' : ''}`} key={group.id}>
+        <div className="ark-atlas-naksha-group-head">
+          <input
+            type="checkbox"
+            checked={state.checked}
+            ref={node => { if (node) node.indeterminate = state.indeterminate }}
+            onChange={event => setGroupOn(group, event.target.checked)}
+            aria-label={`${group.label} — select all`}
+          />
+          <button
+            type="button"
+            className="ark-atlas-naksha-group-toggle"
+            aria-expanded={open}
+            aria-label={open ? `Collapse ${group.label}` : `Expand ${group.label}`}
+            onClick={() => setDataGroupOpen(old => ({ ...old, [group.id]: !old[group.id] }))}
+          >
+            {open ? <ChevronDown size={14}/> : <ChevronRight size={14}/>}
+            <span>{group.label}</span>
+          </button>
+          <small className="ark-atlas-naksha-count" title={`${state.on} of ${state.total} selected`}>{state.on}/{state.total}</small>
+        </div>
+        {open && <div className="ark-atlas-naksha-children">{group.children.map(renderPanelLeaf)}</div>}
+      </div>
+    )
+  }
+
+  const renderPanelSection = (section: PanelSection) => (
+    <div className="ark-atlas-naksha-group" key={`section-${section.label}`}>
+      <h3>{section.label}</h3>
+      {section.children.map(renderPanelLeaf)}
+    </div>
+  )
+
   return <div className="ark-atlas" aria-label="Arkavathi GIS Atlas">
     <aside className={`ark-atlas-explorer ${panelOpen ? 'is-open' : ''}`} aria-label="GIS layer explorer">
       <div className="ark-atlas-panel-head"><div className="ark-atlas-eyebrow"><Layers3 size={15}/> River layer explorer</div><h1>Arkavathi GIS Atlas</h1><p>Explore the basin, water system and project evidence.</p><button className="ark-atlas-panel-close" onClick={() => setPanelOpen(false)} aria-label="Close layer explorer"><X size={18}/></button></div>
       <label className="ark-atlas-search"><Search size={16}/><input value={search} onChange={event => setSearch(event.target.value)} placeholder="Search layers..." aria-label="Search layers"/></label>
       <div className="ark-atlas-group-scroll">
         {GROUPS.map(group => {
-          const all = LAYERS.filter(layer => layer.group === group)
+          const all = explorerLayers.filter(layer => layer.group === group)
           const matches = all.filter(layer => layer.name.toLowerCase().includes(search.trim().toLowerCase()) || group.toLowerCase().includes(search.trim().toLowerCase()))
           if (!matches.length) return null
           const isOpen = search.trim() ? true : expanded[group]
@@ -511,7 +1024,7 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
             </label>)}</div>}
           </section>
         })}
-        {search.trim() && !LAYERS.some(layer => layer.name.toLowerCase().includes(search.trim().toLowerCase()) || layer.group.toLowerCase().includes(search.trim().toLowerCase())) && <p className="ark-atlas-no-results">No matching layers.</p>}
+        {search.trim() && !explorerLayers.some(layer => layer.name.toLowerCase().includes(search.trim().toLowerCase()) || layer.group.toLowerCase().includes(search.trim().toLowerCase())) && <p className="ark-atlas-no-results">No matching layers.</p>}
       </div>
       <SurveySurveyCard
         engine={engine}
@@ -544,33 +1057,46 @@ export function ArkavathiGISAtlas({ tracks, points, nakshaSurveyAccess }: { trac
         </button>
       </div>
 
-      <div className="ark-atlas-legend"><h2>Legend <span>{activeLayers.length} active</span></h2>{activeLayers.length ? <div className="ark-atlas-legend-list">{activeLayers.map(layer => <div key={layer.key}><i className={`ark-atlas-legend-symbol ${layer.kind}`} style={{ backgroundColor: layer.color }}/><span>{layer.name}</span></div>)}{visible.elevation && ELEVATION_BANDS.map((band, index) => <div className="ark-atlas-legend-sub" key={band}><i className="ark-atlas-legend-symbol fill" style={{ backgroundColor: ELEVATION_COLORS[index] }}/><span>{band}</span></div>)}{visible.gaps && [['High', '#a54945'], ['Medium', '#b78a43'], ['Low', '#719672']].map(([label, color]) => <div className="ark-atlas-legend-sub" key={label}><i className="ark-atlas-legend-symbol fill" style={{ backgroundColor: color }}/><span>{label} severity</span></div>)}</div> : <p>Enable a layer to see its legend.</p>}</div>
+      <div className="ark-atlas-legend"><h2>Legend <span>{visibleLeafCount} active</span></h2>{visibleLeafCount ? <div className="ark-atlas-legend-list">
+        {activeLayers.map(layer => <div key={layer.key}><i className={`ark-atlas-legend-symbol ${layer.kind}`} style={{ backgroundColor: layer.color }}/><span>{layer.name}</span></div>)}
+        {nakshaSurveyAccess && activePanelLeaves.map(leaf => <div key={`panel-${leaf.id}`}><i className={`ark-atlas-legend-symbol ${panelLeafShape(leaf) === 'LineString' ? 'line' : panelLeafShape(leaf) === 'Point' ? 'point' : 'fill'}`} style={{ backgroundColor: panelLeafSwatch(leaf) }}/><span>{leaf.label}</span></div>)}
+        {visible.gaps && [['High', '#a54945'], ['Medium', '#b78a43'], ['Low', '#719672']].map(([label, color]) => <div className="ark-atlas-legend-sub" key={label}><i className="ark-atlas-legend-symbol fill" style={{ backgroundColor: color }}/><span>{label} severity</span></div>)}
+        {visible.elevation && elevationManifest && elevationManifest.classification.classes.map(item => <div className="ark-atlas-legend-sub" key={item.index}><i className="ark-atlas-legend-symbol fill" style={{ backgroundColor: item.color }}/><span>{item.label}</span></div>)}
+      </div> : <p>Enable a layer to see its legend.</p>}
+        {visible.elevation && elevationManifest && <p className="ark-atlas-legend-note">Elevation band values are interpreted as metres (m); the source GeoTIFF does not declare vertical units.</p>}
+      </div>
     </aside>
 
-    <div className="ark-atlas-map-area">
+    <div className="ark-atlas-map-area" onClickCapture={handleStreetMapClickCapture}>
       <div ref={mapNode} className="ark-atlas-map" aria-label="Interactive Arkavathi basin map"/>
       <div className="ark-atlas-floating-toolbar" aria-label="GIS layer tools">
-        <button className="ark-atlas-mobile-layers" aria-label="River Layer Explorer" aria-expanded={panelOpen} onClick={() => { setNakshaOpen(false); setPanelOpen(old => !old) }}><Layers3 size={17}/> River Layer Explorer <span>{activeLayers.length}</span></button>
-        {nakshaSurveyAccess && <button className="ark-atlas-naksha-toggle" aria-label="NakshaTech Survey Data" aria-expanded={nakshaOpen} onClick={() => { setPanelOpen(false); setNakshaOpen(old => !old) }}><Database size={16}/> NakshaTech Survey Data {activeNaksha.length > 0 && <span>{activeNaksha.length}</span>}</button>}
+        {nakshaSurveyAccess && <button className="ark-atlas-naksha-toggle" aria-label="Arkavathi River Data" aria-expanded={nakshaOpen} onClick={() => { setPanelOpen(false); setNakshaOpen(old => !old) }}><Database size={16}/> Arkavathi River Data {activePanelLeaves.length > 0 && <span>{activePanelLeaves.length}</span>}</button>}
       </div>
-      <div className="ark-atlas-map-controls" aria-label="Basemap controls"><div className="ark-atlas-basemap"><button className={basemap === 'street' ? 'is-selected' : ''} aria-pressed={basemap === 'street'} onClick={() => setBasemap('street')}>Street map</button><button className={basemap === 'satellite' ? 'is-selected' : ''} aria-pressed={basemap === 'satellite'} onClick={() => setBasemap('satellite')}>Satellite</button></div><button className="ark-atlas-fit" onClick={focusBasin} aria-label="Fit basin boundary" title="Fit basin boundary"><LocateFixed size={17}/></button></div>
+      <div className="ark-atlas-map-controls" aria-label="Basemap controls"><div className="ark-atlas-basemap"><button className={basemap === 'street' ? 'is-selected' : ''} aria-pressed={basemap === 'street'} onClick={() => setBasemap('street')}>Street map</button><button className={basemap === 'satellite' ? 'is-selected' : ''} aria-pressed={basemap === 'satellite'} onClick={() => setBasemap('satellite')}>Satellite</button><button className={`ark-atlas-streetview-toggle${streetStage !== 'off' ? ' is-selected' : ''}`} aria-pressed={streetStage !== 'off'} aria-label="Street View" data-atlas-street="toggle" title={streetStage === 'off' ? 'Select a location for Street View' : 'Exit Street View'} onClick={toggleStreetView}><PersonStanding size={14}/> Street View</button></div><button className="ark-atlas-fit" onClick={focusBasin} aria-label="Fit basin boundary" title="Fit basin boundary"><LocateFixed size={17}/></button></div>
       {nakshaSurveyAccess && <>
 
-        {nakshaOpen && <section className="ark-atlas-naksha-panel" aria-label="NakshaTech Survey Data panel">
-          <div className="ark-atlas-naksha-head"><div><small>Company survey layers</small><h2>NakshaTech Survey Data</h2><p>Arkavathi River Project</p></div><button aria-label="Close NakshaTech Survey Data" onClick={() => setNakshaOpen(false)}><X size={17}/></button></div>
+        {nakshaOpen && <section className="ark-atlas-naksha-panel" aria-label="Arkavathi River Data panel">
+          <div className="ark-atlas-naksha-head"><div><small>River project layers</small><h2>Arkavathi River Data</h2><p>Arkavathi River Project</p></div><button aria-label="Close Arkavathi River Data" onClick={() => setNakshaOpen(false)}><X size={17}/></button></div>
           {nakshaCatalogueError && <p className="ark-atlas-naksha-error" role="alert">{nakshaCatalogueError}</p>}
           <div className="ark-atlas-naksha-list">
             {!nakshaCatalogue.length && !nakshaCatalogueError && <p className="ark-atlas-naksha-empty">Loading survey datasets…</p>}
-            {NAKSHA_GROUPS.map(group => <div className="ark-atlas-naksha-group" key={group}><h3>{group}</h3>{nakshaCatalogue.filter(item => item.group === group).map(dataset => <label className={`ark-atlas-naksha-row ${nakshaVisible[dataset.id] ? 'is-active' : ''}`} key={dataset.id}>
-              <input type="checkbox" checked={Boolean(nakshaVisible[dataset.id])} disabled={!dataset.available} onChange={() => toggleNaksha(dataset.id)} aria-label={`${dataset.name} — NakshaTech`}/>
-              <i className={`ark-atlas-naksha-symbol ${dataset.geometry_type || 'unknown'}`} style={{ backgroundColor: NAKSHA_COLORS[dataset.id] }}/><span>{dataset.name}</span><small>{nakshaLoading[dataset.id] ? 'Loading' : nakshaErrors[dataset.id] ? 'Error' : dataset.available ? dataset.feature_count : 'Unavailable'}</small>
-              {nakshaErrors[dataset.id] && <em title={nakshaErrors[dataset.id]}>{nakshaErrors[dataset.id]}</em>}
-            </label>)}</div>)}
+            {PANEL_ROWS.map(row =>
+              row.kind === 'group' ? renderPanelGroup(row)
+                : row.kind === 'section' ? renderPanelSection(row)
+                  : renderPanelLeaf(row))}
           </div>
-          <div className="ark-atlas-naksha-actions"><button onClick={fitSelectedNaksha} disabled={!activeNaksha.length || activeNaksha.some(item => !nakshaCache.current.has(item.id))}><LocateFixed size={14}/> Fit Selected</button><button onClick={clearNakshaLayers} disabled={!activeNaksha.length}>Clear Survey Layers</button></div>
+          <div className="ark-atlas-naksha-actions">
+            <button onClick={fitSelectedDataPanel} disabled={!activePanelLeaves.length}><LocateFixed size={14}/> Fit Selected</button>
+            <button onClick={clearDataPanelLayers} disabled={!activePanelLeaves.length}>Clear Layers</button>
+          </div>
         </section>}
       </>}
       <div className="ark-atlas-map-caption">ARKAVATHI BASIN <span>•</span> {activeLayers.length} layers visible</div>
+      {streetStage === 'selecting' && <div className="ark-atlas-street-banner" role="status" data-atlas-street="selection-banner"><span><PersonStanding size={15}/> Click a road on the map to select a Street View location · Press Esc to cancel</span><button type="button" onClick={exitStreetView} data-atlas-street="cancel">Cancel</button></div>}
+      {streetStage === 'viewing' && streetLocation && <div className="ark-atlas-streetview" data-atlas-street="panel">
+        <div className="ark-atlas-streetview-bar"><strong>Street View</strong><small>{streetLocation.lat.toFixed(6)}, {streetLocation.lng.toFixed(6)}</small><button type="button" onClick={exitStreetView} data-atlas-street="exit" aria-label="Exit Street View" title="Exit Street View"><X size={14}/> Exit Street View</button></div>
+        <StreetViewPanel location={streetLocation} onLocationChange={selectStreetLocation} active providers={['google', 'kartaview']} defaultProvider={HAS_GOOGLE_MAPS_KEY ? 'google' : 'kartaview'} onPanoramaChange={handlePanoramaChange}/>
+      </div>}
       {selection && <section className="ark-atlas-detail" aria-label="Selected GIS feature"><div className="ark-atlas-detail-head"><div><small>{selection.layer.name}</small><h2>{featureName(selection)}</h2></div><button onClick={clearSelection} aria-label="Close feature details"><X size={18}/></button></div><div className="ark-atlas-detail-fields">{(FIELDS[selection.layer.key] || Object.keys(selection.feature.properties || {})).filter(key => useful(selection.feature.properties?.[key])).map(key => <div key={key}><span>{fieldLabel(key)}</span><strong>{displayValue(selection.feature.properties?.[key])}</strong></div>)}</div><div className="ark-atlas-detail-actions"><button onClick={zoomSelection}>Zoom to feature</button>{selection.layer.key === 'evidence' && safeEvidenceUrl(selection.feature.properties?.evidenceUrl) && <a href={safeEvidenceUrl(selection.feature.properties?.evidenceUrl)!} target="_blank" rel="noopener noreferrer">View evidence →</a>}</div></section>}
       {nakshaSelection && <section className="ark-atlas-detail ark-atlas-naksha-detail" aria-label="Selected NakshaTech feature"><div className="ark-atlas-detail-head"><div><small>NakshaTech survey · {nakshaSelection.dataset.name}</small><h2>{nakshaFeatureName(nakshaSelection)}</h2></div><button onClick={clearNakshaSelection} aria-label="Close NakshaTech feature details"><X size={18}/></button></div><div className="ark-atlas-detail-fields">{nakshaDetailFields(nakshaSelection.feature.properties).map(([key, value]) => <div key={key}><span>{fieldLabel(key)}</span><strong>{displayValue(value)}</strong></div>)}</div><p className="ark-atlas-naksha-crs">Source CRS: {nakshaSelection.dataset.source_crs || 'Unknown'} · Display: EPSG:4326</p></section>}
     </div>

@@ -2,17 +2,13 @@ import {
   BarChart3,
   BadgeCheck,
   CalendarDays,
-  ClipboardCheck,
   ClipboardList,
   Database,
-  FileBarChart,
   FlaskConical,
-  FolderArchive,
   History,
   Home,
   KeyRound,
   Map,
-  PersonStanding,
   ShieldCheck,
   Waves,
 } from 'lucide-react'
@@ -47,13 +43,11 @@ export type DashboardPage =
 const baseItems = [
   [Home, 'Overview', 'overview'],
   [Map, 'GIS Map', 'gis-map'],
-  [PersonStanding, 'Street View', 'street-view'],
+  [BarChart3, 'Analysis', 'street-view'],
   [CalendarDays, 'Event Handler', 'event-handler'],
-  [BarChart3, 'Coverage Analytics', 'analytics'],
   [Database, 'Data Readiness', 'data-readiness'],
   [Waves, 'Civil Modules', 'civil-modules'],
   [FlaskConical, 'Scientific Modules', 'scientific-modules'],
-  [FileBarChart, 'Verification', 'verification'],
 ] as const
 
 export function Sidebar({
@@ -73,17 +67,6 @@ export function Sidebar({
   const items: any[] = [...baseItems]
 
   if (
-    user.organization_type === 'COMPANY' &&
-    user.role === 'COMPANY_ADMIN'
-  ) {
-    items.push([
-      FolderArchive,
-      'Data Repository',
-      'department-data',
-    ])
-  }
-
-  if (
     has('TASK.VIEW_ALL') ||
     has('TASK.VIEW_ASSIGNED')
   ) {
@@ -93,14 +76,6 @@ export function Sidebar({
         ? 'Task Management'
         : 'My Tasks',
       'task-management',
-    ])
-  }
-
-  if (has('WORKFLOW.REVIEW')) {
-    items.push([
-      ClipboardCheck,
-      'Review Centre',
-      'review-centre',
     ])
   }
 
