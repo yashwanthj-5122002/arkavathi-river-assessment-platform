@@ -1,5 +1,5 @@
 # Data and Media Operations Guide
-## Arkavati River Population Assessment Project
+## Arkavati River Pollution Assessment Project
 
 ## Production folders
 

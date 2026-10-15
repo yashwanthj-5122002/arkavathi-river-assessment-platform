@@ -1,5 +1,5 @@
 # Production Hardening Report
-## Arkavati River Population Assessment Project
+## Arkavati River Pollution Assessment Project
 
 ### Scope reviewed
 - Python backend/API and SQLite authentication/workflow stores
@@ -11,7 +11,7 @@
 - Production configuration, media handling and startup/backup/account operations
 
 ### Hardening applied
-- Exact project title standardized to **Arkavati River Population Assessment Project**.
+- Exact project title standardized to **Arkavati River Pollution Assessment Project**.
 - Company display standardized to **Nakshatech**.
 - Existing `auth.db` retained; account emails/password hashes remain intact.
 - Session password hashing parameters strengthened for newly reset/created passwords.

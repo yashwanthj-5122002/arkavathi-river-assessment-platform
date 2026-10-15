@@ -1,4 +1,4 @@
-# Arkavati River Population Assessment Project
+# Arkavati River Pollution Assessment Project
 ## Production-ready project portal
 
 This package contains the hardened production deployment of the Arkavati project application: Institution/University data capture, Nakshatech review/approval, CNNL approved-output monitoring, project GIS, repository, tasks/workflows, scientific records and Video + SRT industry intelligence.

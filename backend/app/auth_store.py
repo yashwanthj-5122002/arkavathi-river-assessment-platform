@@ -253,7 +253,7 @@ def ensure_initialized() -> dict[str, Any]:
 
     if created_credentials:
         lines = [
-            "ARKAVATI RIVER POPULATION ASSESSMENT PROJECT - INITIAL LOGIN CREDENTIALS",
+            "ARKAVATI RIVER POLLUTION ASSESSMENT PROJECT - INITIAL LOGIN CREDENTIALS",
             "=" * 62,
             "Generated locally during first-time production initialization.",
             "Keep this file only until the credentials are distributed securely and changed.",

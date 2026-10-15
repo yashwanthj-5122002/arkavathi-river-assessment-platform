@@ -477,7 +477,7 @@ function CollaborationView({ onBack, config }: { onBack: () => void; config: Por
             </div>
           ) : (
             <div className="mt-4 rounded-xl border border-amber-100 bg-amber-50 p-4 text-xs leading-5 text-amber-900">
-              Official NGO names were not included in the supplied project package. The section is ready for client-approved NGO names without any backend change.
+              Official NGO information can be added when the approved organization names are available.
             </div>
           )}
         </section>
@@ -748,7 +748,7 @@ if (view === 'chairman-desk') {
           <h2 className="mt-1 text-lg font-black uppercase tracking-[0.08em] md:text-xl">Introduction</h2>
         </div>
         <div className="hidden rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.10em] text-blue-100 lg:block">
-          Arkavati River Population Assessment Project
+          Arkavati River Pollution Assessment Project
         </div>
       </div>
 

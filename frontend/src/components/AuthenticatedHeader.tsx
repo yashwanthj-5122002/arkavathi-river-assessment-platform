@@ -271,9 +271,8 @@ function JaiprakashLeadershipBlock() {
             text-blue-100
           "
         >
-          Former Secretary, Government of Karnataka and Chairman,
-          <br />
-          Committee for Studies on Arkavathi River Basin
+         Chairman - Committee for Undertaking Studies on Pollution Abatement in the Arkavathi River Basin &
+         Technical Adviser to the Hon'ble Chief Minister, GoK
         </div>
       </div>
     </div>
@@ -460,7 +459,7 @@ if (projectBranding) {
           {/* WATER RESOURCES MINISTER */}
 
           <LeadershipBlock
-            portrait="/branding/water-resources-minister.png.jpg"
+            portrait="/branding/water-resources-m.png"
             title="Hon'ble Minister for Water Resources"
             name="Shri Cheluvaraya Swami"
             widthClass="w-[245px]"
@@ -555,7 +554,7 @@ if (projectBranding) {
               md:text-3xl
             "
           >
-            Arkavati River Population Assessment Project
+            Arkavati River Pollution Assessment Project
           </h1>
 
           <p className="text-sm text-blue-100">

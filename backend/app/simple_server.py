@@ -153,7 +153,7 @@ from app.workflow_store import (
 )
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
-SERVICE = "Arkavati River Population Assessment Platform API"
+SERVICE = "Arkavati River Pollution Assessment Platform API"
 VERSION = "2.0.0-production"
 SESSION_COOKIE = "arkavati_session"
 

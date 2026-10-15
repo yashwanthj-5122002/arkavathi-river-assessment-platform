@@ -47,7 +47,7 @@ export function LoginPage({config,onLogin}:{config:PortalConfig;onLogin:(user:Au
         <div className="absolute -left-24 top-36 h-80 w-80 rounded-full border border-cyan-300/10"/><div className="absolute -left-10 top-52 h-56 w-56 rounded-full border border-cyan-300/10"/>
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-200/20 bg-cyan-100/10 px-3 py-2 text-xs font-bold text-cyan-100"><ShieldCheck size={15}/> Authorized Project Access</div>
-          <h1 className="ark-login-story-title mt-7 max-w-2xl leading-[1.05] tracking-tight">Arkavati River Population Assessment Project</h1>
+          <h1 className="ark-login-story-title mt-7 max-w-2xl leading-[1.05] tracking-tight">Arkavati River Pollution Assessment Project</h1>
           <p className="mt-4 max-w-xl text-lg leading-8 text-blue-100">Industrial Pollution Assessment, DPR Preparation & River Revitalization</p>
           <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/10 bg-white/8 p-4"><div className="text-2xl font-black">3</div><div className="mt-1 text-xs text-blue-100">Role-based portal types</div></div>
@@ -63,11 +63,11 @@ export function LoginPage({config,onLogin}:{config:PortalConfig;onLogin:(user:Au
 
       <section className="ark-login-panel p-5 sm:p-8 lg:p-12">
         <div className="mx-auto max-w-xl">
-          <div className="md:hidden"><h1 className="text-3xl font-black text-navy-950">Arkavati River Population Assessment Project</h1><p className="mt-1 text-sm text-slate-500">Secure project portal</p></div>
+          <div className="md:hidden"><h1 className="text-3xl font-black text-navy-950">Arkavati River Pollution Assessment Project</h1><p className="mt-1 text-sm text-slate-500">Secure project portal</p></div>
           <div className="mt-6 md:mt-0">
             <div className="text-xs font-black uppercase tracking-[.18em] text-navy-700">Sign in</div>
             <h2 className="mt-2 text-3xl font-black text-slate-950">Choose your portal</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">Your account role is validated by the Python backend. Selecting a different portal does not bypass access controls.</p>
+            <p className="mt-2 text-sm leading-6 text-slate-500">Choose the portal assigned to your account.</p>
           </div>
 
           <div className="ark-login-portals mt-7 grid gap-3 sm:grid-cols-3">
@@ -88,8 +88,6 @@ export function LoginPage({config,onLogin}:{config:PortalConfig;onLogin:(user:Au
             {error && <div className="mt-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-800">{error}</div>}
 
             <button disabled={loading} className="ark-button-primary mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-navy-950 px-4 py-3.5 text-sm font-black text-white shadow-lg transition hover:bg-navy-800 disabled:cursor-wait disabled:opacity-60"><ShieldCheck size={18}/>{loading?'Signing in…':'Sign in securely'}</button>
-
-            <div className="mt-5 rounded-xl bg-slate-50 p-3 text-[11px] leading-5 text-slate-500">Initial demo credentials are generated locally on the host PC during installation and stored in <strong className="text-slate-700">DEMO_LOGIN_CREDENTIALS.txt</strong>. Passwords are not embedded in this web page.</div>
           </form>
         </div>
       </section>

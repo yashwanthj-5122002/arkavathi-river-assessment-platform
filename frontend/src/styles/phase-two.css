@@ -32,8 +32,19 @@
 }
 :is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(section, article, form, div)[class*='rounded-2xl'][class*='bg-white'] {
   border-color: var(--ark-border);
-  background-color: var(--ark-surface-elevated);
-  box-shadow: var(--ark-shadow-sm);
+  background-color: transparent;
+  box-shadow: none;
+}
+/* Keep operational panels see-through while retaining the existing typography.
+   Inputs and buttons are separate controls and keep their own surfaces. */
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(section, article, form, div)[class*='rounded-'][class*='bg-white']:not([class*='rounded-full']) {
+  background-color: transparent;
+  box-shadow: none;
+}
+/* Apply the same panel treatment to the overview and authenticated modules. */
+:is(.ark-workspace .ark-workspace-content, .ark-role-portal main) :is(section, article, form, div)[class*='rounded-'][class*='bg-white']:not([class*='rounded-full']) {
+  background-color: transparent;
+  box-shadow: none;
 }
 :is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) [class*='rounded-2xl'][class*='bg-slate-50'] {
   border-color: var(--ark-border);
@@ -165,7 +176,7 @@
 :is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) .fixed.inset-0 > :is(div, form)[class*='bg-white'] {
   border: 1px solid var(--ark-border);
   border-radius: var(--ark-radius-lg);
-  background: var(--ark-surface-elevated);
+  background: transparent;
   box-shadow: var(--ark-shadow-lg);
 }
 :is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) .fixed.inset-0[class*='bg-slate-950'] {

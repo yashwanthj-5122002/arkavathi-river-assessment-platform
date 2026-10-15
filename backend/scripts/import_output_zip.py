@@ -357,7 +357,7 @@ def import_zip(zip_path: Path, output_dir: Path) -> dict:
         total_duration_seconds = duration_label_to_seconds(reported.get("airborne_combined")) or sum(d["duration_seconds"] for d in days)
         recomputed_duration_seconds = sum(d["recomputed_start_end_seconds"] for d in days)
         summary = {
-            "project": "Arkavati River Population Assessment Project",
+            "project": "Arkavati River Pollution Assessment Project",
             "dataset": "Drone survey telemetry and KMZ projections (Day 3 to Day 8)",
             "survey_days": reported.get("survey_days", len(days)),
             "flight_clips": reported.get("flight_clips", len(flights)),

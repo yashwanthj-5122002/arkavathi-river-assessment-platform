@@ -42,7 +42,7 @@ export function TaskWorkspace({title='Task Management',subtitle='Create, assign,
 
   return <div className="space-y-4">
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[.16em] text-navy-700">V1.8 Workflow</div><h2 className="mt-1 text-2xl font-black text-slate-950">{title}</h2><p className="mt-1 text-sm text-slate-500">{subtitle}</p></div><div className="flex gap-2">{can('TASK.CREATE')&&<button onClick={()=>setShowCreate(true)} className="inline-flex items-center gap-2 rounded-xl bg-navy-950 px-4 py-2.5 text-sm font-black text-white"><Plus size={17}/>Create Task</button>}<button onClick={load} className="rounded-xl border border-slate-300 bg-white p-2.5 text-slate-600"><RefreshCw size={17}/></button></div></div>
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[.16em] text-navy-700">Workflow</div><h2 className="mt-1 text-2xl font-black text-slate-950">{title}</h2><p className="mt-1 text-sm text-slate-500">{subtitle}</p></div><div className="flex gap-2">{can('TASK.CREATE')&&<button onClick={()=>setShowCreate(true)} className="inline-flex items-center gap-2 rounded-xl bg-navy-950 px-4 py-2.5 text-sm font-black text-white"><Plus size={17}/>Create Task</button>}<button onClick={load} className="rounded-xl border border-slate-300 bg-white p-2.5 text-slate-600"><RefreshCw size={17}/></button></div></div>
       <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">{[['Open',counts.open],['In Review',counts.review],['Correction Required',counts.correction],['Approved / Complete',counts.done]].map(([label,value])=><div key={String(label)} className="rounded-2xl border border-slate-200 bg-slate-50 p-4"><div className="text-[10px] font-black uppercase tracking-wider text-slate-400">{label}</div><div className="mt-2 text-2xl font-black text-slate-900">{value}</div></div>)}</div>
     </section>
     {error&&<div className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm font-semibold text-rose-800">{error}</div>}
@@ -64,7 +64,7 @@ function CreateTaskModal({targets,busy,onClose,onCreated}:{targets:TaskTargets|n
     try{
       const created=await api.createTask({title:title.trim(),description:description.trim(),priority,due_date:due||undefined,micro_catchment_id:micro||undefined,department_id:targetType==='DEPARTMENT'?target:undefined,institution_id:targetType==='INSTITUTION'?target:undefined})
       let result=created
-      if(targetType==='INSTITUTION'&&target)result=await api.assignTask(created.public_id,{assignee_organization_id:target,comment:'Assigned from V1.8 Task Management'})
+      if(targetType==='INSTITUTION'&&target)result=await api.assignTask(created.public_id,{assignee_organization_id:target,comment:'Assigned from Task Management'})
       if(targetType==='DEPARTMENT'&&target){
         const uploader=targets?.eligible_users.find(u=>u.role==='COMPANY_DEPARTMENT_USER')
         result=await api.assignTask(created.public_id,{assignee_department_id:target,assignee_user_id:uploader?.id,comment:'Assigned to Nakshatech department team'})

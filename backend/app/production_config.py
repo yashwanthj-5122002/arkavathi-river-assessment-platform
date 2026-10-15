@@ -37,7 +37,7 @@ def _list(name: str, default: list[str] | None = None) -> list[str]:
 
 PROJECT_TITLE = os.environ.get(
     "ARKAVATI_PROJECT_TITLE",
-    "Arkavati River Population Assessment Project",
+    "Arkavati River Pollution Assessment Project",
 ).strip()
 
 HOST = os.environ.get("ARKAVATI_HOST", os.environ.get("ARKAVATHI_HOST", "127.0.0.1")).strip()

@@ -14,7 +14,7 @@ results=[]
 def add(level,name,detail): results.append((level,name,detail))
 
 ensure_production_dirs(); ensure_initialized()
-if PROJECT_TITLE == 'Arkavati River Population Assessment Project': add(PASS,'Project title',PROJECT_TITLE)
+if PROJECT_TITLE == 'Arkavati River Pollution Assessment Project': add(PASS,'Project title',PROJECT_TITLE)
 else: add(WARN,'Project title',PROJECT_TITLE)
 
 required=[

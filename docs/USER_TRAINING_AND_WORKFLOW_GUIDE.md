@@ -1,4 +1,4 @@
-# Arkavati River Population Assessment Project
+# Arkavati River Pollution Assessment Project
 ## User Training, Use Cases and Inter-Organization Workflow
 
 This guide explains how the three principal participant groups use the application and how information moves between them. It is based on the roles, permissions, institution forms, task engine and approval workflow implemented in this application.

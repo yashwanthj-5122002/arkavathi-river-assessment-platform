@@ -21,6 +21,6 @@ Push-Location $Backend
 try {
     Write-Host ''
     Write-Host 'ARKAVATI PRODUCTION SERVER' -ForegroundColor Cyan
-    Write-Host 'Arkavati River Population Assessment Project' -ForegroundColor White
+    Write-Host 'Arkavati River Pollution Assessment Project' -ForegroundColor White
     & $Py -m app.simple_server
 } finally { Pop-Location }

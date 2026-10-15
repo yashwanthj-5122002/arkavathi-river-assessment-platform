@@ -1,4 +1,4 @@
-ARKAVATI RIVER POPULATION ASSESSMENT PROJECT - RUN FIRST
+ARKAVATI RIVER POLLUTION ASSESSMENT PROJECT - RUN FIRST
 ========================================================
 
 1. Open PowerShell in this folder.

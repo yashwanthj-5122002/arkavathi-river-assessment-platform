@@ -9,7 +9,7 @@ $ConfigExample = Join-Path $Root 'config\production.env.example'
 
 Write-Host ''
 Write-Host 'ARKAVATI PRODUCTION SETUP' -ForegroundColor Cyan
-Write-Host 'Arkavati River Population Assessment Project' -ForegroundColor White
+Write-Host 'Arkavati River Pollution Assessment Project' -ForegroundColor White
 Write-Host ('Root: ' + $Root)
 
 if (-not (Test-Path $Config)) {

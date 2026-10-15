@@ -56,6 +56,7 @@ config/production.env
 docs/CREDENTIALS_AND_ACCESS_GUIDE.md
 
 # Python environments
+.env_folder_backup_*/
 .venv/
 venv/
 env/

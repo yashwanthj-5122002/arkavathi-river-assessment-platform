@@ -1,4 +1,4 @@
-# Colleague Setup Guide — Arkavati River Population Assessment Project
+# Colleague Setup Guide — Arkavati River Pollution Assessment Project
 
 Handoff document for setting up this repository on a **new Windows computer** from a fresh clone.
 
