@@ -1,0 +1,5 @@
+# The production GIS survey API reads SHP/DBF with PyShp and transforms source
+# CRS definitions to WGS84 with pyproj. openpyxl supports XLSX data rebuilds.
+openpyxl==3.1.5
+pyshp==2.3.1
+pyproj==3.7.1

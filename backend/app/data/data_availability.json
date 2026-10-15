@@ -1,0 +1,80 @@
+{
+  "available_now": [
+    {
+      "key": "drone_tracks",
+      "label": "Drone flight paths",
+      "status": "available",
+      "source": "Merged.kmz"
+    },
+    {
+      "key": "start_end",
+      "label": "Start / end locations",
+      "status": "available",
+      "source": "Merged.kmz"
+    },
+    {
+      "key": "video_clip_ids",
+      "label": "Source video clip IDs",
+      "status": "available",
+      "source": "Day 3-8 XLSX / KMZ"
+    },
+    {
+      "key": "gps",
+      "label": "Latitude / longitude",
+      "status": "available",
+      "source": "Day 3-8 XLSX"
+    },
+    {
+      "key": "absolute_altitude",
+      "label": "Absolute altitude",
+      "status": "available",
+      "source": "Day 3-8 XLSX"
+    },
+    {
+      "key": "relative_altitude",
+      "label": "Relative altitude",
+      "status": "partial",
+      "source": "Day 4-8 XLSX only"
+    },
+    {
+      "key": "time_frame",
+      "label": "Date, time and frame count",
+      "status": "partial",
+      "source": "Day 4-8 XLSX only"
+    }
+  ],
+  "needed_next": [
+    {
+      "module": "River context",
+      "data": "Arkavathi river and tributary alignment (KML/KMZ/SHP/GeoJSON)"
+    },
+    {
+      "module": "True survey progress",
+      "data": "Planned survey reach/length or planned survey GIS line"
+    },
+    {
+      "module": "12 institutions",
+      "data": "Institution-to-watershed/reach allocation with boundaries if available"
+    },
+    {
+      "module": "River survey",
+      "data": "Location ID, chainage, width, depth, bed level, bank/flow condition"
+    },
+    {
+      "module": "Structures",
+      "data": "Bridge/culvert/check dam/weir inventory with GPS, dimensions and condition"
+    },
+    {
+      "module": "Drains & outfalls",
+      "data": "Drain/outfall IDs, GPS, type/source, connectivity and flow condition"
+    },
+    {
+      "module": "Water sampling",
+      "data": "Sample ID, GPS/location, institution, date, status and lab report link"
+    },
+    {
+      "module": "Critical locations",
+      "data": "Category, problem, priority, recommended action and status"
+    }
+  ]
+}
