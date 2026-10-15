@@ -271,8 +271,8 @@ function JaiprakashLeadershipBlock() {
             text-blue-100
           "
         >
-         Technical Advisor to the Chief Minister, Government of Karnataka,
-          Chairman of the Committee for Studies on the Arkavathi River Basin.
+         Chairman - Committee for Undertaking Studies on Pollution Abatement in the Arkavathi River Basin &
+         Technical Adviser to the Hon'ble Chief Minister, GoK
         </div>
       </div>
     </div>
