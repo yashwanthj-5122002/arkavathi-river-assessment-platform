@@ -1,0 +1,1788 @@
+/* ==========================================================================
+   ARKAVATHI — THE LIVING RIVER ATLAS
+   Story introduction + immersive GIS story + closing typography.
+   Scoped to .ark-story-intro, .ark-immersive, .ark-lightbox and the closing
+   (.ark-portal .ark-closing-*). Uses the landing-page tokens (--ark-*).
+   Reading text is near-black (#171c1a); greens are interface accents only and
+   never tint the map, which keeps its natural provider colours.
+   ========================================================================== */
+
+.ark-story-intro,
+.ark-immersive,
+.ark-lightbox {
+  --ark-text: #171c1a;
+  --ark-text-2: #36423c;
+  --ark-rule: #d6d1c2;
+  --ark-forest: #274e40;
+  --ark-sage: #a6c3b6;
+  --ark-cream: #f3f1e9;
+}
+
+/* ---- 1. Story introduction slide ------------------------------------------ */
+
+.ark-story-intro {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: min(100svh, 1040px);
+  padding-block: clamp(84px, 12vh, 140px) clamp(56px, 8vh, 100px);
+  background: var(--ark-cream);
+  color: var(--ark-text);
+  scroll-margin-top: 0;
+}
+
+.ark-story-intro-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(30px, 5vh, 60px);
+}
+
+.ark-story-intro .ark-story-intro-marker {
+  margin-bottom: 0;
+  color: var(--ark-forest);
+}
+
+.ark-landing .ark-story-intro-marker .ark-eyebrow {
+  font-size: 12px !important;
+  letter-spacing: 0.18em;
+}
+
+.ark-story-intro-marker > span:first-child {
+  font-size: 12px;
+  opacity: 1;
+}
+
+.ark-story-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 110px);
+  align-items: end;
+}
+
+.ark-landing .ark-story-intro-title {
+  max-width: 10ch;
+  color: var(--ark-text);
+  font-size: clamp(3rem, 5.4vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.ark-landing .ark-story-intro-title em {
+  color: var(--ark-forest);
+  font-style: italic;
+}
+
+.ark-landing .ark-story-intro-lead {
+  color: var(--ark-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+.ark-landing .ark-story-intro-sub {
+  margin-top: 18px;
+  color: var(--ark-text-2);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.ark-story-intro-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid var(--ark-text);
+}
+
+.ark-story-intro-facts > div {
+  padding: 20px 24px 0 0;
+}
+
+.ark-story-intro-facts > div + div {
+  padding-left: 24px;
+  border-left: 1px solid var(--ark-rule);
+}
+
+.ark-story-intro-facts dt {
+  color: var(--ark-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.5rem, 2.1vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.ark-story-intro-facts dd {
+  margin: 8px 0 0;
+  color: var(--ark-text-2);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.ark-landing .ark-story-intro-scroll {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 14px;
+  padding: 6px 0;
+  color: var(--ark-forest);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ark-story-intro-scroll-line {
+  width: 56px;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.ark-story-intro-scroll:hover .ark-story-intro-scroll-line { width: 80px; }
+.ark-story-intro-scroll svg { animation: ark-scroll-cue 2.4s ease-in-out infinite; }
+
+.ark-landing .ark-story-intro-hint {
+  margin-top: calc(clamp(30px, 5vh, 60px) * -0.6);
+  color: var(--ark-text-2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@keyframes ark-scroll-cue {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ---- 2. Immersive story: sticky full-width map ---------------------------- */
+
+.ark-immersive {
+  --gutter: clamp(20px, 3vw, 56px);
+  --card-w: clamp(430px, 37vw, 580px);
+  --map-left: calc(var(--gutter) + var(--card-w) + 32px);
+  --side-w: 56px;
+  position: relative;
+  background: #f2efe9;
+  color: var(--ark-text);
+}
+
+.ark-immersive-stage {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: #f2efe9;
+}
+
+.ark-immersive-map {
+  position: absolute;
+  inset: 0;
+}
+
+.ark-immersive-map .maplibregl-canvas { outline: none; }
+
+.ark-immersive-map .maplibregl-canvas:focus-visible {
+  outline: 2px solid #bb9144;
+  outline-offset: -4px;
+}
+
+.ark-map-status {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px;
+  padding-left: var(--map-left);
+  color: var(--ark-text-2);
+  font-size: 14px;
+  text-align: center;
+}
+
+.ark-map-status img {
+  max-width: min(640px, 100%);
+  max-height: 60vh;
+  border: 1px solid var(--ark-rule);
+  background: #fff;
+}
+
+/* HUD: chapter + current location ------------------------------------------- */
+
+.ark-hud {
+  position: absolute;
+  top: 20px;
+  left: var(--map-left);
+  right: calc(var(--gutter) + var(--side-w) + 20px);
+  z-index: 3;
+  display: grid;
+  gap: 4px;
+  max-width: 640px;
+  padding: 13px 18px 14px;
+  border: 1px solid rgb(23 28 26 / 12%);
+  border-radius: 2px;
+  background: rgb(250 249 245 / 96%);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 70%) inset, 0 14px 34px -14px rgb(10 25 22 / 30%);
+  backdrop-filter: blur(6px);
+}
+
+.ark-hud-kicker {
+  color: var(--ark-forest);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ark-hud strong {
+  color: var(--ark-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(18px, 1.45vw, 21px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.ark-hud-note {
+  color: var(--ark-text-2);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ark-hud-warn {
+  color: #8b3a2a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Legend ---------------------------------------------------------------------- */
+
+.ark-legend {
+  position: absolute;
+  left: var(--map-left);
+  bottom: 16px;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  width: fit-content;
+  max-width: min(660px, calc(100% - var(--map-left) - var(--gutter) - var(--side-w) - 40px));
+  margin: 0;
+  padding: 9px 14px;
+  list-style: none;
+  border: 1px solid rgb(23 28 26 / 12%);
+  border-radius: 2px;
+  background: rgb(250 249 245 / 96%);
+  box-shadow: 0 14px 34px -16px rgb(10 25 22 / 30%);
+  color: var(--ark-text);
+  font-size: 12px;
+  line-height: 1.35;
+  backdrop-filter: blur(6px);
+}
+
+.ark-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ark-swatch {
+  display: inline-block;
+  flex: none;
+  width: 20px;
+  height: 10px;
+}
+
+.ark-swatch-line { height: 4px; border-radius: 2px; background: var(--sw); box-shadow: 0 0 0 1.5px #fff; }
+.ark-swatch-line-thin { height: 2px; border-radius: 1px; background: var(--sw); opacity: 0.65; }
+.ark-swatch-reach { height: 6px; border-radius: 3px; background: var(--sw); box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgb(0 0 0 / 10%); }
+.ark-swatch-fill { background: var(--sw); opacity: 0.9; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 18%); }
+.ark-swatch-shade { background: rgb(23 28 26 / 16%); box-shadow: inset 0 0 0 1.5px var(--sw); }
+.ark-swatch-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--sw); box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px rgb(0 0 0 / 14%); }
+.ark-swatch-dash { height: 0; border-top: 2px dashed var(--sw); }
+.ark-swatch-band { height: 9px; border-radius: 5px; background: var(--sw); opacity: 0.4; }
+.ark-swatch-ramp { height: 9px; background: linear-gradient(90deg, #1b6b3e, #6ab15a, #c8cc66, #e8c862, #f2ac59, #dd6f4a, #9c4238); }
+
+/* Chapter progress (desktop rail) and mobile progress bar ----------------------- */
+
+.ark-progress {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: var(--side-w);
+  padding: 12px 0;
+  border: 1px solid rgb(23 28 26 / 12%);
+  border-radius: 2px;
+  background: rgb(250 249 245 / 96%);
+  box-shadow: 0 14px 34px -16px rgb(10 25 22 / 30%);
+  transform: translateY(-50%);
+  backdrop-filter: blur(6px);
+}
+
+.ark-progress-track {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 6px;
+  width: 2px;
+  background: #e2ded2;
+}
+
+.ark-progress-track > span {
+  display: block;
+  width: 100%;
+  background: var(--ark-forest);
+  transition: height 0.45s ease;
+}
+
+.ark-progress button {
+  position: relative;
+  width: 40px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: #56635c;
+  cursor: pointer;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ark-progress button.is-done { color: var(--ark-forest); }
+.ark-progress button:hover { color: var(--ark-text); background: #efece3; }
+
+.ark-progress button.is-active {
+  background: var(--ark-text);
+  color: var(--ark-cream);
+  font-weight: 700;
+}
+
+/* Chapter name revealed beside the rail on hover or keyboard focus. */
+.ark-progress button::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 14px);
+  padding: 6px 10px;
+  border-radius: 2px;
+  background: var(--ark-text);
+  color: var(--ark-cream);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(6px, -50%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ark-progress button:hover::after,
+.ark-progress button:focus-visible::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.ark-progress button:focus-visible,
+.ark-tools button:focus-visible {
+  outline: 2px solid #bb9144;
+  outline-offset: -2px;
+}
+
+.ark-progress-bar { display: none; }
+
+/* Map tools ------------------------------------------------------------------ */
+
+.ark-tools {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 44px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  width: var(--side-w);
+  border: 1px solid rgb(23 28 26 / 14%);
+  border-radius: 2px;
+  background: #faf9f5;
+  box-shadow: 0 14px 34px -16px rgb(10 25 22 / 34%);
+}
+
+.ark-tools button {
+  display: grid;
+  place-items: center;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ark-text);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ark-tools button + button { border-top: 1px solid #e2ded2; }
+.ark-tools button:hover { background: #efece3; }
+.ark-tools button.is-attention { background: var(--ark-text); color: var(--ark-cream); }
+
+.ark-immersive .maplibregl-ctrl-attrib {
+  border-radius: 2px;
+  background: rgb(250 249 245 / 94%);
+  color: var(--ark-text-2);
+  font-size: 11px;
+}
+
+.ark-immersive .maplibregl-cooperative-gesture-screen {
+  background: rgb(23 28 26 / 58%);
+  color: #f3f1e9;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 15px;
+}
+
+/* ---- Floating story panels -------------------------------------------------- */
+
+.ark-immersive-flow {
+  position: relative;
+  z-index: 2;
+  margin-top: -100svh;
+  padding: 38svh 0 52svh;
+  pointer-events: none;
+}
+
+.ark-immersive-rail {
+  display: grid;
+  gap: clamp(56px, 14vh, 160px);
+  width: var(--card-w);
+  margin-left: var(--gutter);
+}
+
+.ark-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 2.6vw, 42px);
+  border: 1px solid rgb(23 28 26 / 12%);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 55%), rgb(255 255 255 / 0) 220px),
+    var(--ark-cream);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 80%) inset,
+    0 2px 6px rgb(10 25 22 / 6%),
+    0 34px 70px -28px rgb(10 25 22 / 42%);
+  pointer-events: auto;
+  scroll-margin-top: 12vh;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+/* Fine editorial hairline inside the panel edge. */
+.ark-card::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgb(23 28 26 / 5%);
+  pointer-events: none;
+}
+
+.ark-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.4s ease;
+}
+
+.ark-card.is-active {
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 80%) inset,
+    0 2px 8px rgb(10 25 22 / 8%),
+    0 40px 80px -28px rgb(10 25 22 / 50%);
+}
+
+.ark-card.is-active::before { background: var(--ark-text); }
+.ark-card:focus { outline: none; }
+.ark-card:focus-visible { outline: 2px solid #bb9144; outline-offset: 4px; }
+
+/* Large editorial chapter numeral. */
+.ark-card-index {
+  position: absolute;
+  top: clamp(10px, 1.2vw, 18px);
+  right: clamp(18px, 2vw, 30px);
+  color: rgb(23 28 26 / 7%);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(4.5rem, 6vw, 6.5rem);
+  font-style: italic;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ark-card-head { position: relative; }
+
+.ark-landing .ark-card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  color: var(--ark-forest);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.ark-card-num {
+  flex: none;
+  color: var(--ark-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.ark-card-rule {
+  width: 22px;
+  height: 1px;
+  flex: none;
+  background: #9fb1a2;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.ark-card.is-active .ark-card-rule {
+  width: 34px;
+  background: var(--ark-text);
+}
+
+.ark-landing .ark-card h3 {
+  margin: 0;
+  max-width: 15ch;
+  color: var(--ark-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2.25rem, 2.7vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: -0.032em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.ark-landing .ark-card h3 em {
+  color: var(--ark-forest);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.ark-landing .ark-card-subline {
+  margin-top: 12px;
+  color: var(--ark-text-2);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.ark-landing .ark-card-quote {
+  margin: 24px 0 0;
+  padding: 2px 0 2px 20px;
+  border-left: 2px solid var(--ark-sage);
+}
+
+.ark-landing .ark-card-quote p {
+  color: var(--ark-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(18px, 1.35vw, 20px);
+  font-style: italic;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.ark-landing .ark-card-quote.is-closing {
+  margin-top: 30px;
+  padding: 20px 22px;
+  border-left: 3px solid var(--ark-text);
+  background: rgb(166 195 182 / 18%);
+}
+
+/* Narrative body: justified like a typeset page --------------------------------- */
+
+.ark-card-body {
+  margin-top: 26px;
+}
+
+.ark-landing .ark-card-body p {
+  position: relative;
+  color: var(--ark-text);
+  font-size: clamp(16px, 1.1vw, 17px);
+  line-height: 1.8;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 7 3 3;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.ark-landing .ark-card-body > * + * {
+  margin-top: 18px;
+}
+
+.ark-landing .ark-card-body p.ark-stop-marker {
+  margin-left: -16px;
+  padding-left: 14px;
+  border-left: 2px solid transparent;
+  transition: border-color 0.35s ease;
+}
+
+.ark-landing .ark-card-body p.ark-stop-marker.is-current {
+  border-left-color: var(--ark-text);
+}
+
+.ark-hl {
+  padding: 0 1px;
+  background: linear-gradient(transparent 62%, rgb(166 195 182 / 55%) 0);
+  color: #0f1512;
+  font-weight: 650;
+}
+
+/* Why this matters ----------------------------------------------------------------- */
+
+.ark-why {
+  position: relative;
+  margin-top: 28px;
+  padding: 18px 20px 18px 22px;
+  border-top: 1px solid var(--ark-text);
+  background: rgb(255 255 255 / 55%);
+}
+
+.ark-why-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ark-forest);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ark-landing .ark-why p {
+  color: var(--ark-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Glossary terms ------------------------------------------------------------------ */
+
+.ark-term > button {
+  display: inline;
+  padding: 0;
+  border: 0;
+  border-bottom: 1.5px dotted var(--ark-forest);
+  background: none;
+  color: inherit;
+  cursor: help;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+}
+
+.ark-term > button:hover,
+.ark-term.is-open > button {
+  background: rgb(166 195 182 / 35%);
+}
+
+.ark-term > button:focus-visible {
+  outline: 2px solid #bb9144;
+  outline-offset: 2px;
+}
+
+.ark-term-tip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 10px);
+  z-index: 6;
+  padding: 12px 15px;
+  border-radius: 2px;
+  background: var(--ark-text);
+  box-shadow: 0 14px 34px rgb(4 22 26 / 30%);
+  color: #f3f1e9;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.55;
+  text-align: left;
+  text-transform: none;
+  hyphens: manual;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
+}
+
+.ark-term-tip strong {
+  margin-right: 4px;
+  color: var(--ark-sage);
+  font-weight: 700;
+}
+
+.ark-term:hover .ark-term-tip,
+.ark-term:focus-within .ark-term-tip,
+.ark-term.is-open .ark-term-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* Location photographs (synchronised with map stops) --------------------------------- */
+
+.ark-stop-figure {
+  margin: 26px 0 0;
+}
+
+.ark-landing .ark-card-body > .ark-stop-figure {
+  margin-block: 24px 6px;
+}
+
+.ark-stop-media {
+  position: relative;
+}
+
+.ark-stop-photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 2px;
+  background: #e7e3d8;
+  cursor: zoom-in;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  box-shadow: 0 18px 40px -22px rgb(10 25 22 / 50%);
+  transition: outline-color 0.35s ease;
+}
+
+.ark-stop-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.7s ease, opacity 0.6s ease;
+}
+
+.ark-stop-photo img,
+.ark-stop-inset img,
+.ark-lightbox-figure img { opacity: 0; }
+
+.ark-stop-photo img.is-loaded,
+.ark-stop-inset img.is-loaded,
+.ark-lightbox-figure img.is-loaded { opacity: 1; }
+
+.ark-stop-photo:hover img { transform: scale(1.03); }
+.ark-stop-figure.is-active .ark-stop-photo { outline-color: var(--ark-text); }
+
+.ark-photo-zoom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgb(23 28 26 / 14%);
+  background: rgb(250 249 245 / 94%);
+  color: var(--ark-text);
+}
+
+.ark-stop-inset {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 32%;
+  padding: 4px;
+  border: 1px solid rgb(23 28 26 / 14%);
+  background: var(--ark-cream);
+  box-shadow: 0 12px 28px rgb(10 25 22 / 30%);
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.ark-stop-inset:hover { transform: translateY(-2px); }
+
+.ark-stop-inset img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: opacity 0.6s ease;
+}
+
+.ark-stop-photo:focus-visible,
+.ark-stop-inset:focus-visible,
+.ark-stop-locate:focus-visible,
+.ark-card-thumbs button:focus-visible,
+.ark-card-gallery:focus-visible,
+.ark-findings button:focus-visible,
+.ark-findings a:focus-visible {
+  outline: 2px solid #bb9144;
+  outline-offset: 2px;
+}
+
+.ark-stop-figure figcaption {
+  display: grid;
+  gap: 7px;
+  padding-top: 12px;
+  color: var(--ark-text-2);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.ark-stop-locate {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 1px solid rgb(23 28 26 / 30%);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ark-text);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: left;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.ark-stop-locate:hover { background: #ebe7dc; }
+
+.ark-stop-figure.is-active .ark-stop-locate {
+  border-color: var(--ark-text);
+  background: var(--ark-text);
+  color: var(--ark-cream);
+}
+
+/* Documented findings (records, distinct from narrative) ------------------------------- */
+
+.ark-findings {
+  position: relative;
+  margin-top: 28px;
+  padding: 20px 20px 18px;
+  border: 1px solid var(--ark-text);
+  border-radius: 2px;
+  background: #fbfaf6;
+}
+
+.ark-landing .ark-findings-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ark-forest);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ark-findings h4 {
+  margin: 8px 0 0;
+  color: var(--ark-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.ark-findings h4.ark-findings-subhead {
+  margin-top: 22px;
+  font-size: 17px;
+}
+
+.ark-findings-sites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.ark-findings-sites button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(23 28 26 / 30%);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ark-text);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ark-findings-sites button:hover { background: #ebe7dc; }
+
+.ark-findings-sites button.is-active {
+  border-color: #1e3a5f;
+  background: #1e3a5f;
+  color: #fff;
+}
+
+.ark-findings-record {
+  position: relative;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #ddd8ca;
+}
+
+.ark-findings-record > strong {
+  display: block;
+  color: var(--ark-text);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.ark-landing .ark-findings-record p {
+  position: relative;
+  margin-top: 6px;
+  color: var(--ark-text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.ark-findings-record dl,
+.ark-findings-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+  margin: 14px 0 0;
+}
+
+.ark-findings-record dl > div,
+.ark-findings-stats > div { position: relative; }
+
+.ark-findings-stats > div.is-wide { grid-column: 1 / -1; }
+
+.ark-findings-record dt,
+.ark-findings-stats dt {
+  color: var(--ark-forest);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ark-findings-record dd,
+.ark-findings-stats dd {
+  margin: 3px 0 0;
+  color: var(--ark-text);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.ark-findings-stats dd {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+}
+
+.ark-findings-stats .is-wide dd {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14.5px;
+}
+
+.ark-findings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ark-landing .ark-findings-actions button,
+.ark-landing .ark-findings-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--ark-text);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ark-text);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.ark-landing .ark-findings-actions button:hover,
+.ark-landing .ark-findings-actions a:hover { background: #ebe7dc; }
+
+.ark-findings-groups {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ark-findings-groups button,
+.ark-findings-static {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd8ca;
+  border-radius: 2px;
+  background: var(--ark-cream);
+  color: var(--ark-text);
+  font-size: 14.5px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.ark-findings-groups button {
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ark-findings-groups button:hover {
+  border-color: var(--ark-text);
+  background: #efece3;
+}
+
+.ark-findings-groups small {
+  color: var(--ark-text-2);
+  font-size: 12.5px;
+}
+
+.ark-landing .ark-findings-note {
+  margin-top: 14px;
+  color: var(--ark-text-2);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.ark-findings-table summary {
+  margin-top: 14px;
+  color: var(--ark-text);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ark-findings-table table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  color: var(--ark-text);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.ark-findings-table th,
+.ark-findings-table td {
+  padding: 7px 6px;
+  border-bottom: 1px solid #e3dfd3;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ark-findings-table th {
+  color: var(--ark-forest);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ark-findings-table td:last-child,
+.ark-findings-table th:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Card footer: supporting photographs + gallery ---------------------------------------- */
+
+.ark-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid #ddd8ca;
+}
+
+.ark-card-thumbs {
+  display: flex;
+  gap: 6px;
+}
+
+.ark-card-thumbs button {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgb(23 28 26 / 14%);
+  border-radius: 2px;
+  background: #e7e3d8;
+  cursor: zoom-in;
+}
+
+.ark-card-thumbs img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ark-card-thumbs button:hover img { transform: scale(1.08); }
+
+.ark-card-gallery {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgb(23 28 26 / 30%);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ark-text);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.ark-card-gallery:hover {
+  border-color: var(--ark-text);
+  background: #ebe7dc;
+}
+
+.ark-card-gallery span {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: var(--ark-text);
+  color: var(--ark-cream);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+.ark-landing .ark-immersive-note {
+  padding: 14px 16px;
+  border: 1px solid rgb(23 28 26 / 12%);
+  border-radius: 2px;
+  background: rgb(250 249 245 / 96%);
+  color: var(--ark-text-2);
+  font-size: 12.5px;
+  line-height: 1.6;
+  pointer-events: auto;
+}
+
+/* ---- Map markers ------------------------------------------------------------- */
+
+.ark-place {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #171c1a;
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 92%);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s;
+}
+
+.ark-place.is-visible { opacity: 1; visibility: visible; }
+
+/* Geographic spotlight: a quiet ring around the place the story is about. */
+.ark-place.is-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 2px solid #171c1a;
+  border-radius: 50%;
+  opacity: 0.55;
+  animation: ark-spotlight 2.6s ease-out infinite;
+}
+
+@keyframes ark-spotlight {
+  0% { transform: scale(0.55); opacity: 0.75; }
+  80%, 100% { transform: scale(1.6); opacity: 0; }
+}
+
+.ark-place-label {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  transform: translateY(-50%);
+  padding: 4px 9px;
+  border: 1px solid rgb(23 28 26 / 18%);
+  border-radius: 2px;
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 6px 16px -6px rgb(10 25 22 / 35%);
+  color: #171c1a;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.ark-place.is-west .ark-place-label {
+  right: calc(100% + 8px);
+  left: auto;
+}
+
+.ark-river-label {
+  color: var(--river, #1677d2);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 8px #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s;
+}
+
+.ark-river-label.is-visible { opacity: 1; visibility: visible; }
+
+.ark-site-marker {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50% 50% 50% 3px;
+  background: #1e3a5f;
+  box-shadow: 0 4px 12px rgb(10 25 22 / 32%);
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s, transform 0.2s ease;
+}
+
+.ark-site-marker.is-visible { opacity: 1; visibility: visible; }
+.ark-site-marker:hover { transform: translateY(-2px); }
+.ark-site-marker:focus-visible { outline: 2px solid #bb9144; outline-offset: 2px; }
+
+/* ---- Themed map popups --------------------------------------------------------- */
+
+/* Popups are opened on request, so they sit above the HUD, legend and controls. */
+.ark-immersive .maplibregl-popup { z-index: 5; }
+
+.ark-chron-popup-shell .maplibregl-popup-content {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgb(23 28 26 / 16%);
+  border-radius: 2px;
+  background: #faf9f5;
+  box-shadow: 0 18px 44px rgb(10 25 22 / 24%);
+}
+
+.ark-chron-popup-shell .maplibregl-popup-tip {
+  border-top-color: #faf9f5 !important;
+  border-bottom-color: #faf9f5 !important;
+}
+
+.ark-chron-popup-shell .maplibregl-popup-close-button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: #36423c;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.ark-chron-popup {
+  max-height: min(60vh, 420px);
+  overflow-y: auto;
+  padding: 15px 17px 16px;
+  color: #171c1a;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.ark-chron-popup .ark-chron-popup-kicker {
+  margin: 0 0 6px;
+  color: #274e40;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ark-chron-popup h3 {
+  margin: 0;
+  padding-right: 18px;
+  color: #171c1a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.ark-chron-popup dl { margin: 12px 0 0; }
+
+.ark-chron-popup dl > div {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 10px;
+  padding: 7px 0;
+  border-top: 1px solid #e3dfd3;
+}
+
+.ark-chron-popup dt {
+  color: #274e40;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ark-chron-popup dd {
+  margin: 0;
+  color: #171c1a;
+  font-size: 13.5px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.ark-chron-popup a {
+  display: inline-flex;
+  margin-top: 12px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #171c1a;
+  color: #171c1a;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.ark-chron-popup .ark-chron-popup-note {
+  margin: 10px 0 0;
+  color: #36423c;
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+/* ---- Lightbox ------------------------------------------------------------------ */
+
+.ark-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 3vw, 38px);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.ark-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(10 14 13 / 86%);
+  backdrop-filter: blur(6px);
+  cursor: zoom-out;
+}
+
+.ark-lightbox-panel {
+  position: relative;
+  width: min(1080px, 96vw);
+  max-height: 94vh;
+  overflow-y: auto;
+  padding: clamp(13px, 1.8vw, 20px);
+  border: 1px solid rgb(23 28 26 / 16%);
+  border-radius: 2px;
+  background: var(--ark-cream);
+  box-shadow: 0 45px 130px rgb(0 0 0 / 48%);
+  color: var(--ark-text);
+  scrollbar-width: thin;
+}
+
+.ark-lightbox-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ddd8ca;
+}
+
+.ark-lightbox-head > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+}
+
+.ark-lightbox-head span {
+  color: var(--ark-forest);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.ark-lightbox-head strong {
+  color: var(--ark-text-2);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ark-lightbox-close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  padding: 0;
+  border: 1px solid rgb(23 28 26 / 20%);
+  border-radius: 2px;
+  background: #faf9f5;
+  color: var(--ark-text);
+  cursor: pointer;
+}
+
+.ark-lightbox-figure {
+  display: grid;
+  place-items: center;
+  margin: 14px 0 0;
+  background: #e7e3d8;
+}
+
+.ark-lightbox-figure img {
+  display: block;
+  width: 100%;
+  max-height: 62vh;
+  object-fit: contain;
+  transition: opacity 0.45s ease;
+}
+
+.ark-lightbox-figure figcaption {
+  width: 100%;
+  padding: 11px 14px 12px;
+  border-top: 1px solid #ddd8ca;
+  background: #faf9f5;
+  color: var(--ark-text);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.ark-lightbox-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.ark-lightbox-controls button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgb(23 28 26 / 30%);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ark-text);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.ark-lightbox-controls button:hover { background: #ebe7dc; }
+
+.ark-lightbox-close:focus-visible,
+.ark-lightbox-controls button:focus-visible,
+.ark-lightbox-thumbs button:focus-visible {
+  outline: 2px solid #bb9144;
+  outline-offset: 2px;
+}
+
+.ark-lightbox-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+  gap: 6px;
+  margin-top: 13px;
+}
+
+.ark-lightbox-thumbs button {
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: #e7e3d8;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.ark-lightbox-thumbs button:hover { opacity: 0.9; }
+
+.ark-lightbox-thumbs button.is-active {
+  border-color: var(--ark-text);
+  opacity: 1;
+}
+
+.ark-lightbox-thumbs img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.ark-lightbox-note {
+  margin: 11px 0 0;
+  color: var(--ark-text-2);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ---- 3. Closing story (inside the existing .ark-portal section) ------------------ */
+
+.ark-portal .ark-closing-title { margin-top: 24px; }
+
+.ark-closing-subheads {
+  display: grid;
+  gap: 4px;
+  margin-top: 26px;
+}
+
+.ark-portal .ark-closing-subheads h3 {
+  color: #f3f1e9;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.ark-portal .ark-closing-subheads em { color: #cfdbbc; }
+
+.ark-closing-copy {
+  display: grid;
+  gap: 14px;
+  max-width: 660px;
+  margin: 28px auto 0;
+}
+
+.ark-landing .ark-closing-copy p {
+  color: #e6ede7;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.75;
+}
+
+.ark-portal .ark-closing-quote {
+  max-width: 700px;
+  margin: 30px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgb(243 241 233 / 28%);
+  color: #f3f1e9;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.25rem, 1.9vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* ---- Responsive -------------------------------------------------------------------- */
+
+@media (min-width: 960px) and (max-height: 700px) {
+  .ark-progress button { height: 24px; font-size: 11px; }
+  .ark-tools button { height: 38px; }
+  .ark-hud { padding: 10px 14px 11px; }
+}
+
+@media (max-width: 1100px) {
+  .ark-story-intro-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  .ark-story-intro-facts > div:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+
+/* Tablet and mobile: the map becomes a sticky top panel; the story scrolls below it. */
+@media (max-width: 959px) {
+  .ark-immersive {
+    --gutter: 14px;
+    --map-left: 10px;
+  }
+
+  .ark-immersive-stage {
+    z-index: 3;
+    height: clamp(300px, 50svh, 560px);
+    box-shadow: 0 10px 24px rgb(10 25 22 / 18%);
+  }
+
+  .ark-map-status { padding-left: 24px; }
+
+  .ark-hud {
+    top: 10px;
+    left: 10px;
+    right: 66px;
+    max-width: none;
+    padding: 9px 12px 10px;
+    gap: 2px;
+  }
+
+  .ark-hud-kicker { font-size: 10.5px; letter-spacing: 0.1em; }
+  .ark-hud strong { font-size: 16px; }
+  .ark-hud-note { display: none; }
+
+  .ark-legend { display: none; }
+  .ark-progress { display: none; }
+
+  .ark-progress-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: 4px;
+    background: rgb(23 28 26 / 14%);
+  }
+
+  .ark-progress-bar > span {
+    display: block;
+    height: 100%;
+    background: var(--ark-text);
+    transition: width 0.45s ease;
+  }
+
+  .ark-tools {
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+    width: 46px;
+  }
+
+  .ark-tools button { height: 44px; }
+
+  .ark-immersive-flow {
+    margin-top: 0;
+    padding: 18px 0 34svh;
+    background: #f2efe9;
+    pointer-events: auto;
+  }
+
+  .ark-immersive-rail {
+    width: auto;
+    margin: 0 var(--gutter);
+    gap: 16px;
+  }
+
+  .ark-card {
+    padding: 26px 20px;
+    box-shadow: 0 10px 28px -12px rgb(10 25 22 / 28%);
+    scroll-margin-top: calc(clamp(300px, 50svh, 560px) + 8px);
+  }
+
+  .ark-card.is-active { box-shadow: 0 14px 34px -12px rgb(10 25 22 / 34%); }
+  .ark-landing .ark-card h3 { font-size: clamp(1.85rem, 5.8vw, 2.4rem); }
+  .ark-landing .ark-card-body p { font-size: 16px; }
+  .ark-landing .ark-card-body p.ark-stop-marker { margin-left: -12px; padding-left: 10px; }
+
+  /* Long place names wrap instead of running off a narrow map. */
+  .ark-place-label {
+    width: max-content;
+    max-width: 150px;
+    white-space: normal;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+  .ark-hud-note { display: block; font-size: 12.5px; }
+
+  .ark-legend {
+    left: 10px;
+    bottom: 12px;
+    display: flex;
+    max-width: calc(100% - 20px);
+    padding: 7px 11px;
+    font-size: 11.5px;
+  }
+}
+
+@media (max-width: 700px) {
+  .ark-story-intro { min-height: auto; padding-block: 76px 56px; }
+  .ark-story-intro-grid { grid-template-columns: 1fr; gap: 22px; }
+  .ark-landing .ark-story-intro-title { max-width: none; font-size: clamp(2.7rem, 12vw, 3.4rem); }
+  .ark-landing .ark-story-intro-lead { font-size: 1.15rem; }
+  .ark-landing .ark-story-intro-sub { font-size: 15.5px; }
+  .ark-story-intro-facts > div { padding-right: 12px; }
+  .ark-story-intro-facts > div + div { padding-left: 12px; }
+  .ark-story-intro-facts dt { font-size: 1.35rem; }
+  .ark-story-intro-facts dd { font-size: 12.5px; }
+
+  .ark-card { padding: 24px 18px; }
+  .ark-card::after { inset: 5px; }
+  .ark-card-index { font-size: 4rem; }
+  .ark-landing .ark-card-quote p { font-size: 17.5px; }
+  .ark-findings { padding: 16px 14px; }
+  .ark-findings-record dl,
+  .ark-findings-stats { grid-template-columns: 1fr; }
+  .ark-chron-popup dl > div { grid-template-columns: 84px minmax(0, 1fr); }
+  .ark-card-thumbs button { width: 42px; height: 42px; }
+
+  .ark-lightbox-panel { width: 96vw; max-height: 92vh; padding: 11px; }
+  .ark-lightbox-figure img { max-height: 50vh; }
+  .ark-lightbox-figure figcaption { font-size: 13px; }
+  .ark-lightbox-thumbs { grid-template-columns: repeat(auto-fill, minmax(54px, 1fr)); }
+}
+
+/* Narrow phones: left-aligned text reads better than justification. */
+@media (max-width: 480px) {
+  .ark-landing .ark-card-body p {
+    text-align: left;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+}
+
+@media (max-width: 420px) {
+  .ark-landing .ark-card-body p { font-size: 15.5px; line-height: 1.75; }
+  .ark-landing .ark-card h3 { font-size: 1.75rem; }
+  .ark-card-thumbs { display: none; }
+  .ark-place-label { max-width: 116px; padding: 3px 6px; font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ark-story-intro *,
+  .ark-immersive *,
+  .ark-immersive *::before,
+  .ark-lightbox *,
+  .ark-place,
+  .ark-place::before,
+  .ark-river-label,
+  .ark-site-marker {
+    animation: none !important;
+    transition: none !important;
+  }
+}
