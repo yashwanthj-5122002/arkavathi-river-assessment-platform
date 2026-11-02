@@ -1,0 +1,2050 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="industry" id="industry">
+	<SimpleField name="OBJECTID" type="float"></SimpleField>
+	<SimpleField name="KGISINDUSTRYId" type="float"></SimpleField>
+	<SimpleField name="INDUSTRYName" type="string"></SimpleField>
+	<SimpleField name="KGISCode" type="string"></SimpleField>
+	<SimpleField name="KGISWardId" type="float"></SimpleField>
+	<SimpleField name="KGISVillageID" type="float"></SimpleField>
+	<SimpleField name="DepartmentCode" type="string"></SimpleField>
+</Schema>
+<Folder><name>industry</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">1</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">1</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugarcane Crushing Capacity, Chamalapura, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055748031970000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28677</SimpleData>
+		<SimpleData name="DepartmentCode">1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6635869999227,12.1308249997129</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">2</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">2</SimpleData>
+		<SimpleData name="INDUSTRYName">Development of Mounded LPG Facility, Hebbalu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055726188330000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28443</SimpleData>
+		<SimpleData name="DepartmentCode">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6110180003323,12.3650870003529</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">3</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">3</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Industrial Unit For Production Of Ci(Sg) Grade Casting, Belgaum, Belagavi</SimpleData>
+		<SimpleData name="KGISCode">29555054385978010000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">937</SimpleData>
+		<SimpleData name="DepartmentCode">100</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.4774999999051,15.7911310001285</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">4</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">4</SimpleData>
+		<SimpleData name="INDUSTRYName">Cement Unit By Clinker Grinding of Capacity 100 Tpd, Neeralakeri, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054465986960000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">144</SimpleData>
+		<SimpleData name="DepartmentCode">101</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.4544439998494,15.9757440001037</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">5</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">5</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugar Plant &amp; Mw Co-Generation Unit, Hudli, Belagavi</SimpleData>
+		<SimpleData name="KGISCode">29555054385977020000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">970</SimpleData>
+		<SimpleData name="DepartmentCode">102</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.6622720002404,15.9760109996749</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">6</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">6</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed 30 Mw Cogeneration Power Plant, Muddapura, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054455985960000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">594</SimpleData>
+		<SimpleData name="DepartmentCode">103</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.3010159998475,16.2077229998533</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugar Cane Crushing Unit, Thimmapura, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054455986010000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">599</SimpleData>
+		<SimpleData name="DepartmentCode">104</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.3432470000827,16.2144590004242</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">8</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">8</SimpleData>
+		<SimpleData name="INDUSTRYName">Lift Irrigation Scheme Project At, Kundharagi, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054445985370000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">261</SimpleData>
+		<SimpleData name="DepartmentCode">105</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.5630559995969,16.2388630002934</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">9</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">9</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed 12,000 Tcd Sugar Plant &amp; 78 Mw Co-Generation Power Plant, Utthura, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054455985680000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">638</SimpleData>
+		<SimpleData name="DepartmentCode">106</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.2239670001651,16.2770709998448</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">10</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">10</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion From 12000 Tcd To 24000 Tcd , Utthura, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054455985680000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">638</SimpleData>
+		<SimpleData name="DepartmentCode">107</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.2239520001689,16.2771440002149</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">11</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">11</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed 200 TPD Cement Grinding Unit, Roogi, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054455985700000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">633</SimpleData>
+		<SimpleData name="DepartmentCode">108</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.2629219999715,16.2918980000037</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">12</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">12</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Bulk Drugs Manufacturing Unit, Eganura, Raichur</SimpleData>
+		<SimpleData name="KGISCode">29559054616007780000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">4222</SimpleData>
+		<SimpleData name="DepartmentCode">109</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3477410001505,16.2911549996487</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">13</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">13</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Unit For Manufacture Of Formulation Based Products, Bannikuppe, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29584056086263700000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">29254</SimpleData>
+		<SimpleData name="DepartmentCode">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4380890000308,12.6733369999358</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">14</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">14</SimpleData>
+		<SimpleData name="INDUSTRYName">Enhancement of LPG Bottling Capacity, Kanagale, Belagavi</SimpleData>
+		<SimpleData name="KGISCode">29555054375975560000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">1326</SimpleData>
+		<SimpleData name="DepartmentCode">110</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.4256600002241,16.3126929997305</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">15</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">15</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Active Pharmaceuticals Ingredients (Apis, Chikkasuguru, Raichur</SimpleData>
+		<SimpleData name="KGISCode">29559054616008060000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">4198</SimpleData>
+		<SimpleData name="DepartmentCode">111</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.351319999997,16.3074700000766</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">16</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">16</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacturing of Bulk Drugs &amp; Intermediates, Chikkasuguru, Raichur</SimpleData>
+		<SimpleData name="KGISCode">29559054616008060000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">4198</SimpleData>
+		<SimpleData name="DepartmentCode">112</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3570630004703,16.3076460002799</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">17</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">17</SimpleData>
+		<SimpleData name="INDUSTRYName">Active Pharmaceutical Ingredients (Apls) &amp; Its Intermedients Manufacturing Unit, Chikkasuguru, Raichur</SimpleData>
+		<SimpleData name="KGISCode">29559054616008060000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">4198</SimpleData>
+		<SimpleData name="DepartmentCode">113</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3581990000753,16.3085589999111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">18</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">18</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacturing of Bulk Drugs &amp; Intermdiates Project, Chikkasuguru, Raichur</SimpleData>
+		<SimpleData name="KGISCode">29559054616008060000FESEIUNFDAIND0004</SimpleData>
+		<SimpleData name="KGISVillageID">4198</SimpleData>
+		<SimpleData name="DepartmentCode">114</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3519530000168,16.3097810002064</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">19</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">19</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion And Modification of Active Pharmaceutical Ingredients, Chikkasuguru, Raichur</SimpleData>
+		<SimpleData name="KGISCode">29559054616008060000FESEIUNFDAIND0005</SimpleData>
+		<SimpleData name="KGISVillageID">4198</SimpleData>
+		<SimpleData name="DepartmentCode">115</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3566670003119,16.3105559996761</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">20</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">20</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacturing of Bulk Drugs And Intermediates Facility, Chikkasuguru, Raichur</SimpleData>
+		<SimpleData name="KGISCode">29559054616008060000FESEIUNFDAIND0006</SimpleData>
+		<SimpleData name="KGISVillageID">4198</SimpleData>
+		<SimpleData name="DepartmentCode">116</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.352026000224,16.3131969999225</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">21</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">21</SimpleData>
+		<SimpleData name="INDUSTRYName">Mouneshwar Small Hydro Project, Benchigaddi, Yadgir</SimpleData>
+		<SimpleData name="KGISCode">29580055876210320000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">32320</SimpleData>
+		<SimpleData name="DepartmentCode">117</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.5519830001301,16.3244410001212</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">22</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">22</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugar Plant, Mudhola, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054455985720000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">628</SimpleData>
+		<SimpleData name="DepartmentCode">118</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.2705379997989,16.3501520001777</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">23</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">23</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Industry Project, Badagandi, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054445985020000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">278</SimpleData>
+		<SimpleData name="DepartmentCode">119</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.667213000282,16.3559760000854</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">24</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">24</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacture of Chemical Intermediates, Harohalli, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29584056086263550000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">29272</SimpleData>
+		<SimpleData name="DepartmentCode">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4443799997633,12.6750629999531</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">25</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">25</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Production Capacity Of Sugar Unit , Hosura, Vijayapura</SimpleData>
+		<SimpleData name="KGISCode">29557054495991460000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">4918</SimpleData>
+		<SimpleData name="DepartmentCode">120</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.4767299995633,16.4501810003433</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">26</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">26</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugarcane Crushing Capacity, Nanadhi, Belagavi</SimpleData>
+		<SimpleData name="KGISCode">29555054335971730000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">1134</SimpleData>
+		<SimpleData name="DepartmentCode">121</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.6141389996309,16.5069439998731</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">27</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">27</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugar Plant Capacity, Yadramva, Belagavi</SimpleData>
+		<SimpleData name="KGISCode">29555054355973620000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">1695</SimpleData>
+		<SimpleData name="DepartmentCode">122</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.7237869999741,16.5270509998581</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">28</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">28</SimpleData>
+		<SimpleData name="INDUSTRYName">River Valley And Hydroelectrict Project, Kulahalli, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054435984080000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">526</SimpleData>
+		<SimpleData name="DepartmentCode">123</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.1624900002046,16.5314670002779</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">29</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">29</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugar Industries Power, Mygura, Bagalakote</SimpleData>
+		<SimpleData name="KGISCode">29556054435984260000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">507</SimpleData>
+		<SimpleData name="DepartmentCode">124</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.2085939999283,16.5727259998323</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">30</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">30</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugar Industries, Kambagi, Vijayapura</SimpleData>
+		<SimpleData name="KGISCode">29557054495991300000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">4893</SimpleData>
+		<SimpleData name="DepartmentCode">125</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.5516700002284,16.5736099998301</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">31</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">31</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion And Nodification of Sugar Factory of Capacity, Athani, Belagavi</SimpleData>
+		<SimpleData name="KGISCode">29555054348030240000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">666</SimpleData>
+		<SimpleData name="DepartmentCode">126</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.0491669996903,16.6665940000629</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">32</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">32</SimpleData>
+		<SimpleData name="INDUSTRYName">Development of Nandur Kesartagi Industrial Area, Nandhura (K), Kallburgi</SimpleData>
+		<SimpleData name="KGISCode">29579055826202730000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">3370</SimpleData>
+		<SimpleData name="DepartmentCode">127</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8808099996077,17.2703820001752</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">33</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">33</SimpleData>
+		<SimpleData name="INDUSTRYName">Modification &amp; Expansion of Bulk Drug &amp; Intermediates Unit, Gadavanthi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">128</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0900069999115,17.7585780000861</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">34</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">34</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion &amp; Existing of Bulk Drugs Intermediates, Gadavanthi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">129</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.095381946541,17.759590002668</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">35</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">35</SimpleData>
+		<SimpleData name="INDUSTRYName">Hazardous Waste Landfill, Harohalli, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29584056086263550000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">29272</SimpleData>
+		<SimpleData name="DepartmentCode">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4496479995377,12.6773459996801</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">36</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">36</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacturing of Hormones And Cortico Steroids, Gadavanthi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">130</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0913889998426,17.7633329998078</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">37</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">37</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Industry For Manufacturing Of Bulk Drugs, Gadavanthi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0004</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">131</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0977119996522,17.7633729998017</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">38</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">38</SimpleData>
+		<SimpleData name="INDUSTRYName">Modification &amp; Expansion of Bulk Durg &amp; Intermediates Unit, Gadavanthi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0005</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">132</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0948519997099,17.7645030001979</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">39</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">39</SimpleData>
+		<SimpleData name="INDUSTRYName">Bulk Drug Intermediates, Active Pharmaceutical Ingredients Manufacturing, Gadavanthi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0006</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">133</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0936889997938,17.7655909998158</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">40</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">40</SimpleData>
+		<SimpleData name="INDUSTRYName">Bulk Drugs &amp; Intermediates, Gadavanthi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0007</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">134</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.1013890001935,17.7708330000375</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">41</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">41</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Bulk Drugs &amp; Intermediates Products Manufacturing Project, Bakka Chavadi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">2424</SimpleData>
+		<SimpleData name="DepartmentCode">135</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4582150000315,17.8994999999876</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">42</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">42</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Bulk Drugs &amp; Intermediates Manufacturing, Bakka Chavadi, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">2424</SimpleData>
+		<SimpleData name="DepartmentCode">136</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4566669995597,17.8997220003467</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">43</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">43</SimpleData>
+		<SimpleData name="INDUSTRYName">Active Pharmaceutical Ingredients &amp; Chemical Intermediates, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">137</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4585399996009,17.9059920003643</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">44</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">44</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Modification In The Manufacturing And Intermediates, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0004</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">138</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4562049999004,17.9074000004193</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">45</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">45</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Existing Plant To Increase The Production Capacity Adding New Products, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0005</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">139</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4564490001515,17.9078869998168</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">46</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">46</SimpleData>
+		<SimpleData name="INDUSTRYName">Harohalli 2nd Stage Industrial Area, Picchanakere, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29584056086263330000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">29288</SimpleData>
+		<SimpleData name="DepartmentCode">14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.3927967513884,12.6780811430809</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">47</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">47</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Bulk Drug Unit Of Capacity Of 74 Mt To 120 Mt, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0006</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">140</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4609039998501,17.9079040001299</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">48</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">48</SimpleData>
+		<SimpleData name="INDUSTRYName">Bulk Drugs, Intermediates And R &amp; D Products, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0007</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">141</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4627420002356,17.9079129997387</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">49</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">49</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Bulk Drugs &amp; Intermediates Products Manufacturing Project, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0008</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">142</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4630719999609,17.9087690003586</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">50</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">50</SimpleData>
+		<SimpleData name="INDUSTRYName">Modification And Expansion For Manufacturing of Bulk Drug And Intermediates Unit, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0009</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">143</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4553990003037,17.9094109998058</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">51</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">51</SimpleData>
+		<SimpleData name="INDUSTRYName">Modification And Expansion of Manufacturing Unit Of Bulk Drugs Project, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0010</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">144</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4599619996356,17.9093820003393</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">52</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">52</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Bulk Durgs &amp; Intermediates Products Manufacturing Project, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0011</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">145</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4567899999569,17.9110309996018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">53</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">53</SimpleData>
+		<SimpleData name="INDUSTRYName">Specialty Chemicals &amp; Bio-Tech Products Manufacturing Project, Nijamapura, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0012</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">146</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4665959998541,17.9113340001844</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">54</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">54</SimpleData>
+		<SimpleData name="INDUSTRYName">Modification For Change Product &amp; Product Mix Project, Kolara, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">147</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4638409995593,17.9124429997136</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">55</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">55</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Modification For Change In Product And Product Mix, Kolara, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">148</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4700310003314,17.9155460002026</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">56</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">56</SimpleData>
+		<SimpleData name="INDUSTRYName">Cosmetics Manufacturing Unit &amp; R &amp; D Facility, Kolara, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">149</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4603530003436,17.9190760004442</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">57</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">57</SimpleData>
+		<SimpleData name="INDUSTRYName">Setting Up of 1 X 3 Mw Capacity Cogen Thermal Power, Medamaranahalli, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29584056086263400000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">29286</SimpleData>
+		<SimpleData name="DepartmentCode">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4483649996919,12.6927539999885</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">58</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">58</SimpleData>
+		<SimpleData name="INDUSTRYName">Bulk Drug &amp; Intermediates Unit, Kolara, Bidar</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0004</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">150</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4611109995255,17.9208329997816</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">59</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">59</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacturing of Cosmaceutical, Active Pharmaceuticals And Specialty Chemicals, Jigani, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">16</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6416670002782,12.767499999605</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">60</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">60</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Pharmadeutical Industry, Jigani, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">17</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6386560004041,12.7683089995696</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">61</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">61</SimpleData>
+		<SimpleData name="INDUSTRYName">Wet Waste Composting Project, Jigani, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">18</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6365180264269,12.7689785430518</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">62</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">62</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Hikal Limited Unit II, Jigani, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0004</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">19</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6415289997233,12.7720740000541</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">63</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">63</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Existing Sugar Unit , Kunthuru, Chamarajanagar</SimpleData>
+		<SimpleData name="KGISCode">29578055796198360000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">25384</SimpleData>
+		<SimpleData name="DepartmentCode">2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0293639998706,12.1307630003827</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">64</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">64</SimpleData>
+		<SimpleData name="INDUSTRYName">Change In Product Mix Bulk Drugs, Jigani, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0005</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">20</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.635585999663,12.7741600002718</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">65</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">65</SimpleData>
+		<SimpleData name="INDUSTRYName">Setting Up New Active Pharmaceutical Ingredients Facility, Jigani, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0006</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">21</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6545759999952,12.7853660000847</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">66</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">66</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Change In Product Mix Project, Jigani, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0007</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">22</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6484279996897,12.7854849999691</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">67</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">67</SimpleData>
+		<SimpleData name="INDUSTRYName">Change In Project Mix &amp; Enhancement of Plant Facilities Project, Bande Nallasandra, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456131670000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15030</SimpleData>
+		<SimpleData name="DepartmentCode">23</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6556979996674,12.789481999577</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">68</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">68</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacturing of Bulk Drugs Project, Kyalsanahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456131660000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15066</SimpleData>
+		<SimpleData name="DepartmentCode">24</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6596659997581,12.8007540001164</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">69</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">69</SimpleData>
+		<SimpleData name="INDUSTRYName">Lubricants Additives Scale Up - 500 Mt/Annum, Talakuppe, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29584056066261230000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">29878</SimpleData>
+		<SimpleData name="DepartmentCode">25</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4216650003494,12.8098440002574</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">70</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">70</SimpleData>
+		<SimpleData name="INDUSTRYName">Change In Product Mix And Enhancement of Facilities, Hyarandahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456131630000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15054</SimpleData>
+		<SimpleData name="DepartmentCode">26</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.660748999904,12.8105700000059</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">71</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">71</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion For Manufacturing of R &amp; D &amp; Custom Synthesis Products, Bommasandra, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456133570000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">14997</SimpleData>
+		<SimpleData name="DepartmentCode">27</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6846930001705,12.81540100029</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">72</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">72</SimpleData>
+		<SimpleData name="INDUSTRYName">Active Pharmaceutical Ingredients (APIS), Chikkanagamangala, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456131890000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">21246</SimpleData>
+		<SimpleData name="DepartmentCode">28</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6894080001676,12.8476689997671</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">73</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">73</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Development of Scientific Landfill For Inerts, Mylasandra, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055436130580000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15537</SimpleData>
+		<SimpleData name="DepartmentCode">29</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6272330003686,12.8525889996456</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">74</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">74</SimpleData>
+		<SimpleData name="INDUSTRYName">Active Pharmaceutical Ingredients &amp; Intermediate Manufacturing Facility Project, Kallahalli, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055748031970000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">28702</SimpleData>
+		<SimpleData name="DepartmentCode">3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6578349997713,12.1396830000059</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">75</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">75</SimpleData>
+		<SimpleData name="INDUSTRYName">Common Municipal Solid Waste Management Facility (CMSWMF), Chikkanagamangala, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055456131890000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">21246</SimpleData>
+		<SimpleData name="DepartmentCode">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6862137031496,12.8612304886081</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">76</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">76</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Common Effluent Treatment Plang (CEPT), Kumbalagodu, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055436130620000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15586</SimpleData>
+		<SimpleData name="DepartmentCode">31</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4425139995996,12.8704520000654</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">77</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">77</SimpleData>
+		<SimpleData name="INDUSTRYName">Common Municipal Solid Waste Management Facility (CMSWMF), Lingadeeranahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055428031620000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15588</SimpleData>
+		<SimpleData name="DepartmentCode">32</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.5068040003737,12.8755979995961</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">78</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">78</SimpleData>
+		<SimpleData name="INDUSTRYName">Common Municipal Solid Waste Management Facility (CMSWMF), Kumbalagodu, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055436130620000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">15586</SimpleData>
+		<SimpleData name="DepartmentCode">33</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4318740004007,12.8821359997498</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">79</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">79</SimpleData>
+		<SimpleData name="INDUSTRYName">Tank Terminal Facility For Storage of Meg, Acetic Acid, Light Naphtha, Lshs, Diesel, Thannirubavi, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055618031810000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">26185</SimpleData>
+		<SimpleData name="DepartmentCode">34</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8150347979469,12.8997991758601</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">80</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">80</SimpleData>
+		<SimpleData name="INDUSTRYName">Modernization of Distilleries Itemes Project, Challagatta, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055436130190000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15556</SimpleData>
+		<SimpleData name="DepartmentCode">35</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4514069999797,12.8892730000739</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">81</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">81</SimpleData>
+		<SimpleData name="INDUSTRYName">Hazardous Chemical Storage Tanks Facilities, Thannirubavi, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055618031810000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">26185</SimpleData>
+		<SimpleData name="DepartmentCode">36</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8110660003353,12.9112180002653</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">82</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">82</SimpleData>
+		<SimpleData name="INDUSTRYName">Edible Oil Storage Tanks Facilities, Thannirubavi, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055618031810000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">26185</SimpleData>
+		<SimpleData name="DepartmentCode">37</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8107020001016,12.913322999983</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">83</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">83</SimpleData>
+		<SimpleData name="INDUSTRYName">Bottling Capacity (Additional 24 Station Filling Carousel) With All Downstream And Up-Stream Facilities, Bykambadi, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055618031810000FESEIUNFDAIND0004</SimpleData>
+		<SimpleData name="KGISVillageID">26164</SimpleData>
+		<SimpleData name="DepartmentCode">38</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8234779999423,12.9487239996415</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">84</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">84</SimpleData>
+		<SimpleData name="INDUSTRYName">Modification &amp; Expansion of Manufacturing Unit of Bulk Drugs, Bykambadi, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055618031810000FESEIUNFDAIND0005</SimpleData>
+		<SimpleData name="KGISVillageID">26164</SimpleData>
+		<SimpleData name="DepartmentCode">39</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8254309998038,12.9515559996258</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">85</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">85</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Steel Rolling &amp; Induction Furnaceindustry, Thoremavu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055746191940000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28568</SimpleData>
+		<SimpleData name="DepartmentCode">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6975690001676,12.1520800003712</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">86</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">86</SimpleData>
+		<SimpleData name="INDUSTRYName">New Aroma And Speciality Chemical Manufacturing Facility, Panamburu, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055618031810000FESEIUNFDAIND0006</SimpleData>
+		<SimpleData name="KGISVillageID">26180</SimpleData>
+		<SimpleData name="DepartmentCode">40</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8025000003145,12.9520000001805</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">87</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">87</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Scientific Landfill, Muddaiahanapalya, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055436129960000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15648</SimpleData>
+		<SimpleData name="DepartmentCode">41</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4228370001026,12.9417729999088</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">88</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">88</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Development of Scientific Landfill For Disposal Of Inerts, Maragondahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055436130130000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15589</SimpleData>
+		<SimpleData name="DepartmentCode">42</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4255560001821,12.9447219997841</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">89</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">89</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion And Modification of Petroleum Products Handling Facility, Bykambadi, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055618031810000FESEIUNFDAIND0007</SimpleData>
+		<SimpleData name="KGISVillageID">26164</SimpleData>
+		<SimpleData name="DepartmentCode">43</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.813061000023,12.9595119998199</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">90</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">90</SimpleData>
+		<SimpleData name="INDUSTRYName">Pharmaceutical SEZ, Chikkabasavanahalli, Hassan</SimpleData>
+		<SimpleData name="KGISCode">29574055566161600000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">23106</SimpleData>
+		<SimpleData name="DepartmentCode">44</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.1290890003263,12.9656679997018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">91</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">91</SimpleData>
+		<SimpleData name="INDUSTRYName">Standalone Grinding Cement Industry, Nagathavalli, Hassan</SimpleData>
+		<SimpleData name="KGISCode">29574055566161590000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">22905</SimpleData>
+		<SimpleData name="DepartmentCode">45</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.1186160001795,12.9712020001302</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">92</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">92</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of EPIP Industrial Area II Phase, Badaga Vulipadi, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055616175050000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">26050</SimpleData>
+		<SimpleData name="DepartmentCode">46</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.9543269999955,12.976514999711</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">93</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">93</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Manufacturing of Pure Terephthalic Acid, Bajpe, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055616175000000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">26161</SimpleData>
+		<SimpleData name="DepartmentCode">47</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8650980001417,12.9789480000612</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">94</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">94</SimpleData>
+		<SimpleData name="INDUSTRYName">Modification of Industrial Project, Bajpe, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055616175000000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">26161</SimpleData>
+		<SimpleData name="DepartmentCode">48</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8650790000094,12.9790280000942</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">95</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">95</SimpleData>
+		<SimpleData name="INDUSTRYName">Sustainable Waste Management And Renewable Energy Project, Kannalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055426128240000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15478</SimpleData>
+		<SimpleData name="DepartmentCode">49</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4467459998787,12.9700979999679</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">96</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">96</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Industrial Areas, Thandavapura, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055746191880000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28567</SimpleData>
+		<SimpleData name="DepartmentCode">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6934600004135,12.1588010000619</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">97</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">97</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed New Active Pharmaceutical Ingredients  And Non Api Manufacturing Unit, Kalavara, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055616174790000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">26168</SimpleData>
+		<SimpleData name="DepartmentCode">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8577950001386,12.9822790002451</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">98</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">98</SimpleData>
+		<SimpleData name="INDUSTRYName">New Specialty Chemical Manufacturing Facility Project, Bajpe, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055616175000000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">26161</SimpleData>
+		<SimpleData name="DepartmentCode">51</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.873998999728,12.984512999584</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">99</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">99</SimpleData>
+		<SimpleData name="INDUSTRYName">Common Municipal Solid Waste Management Facility (CMSWMF), K.G.Sheegehalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055426128230000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15476</SimpleData>
+		<SimpleData name="DepartmentCode">52</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4419440001893,12.9744719998924</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">100</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">100</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Specialty Chemicals Manufacture, Koorandahalli, Kolara</SimpleData>
+		<SimpleData name="KGISCode">29581055926221780000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">16665</SimpleData>
+		<SimpleData name="DepartmentCode">53</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.9175700001372,12.9821979996168</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">101</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">101</SimpleData>
+		<SimpleData name="INDUSTRYName">Enhancement of Storage Capacity, Devanagundhi, Bengaluru Rural</SimpleData>
+		<SimpleData name="KGISCode">29583056046257240000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">20578</SimpleData>
+		<SimpleData name="DepartmentCode">54</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.8453059998815,12.9851759997241</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">102</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">102</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Specialty Detergent Liquid Blend, Bio Fuel Briquette, Detergent Bars &amp; Scouring Bars, Nosagere, Kolara</SimpleData>
+		<SimpleData name="KGISCode">29581055926221790000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">16697</SimpleData>
+		<SimpleData name="DepartmentCode">55</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.9172240004271,12.9851609999993</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">103</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">103</SimpleData>
+		<SimpleData name="INDUSTRYName">Common Municipal Solid Waste Management Facility (CMSWMF), Kadabagere, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055426128130000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15220</SimpleData>
+		<SimpleData name="DepartmentCode">56</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4460580000458,12.9969409997022</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">104</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">104</SimpleData>
+		<SimpleData name="INDUSTRYName">Change In Product Mix Bulk Drugs Project, Veerenahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055446131020000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">21351</SimpleData>
+		<SimpleData name="DepartmentCode">57</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.7320019999582,13.0271699999916</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">105</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">105</SimpleData>
+		<SimpleData name="INDUSTRYName">Common Municipal Solid Waste Management Facility (CMSWMF), Doddabidarakallu, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055428031620000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">15461</SimpleData>
+		<SimpleData name="DepartmentCode">58</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4797199995737,13.0302850000115</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">106</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">106</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Ingot Plant, Nimbekayipura, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055446130990000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">21378</SimpleData>
+		<SimpleData name="DepartmentCode">59</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.7460020004168,13.0553929999758</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">107</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">107</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of 6 Lakh Klpa Capacity Integrated Paint &amp; Resins/ Emulsions Manufacturing Plant, Immavu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055746191950000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28559</SimpleData>
+		<SimpleData name="DepartmentCode">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.7070839996065,12.1639439999662</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">108</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">108</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Hejamdikodi Fishery Harbour, Sashihithlu, DakshinaKannada</SimpleData>
+		<SimpleData name="KGISCode">29575055616174350000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">26155</SimpleData>
+		<SimpleData name="DepartmentCode">60</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.7776929999416,13.0710480003944</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">109</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">109</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed New LPG Bottling Plant of 21000 Mtpa, Jakkasandra, Kolara</SimpleData>
+		<SimpleData name="KGISCode">29581055926221060000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">16647</SimpleData>
+		<SimpleData name="DepartmentCode">61</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.9634850002396,13.084326999936</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">110</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">110</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Development of Scientific Landfill For Disposal Of Solid Waste And Inerts, J.I.Kada Agrahara, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055446130710000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">21340</SimpleData>
+		<SimpleData name="DepartmentCode">62</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6973900002929,13.0880839997672</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">111</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">111</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Jakkasandra Industrial Area, Dombarahalli, Kolara</SimpleData>
+		<SimpleData name="KGISCode">29581055926221050000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">16628</SimpleData>
+		<SimpleData name="DepartmentCode">63</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.9597519999651,13.0878020003721</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">112</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">112</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Development of Scientific Landfill For Inerts,Bellahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055428031620000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">15422</SimpleData>
+		<SimpleData name="DepartmentCode">64</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6458590004014,13.1033990000387</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">113</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">113</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Development of Scientific Landfill For Inerts, Mitaganahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055446130650000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">21345</SimpleData>
+		<SimpleData name="DepartmentCode">65</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6497250002165,13.1107070002674</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">114</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">114</SimpleData>
+		<SimpleData name="INDUSTRYName">Yelahanka Combined Cycle Gas Power Plant (Yccpp) of 1 X 350 Mw Capacity, Kenchenahalli, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055428031620000FESEIUNFDAIND0004</SimpleData>
+		<SimpleData name="KGISVillageID">15412</SimpleData>
+		<SimpleData name="DepartmentCode">66</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.5825189996364,13.1182840001966</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">115</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">115</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Industrial Areas, Nandhikuru, Udupi</SimpleData>
+		<SimpleData name="KGISCode">29569055236088430000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">14920</SimpleData>
+		<SimpleData name="DepartmentCode">67</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8078129995532,13.1508490001516</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">116</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">116</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Development of Scientific Landfill For Inerts, Bagaluru, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055426129150000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15317</SimpleData>
+		<SimpleData name="DepartmentCode">68</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6680809997624,13.1543910000898</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">117</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">117</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Development of Scientific Landfill For Disposal Of Inerts, Bettahalasuru, Bengaluru Urban</SimpleData>
+		<SimpleData name="KGISCode">29572055426128950000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">15321</SimpleData>
+		<SimpleData name="DepartmentCode">69</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6161109998735,13.1608330001559</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">118</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">118</SimpleData>
+		<SimpleData name="INDUSTRYName">Construction of MSW Treatment Facility, Chowdahalli, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055726187370000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28435</SimpleData>
+		<SimpleData name="DepartmentCode">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6169309995418,12.2390939996361</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">119</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">119</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Dobaspet Industrial Area, Avverahalli, Bengaluru Rural</SimpleData>
+		<SimpleData name="KGISCode">29583056016247600000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">20999</SimpleData>
+		<SimpleData name="DepartmentCode">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.2507440000989,13.2030340000899</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">121</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">121</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Change Product Mix Project, Veerapura, Bengaluru Rural</SimpleData>
+		<SimpleData name="KGISCode">29583056026251330000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">20326</SimpleData>
+		<SimpleData name="DepartmentCode">72</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.5536231620829,13.2484192339375</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">122</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">122</SimpleData>
+		<SimpleData name="INDUSTRYName">New LPG Bottling Plant, Dyavaganahalli, Chikkaballapura</SimpleData>
+		<SimpleData name="KGISCode">29582055996242790000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">31194</SimpleData>
+		<SimpleData name="DepartmentCode">73</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.8554489999428,13.2692719996263</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">123</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">123</SimpleData>
+		<SimpleData name="INDUSTRYName">Clinker Cement Grinding And Blending, Bellahalli, Kolara</SimpleData>
+		<SimpleData name="KGISCode">29581055916217450000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">16451</SimpleData>
+		<SimpleData name="DepartmentCode">74</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.9706630002452,13.2739699999189</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">124</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">124</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Biopharmaceutical Facility, Obadevanahalli, Bengaluru Rural</SimpleData>
+		<SimpleData name="KGISCode">29583056026251380000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">20295</SimpleData>
+		<SimpleData name="DepartmentCode">75</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.5787690004195,13.2795440004386</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">125</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">125</SimpleData>
+		<SimpleData name="INDUSTRYName">Development of Vasanthanarasapura 1st Phase, Nagenahalli, Tumakuru</SimpleData>
+		<SimpleData name="KGISCode">29571055376113240000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">19563</SimpleData>
+		<SimpleData name="DepartmentCode">76</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0395519997897,13.489786999717</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">126</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">126</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacturing of Bulk Drugs, Nagenahalli, Tumakuru</SimpleData>
+		<SimpleData name="KGISCode">29571055376113240000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">19563</SimpleData>
+		<SimpleData name="DepartmentCode">77</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.026712999877,13.4922639999143</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">127</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">127</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion Cement Plant, Sadarahalli, Tumakuru</SimpleData>
+		<SimpleData name="KGISCode">29571055326101630000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">14264</SimpleData>
+		<SimpleData name="DepartmentCode">78</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6308010002537,13.5055320000176</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">128</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">128</SimpleData>
+		<SimpleData name="INDUSTRYName">Construction of Breakwater/Guide Bund Project, Kundhapura, Udupi</SimpleData>
+		<SimpleData name="KGISCode">29569055228031390000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">14824</SimpleData>
+		<SimpleData name="DepartmentCode">79</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.6688890001028,13.6353450001052</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">129</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">129</SimpleData>
+		<SimpleData name="INDUSTRYName">Construction of MSW Treatment And Disposal Facility, Kesare, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055726187270000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28449</SimpleData>
+		<SimpleData name="DepartmentCode">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6765520000695,12.3523170000085</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">130</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">130</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Sogane Indistrial Area, J.I.Sogane, Shivamogga</SimpleData>
+		<SimpleData name="KGISCode">29568055206085000000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">13393</SimpleData>
+		<SimpleData name="DepartmentCode">80</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.6165039998523,13.8604399999327</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">131</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">131</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. ECOF Industries Pvt. Ltd</SimpleData>
+		<SimpleData name="KGISCode">29581055926221780000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">16665</SimpleData>
+		<SimpleData name="DepartmentCode">81</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.9153489438966,12.9791029654356</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">132</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">132</SimpleData>
+		<SimpleData name="INDUSTRYName">M/S. Davanagere Sugas Company Limited, Kukkavada, Davanagere</SimpleData>
+		<SimpleData name="KGISCode">29567055126065800000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">11781</SimpleData>
+		<SimpleData name="DepartmentCode">82</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.881848000187,14.3301429996681</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">133</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">133</SimpleData>
+		<SimpleData name="INDUSTRYName">Cogeneration Thermal Power Plant, Belludi, Davanagere</SimpleData>
+		<SimpleData name="KGISCode">29567055096062600000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">11947</SimpleData>
+		<SimpleData name="DepartmentCode">83</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.7894869997228,14.4505640002959</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">134</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">134</SimpleData>
+		<SimpleData name="INDUSTRYName">Setup of Liquid Storage Tank Terminall, Bythakhola, Uttara Kannada</SimpleData>
+		<SimpleData name="KGISCode">29563054788030900000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">9060</SimpleData>
+		<SimpleData name="DepartmentCode">84</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.1083329999154,14.794722000082</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">135</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">135</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Commercial Karwar Port At Reclaimed Land, Bythakhola, Uttara Kannada</SimpleData>
+		<SimpleData name="KGISCode">29563054788030900000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">9060</SimpleData>
+		<SimpleData name="DepartmentCode">85</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.1145660000584,14.7994590003338</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">136</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">136</SimpleData>
+		<SimpleData name="INDUSTRYName">Bulk Drugs Along With Related Intermediate Products And Synthetic Organic Chemicals, Mundaragi, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565055008031140000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">5017</SimpleData>
+		<SimpleData name="DepartmentCode">86</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.9008329995959,15.0961109999034</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">137</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">137</SimpleData>
+		<SimpleData name="INDUSTRYName">Sponge Iron Plant of 50 Tpa With Preheating Technology, Belagallu, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565055006049210000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">5006</SimpleData>
+		<SimpleData name="DepartmentCode">87</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8113890003922,15.1107860004053</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">138</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">138</SimpleData>
+		<SimpleData name="INDUSTRYName">Coal Tar Distillation Plant, Musinayakanahalli, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565055016050220000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">5574</SimpleData>
+		<SimpleData name="DepartmentCode">88</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.7139939997083,15.1679720001222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">139</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">139</SimpleData>
+		<SimpleData name="INDUSTRYName">Kuduthini Industrial Area By KIADB, Kuduthini, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565055006048750000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">5048</SimpleData>
+		<SimpleData name="DepartmentCode">89</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.7354299995854,15.1729849998139</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">140</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">140</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Production Capacity of Intermediates, Hebbalu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055726188330000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">28443</SimpleData>
+		<SimpleData name="DepartmentCode">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.6249920000149,12.3612999996482</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">141</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">141</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed 2,00,000 KLPA Paint Plant, Thoranagallu, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565055016050160000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">5583</SimpleData>
+		<SimpleData name="DepartmentCode">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.7003979998807,15.1798270000306</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">142</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">142</SimpleData>
+		<SimpleData name="INDUSTRYName">Installation of Cement Grinding Unit, Kuduthini, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565055006048750000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">5048</SimpleData>
+		<SimpleData name="DepartmentCode">91</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.7703630000721,15.2159919996931</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">143</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">143</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Iron Ore Benefication Plant, Jambunathanahalli, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565054988031090000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">5250</SimpleData>
+		<SimpleData name="DepartmentCode">92</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.4057659996705,15.2464290002251</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">144</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">144</SimpleData>
+		<SimpleData name="INDUSTRYName">Iron Ore Beneficiation Plant, Jambunathanahalli, Ballari</SimpleData>
+		<SimpleData name="KGISCode">29565054988031090000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">5250</SimpleData>
+		<SimpleData name="DepartmentCode">93</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.4055600000179,15.2477520003408</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">145</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">145</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Iron Ore Beneficiation Plant , Halavarthi, Koppal</SimpleData>
+		<SimpleData name="KGISCode">29560054676017750000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">8225</SimpleData>
+		<SimpleData name="DepartmentCode">94</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.2339059997701,15.3210560001655</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">146</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">146</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Ground Granulated Blast Furnace (GGBS) &amp; Cement Manufacturing Industry, Kutakanahalli, Koppal</SimpleData>
+		<SimpleData name="KGISCode">29560054676017560000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">8240</SimpleData>
+		<SimpleData name="DepartmentCode">95</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.2416669998576,15.3739250000542</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">147</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">147</SimpleData>
+		<SimpleData name="INDUSTRYName">Development of Itigatti Industrial Area, Thadasinakoppa, Dharwad</SimpleData>
+		<SimpleData name="KGISCode">29562054738030830000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">6579</SimpleData>
+		<SimpleData name="DepartmentCode">96</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.0250650001338,15.3902860000333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">148</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">148</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Industrial Areas, Mummigatti, Dharwad</SimpleData>
+		<SimpleData name="KGISCode">29562054736022690000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">6564</SimpleData>
+		<SimpleData name="DepartmentCode">97</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.9470180000801,15.4968789997413</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">149</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">149</SimpleData>
+		<SimpleData name="INDUSTRYName">Storage of 2 Nos. of 50 Mt Propone Gas For Automobile Manufacturing Plant, Niralakatti, Dharwad</SimpleData>
+		<SimpleData name="KGISCode">29562054736022210000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">6614</SimpleData>
+		<SimpleData name="DepartmentCode">98</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.930994999792,15.5230579996152</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">150</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">150</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugar Plant And Co-Generation Unit, Saudhatthi, Belagavi</SimpleData>
+		<SimpleData name="KGISCode">29555054415982460000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">1902</SimpleData>
+		<SimpleData name="DepartmentCode">99</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.0616410003365,15.7208520003413</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">151</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">151</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Sugarcane Crushing Capacity, Chamalapura, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29578055776196870000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">25102</SimpleData>
+		<SimpleData name="DepartmentCode">151</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8187000024041,11.9245999006635</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">152</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">152</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Existing Sugar Unit , Kunthuru, Chamarajanagar</SimpleData>
+		<SimpleData name="KGISCode">29578055776197010000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">25133</SimpleData>
+		<SimpleData name="DepartmentCode">152</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8595000012215,11.9023998915533</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">153</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">153</SimpleData>
+		<SimpleData name="INDUSTRYName">Active Pharmaceutical Ingredients &amp; Intermediate Manufacturing Facility Project, Kallahalli, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29577055716186720000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">28273</SimpleData>
+		<SimpleData name="DepartmentCode">153</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.4361999774755,12.4313999381681</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">154</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">154</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Steel Rolling &amp; Induction Furnaceindustry, Thoremavu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29578055776196680000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">25011</SimpleData>
+		<SimpleData name="DepartmentCode">154</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8853000393347,11.8924999642448</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">155</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">155</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Industrial Areas, Thandavapura, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29576055686180360000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">27486</SimpleData>
+		<SimpleData name="DepartmentCode">155</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.9040999822553,12.254599903886</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">156</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">156</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of 6 Lakh Klpa Capacity Integrated Paint &amp; Resins/ Emulsions Manufacturing Plant, Immavu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29570055306097960000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">10156</SimpleData>
+		<SimpleData name="DepartmentCode">156</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.9330000312225,13.2886999738622</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">157</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">157</SimpleData>
+		<SimpleData name="INDUSTRYName">Construction of MSW Treatment Facility, Chowdahalli, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29575055616174530000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">26118</SimpleData>
+		<SimpleData name="DepartmentCode">157</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.9066999798513,13.0407999449557</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">158</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">158</SimpleData>
+		<SimpleData name="INDUSTRYName">Construction of MSW Treatment And Disposal Facility, Kesare, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29578055776197010000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">25133</SimpleData>
+		<SimpleData name="DepartmentCode">158</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8547999945885,11.9059999279232</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">159</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">159</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion of Production Capacity of Intermediates, Hebbalu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29578055786198110000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">30150</SimpleData>
+		<SimpleData name="DepartmentCode">159</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.065099962586,12.0240998987363</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">160</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">160</SimpleData>
+		<SimpleData name="INDUSTRYName">Development of Mounded LPG Facility, Hebbalu, Mysuru</SimpleData>
+		<SimpleData name="KGISCode">29578055776197140000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">25117</SimpleData>
+		<SimpleData name="DepartmentCode">160</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8341000325886,11.7986999146835</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">161</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">161</SimpleData>
+		<SimpleData name="INDUSTRYName">Establishment of Unit For Manufacture Of Formulation Based Products, Bannikuppe, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29576055676179720000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">31605</SimpleData>
+		<SimpleData name="DepartmentCode">161</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.0014000389877,12.5721999214366</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">162</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">162</SimpleData>
+		<SimpleData name="INDUSTRYName">Manufacture of Chemical Intermediates, Harohalli, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29578055776197150000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">25069</SimpleData>
+		<SimpleData name="DepartmentCode">162</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.9231999764421,11.8803999162681</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">163</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">163</SimpleData>
+		<SimpleData name="INDUSTRYName">Hazardous Waste Landfill, Harohalli, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29578055776197150000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">25069</SimpleData>
+		<SimpleData name="DepartmentCode">163</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.9193000174445,11.882099973805</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">164</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">164</SimpleData>
+		<SimpleData name="INDUSTRYName">Harohalli 2nd Stage Industrial Area, Picchanakere, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29573055516146400000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">23838</SimpleData>
+		<SimpleData name="DepartmentCode">164</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0070000278641,12.4500999036431</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">165</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">165</SimpleData>
+		<SimpleData name="INDUSTRYName">Setting Up of 1 X 3 Mw Capacity Cogen Thermal Power, Medamaranahalli, Ramanagara</SimpleData>
+		<SimpleData name="KGISCode">29574055586166920000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">21886</SimpleData>
+		<SimpleData name="DepartmentCode">165</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.961599995205,12.6121999556644</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">169</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">169</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Stereo Drugs Private Limited</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0013</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">166</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4561984657016,17.9073858205802</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">170</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">170</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Chorus Labs Limited</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0005</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">167</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4699256418149,17.9157046673336</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">171</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">171</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Resonance Laboratories Pvt. Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29583056026252460000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">20247</SimpleData>
+		<SimpleData name="DepartmentCode">168</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.5583617218663,13.2605994329222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">172</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">172</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Vani Organics Pvt. Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0006</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">169</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4610205047167,17.9206422508074</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">173</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">173</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Chandra Life Sciences Private Limited</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0014</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">170</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4559624542566,17.9091960932525</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">174</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">174</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Lakshidurga Drugs &amp; Intermediates (P) Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0008</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">171</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0899870573625,17.7585931142568</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">175</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">175</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Syntho Chirals. Pvt. Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0007</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">172</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4638929618569,17.9127351077093</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">176</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">176</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. GPR Life Science Pvt. Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0009</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">173</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0935983056256,17.758854130973</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">177</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">177</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Apotex Pharmachem India Pvt. Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29572055456131630000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">15054</SimpleData>
+		<SimpleData name="DepartmentCode">174</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6605069121396,12.8101491065744</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">178</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">178</SimpleData>
+		<SimpleData name="INDUSTRYName">Cosmetic Ingredients &amp; Active Pharmaceutical Ingredients (APIS) &amp; Intermediates Manufacturing Industry with R&amp;D Activity</SimpleData>
+		<SimpleData name="KGISCode">29572055456131890000FESEIUNFDAIND0003</SimpleData>
+		<SimpleData name="KGISVillageID">21246</SimpleData>
+		<SimpleData name="DepartmentCode">175</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6891409991291,12.8477588805413</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7626</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7626</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. SN2 Asymmetricx Pvt. Ltd</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0015</SimpleData>
+		<SimpleData name="KGISVillageID">2424</SimpleData>
+		<SimpleData name="DepartmentCode">176</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4581323384031,17.9000391989148</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7627</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7627</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Sri Lakshmi Chemicals</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0016</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">177</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4565893523938,17.9110162415939</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7628</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7628</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Chiral Biosciences Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29558054576001940000FESEIUNFDAIND0008</SimpleData>
+		<SimpleData name="KGISVillageID">2433</SimpleData>
+		<SimpleData name="DepartmentCode">178</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4666275208091,17.9120729063215</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7629</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7629</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s.Sri Venkata Sai Organics</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0010</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">179</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0953793719776,17.7594340425754</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7630</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7630</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s.P.R. Drugs Pvt. Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29558054576002010000FESEIUNFDAIND0017</SimpleData>
+		<SimpleData name="KGISVillageID">2435</SimpleData>
+		<SimpleData name="DepartmentCode">180</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.4629756102815,17.9089769911322</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7631</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7631</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Acebright (India) Pharma Pvt. Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29572055456133600000FESEIUNFDAIND0008</SimpleData>
+		<SimpleData name="KGISVillageID">15056</SimpleData>
+		<SimpleData name="DepartmentCode">181</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.6355712978595,12.7741728284264</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7632</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7632</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Asian Polymers</SimpleData>
+		<SimpleData name="KGISCode">29573055506144600000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">24265</SimpleData>
+		<SimpleData name="DepartmentCode">182</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>76.8061443115218,12.4948488109902</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7633</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7633</SimpleData>
+		<SimpleData name="INDUSTRYName">M/s. Satyadeeptha Pharmaceuticals Ltd.</SimpleData>
+		<SimpleData name="KGISCode">29558054586002920000FESEIUNFDAIND0011</SimpleData>
+		<SimpleData name="KGISVillageID">2573</SimpleData>
+		<SimpleData name="DepartmentCode">183</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.0937786257757,17.7658243093181</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7634</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7634</SimpleData>
+		<SimpleData name="INDUSTRYName">Expansion / Modification of Apis Manufacturing Industry, Bharathipura, Bengaluru Rural</SimpleData>
+		<SimpleData name="KGISCode">29583056016247470000FESEIUNFDAIND0001</SimpleData>
+		<SimpleData name="KGISVillageID">21007</SimpleData>
+		<SimpleData name="DepartmentCode">71</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>77.2658330004238,13.2249999997367</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7635</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7635</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Establishment of Nandikur Industrial Area Development Project</SimpleData>
+		<SimpleData name="KGISCode">29569055236088430000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">14920</SimpleData>
+		<SimpleData name="DepartmentCode">184</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.8075073000702,13.1498150207019</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#industry">
+		<SimpleData name="OBJECTID">7636</SimpleData>
+		<SimpleData name="KGISINDUSTRYId">7636</SimpleData>
+		<SimpleData name="INDUSTRYName">Proposed Change in Product Mix Project</SimpleData>
+		<SimpleData name="KGISCode">29555054385978010000FESEIUNFDAIND0002</SimpleData>
+		<SimpleData name="KGISVillageID">937</SimpleData>
+		<SimpleData name="DepartmentCode">185</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>74.4850930015695,15.7759979072892</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

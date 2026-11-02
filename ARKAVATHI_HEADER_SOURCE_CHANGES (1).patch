@@ -1,0 +1,76 @@
+--- /mnt/data/arkavathi_patch_work/AuthenticatedHeader.tsx.before	2026-10-05 10:37:15.264676893 +0000
++++ frontend/src/components/AuthenticatedHeader.tsx	2026-10-05 10:37:16.149662737 +0000
+@@ -1,4 +1,4 @@
+-﻿import { LogOut, ShieldCheck, UserRound } from 'lucide-react'
++import { LogOut, ShieldCheck, UserRound } from 'lucide-react'
+ import type { AuthUser } from '../lib/types'
+ 
+ function portalLabel(user: AuthUser) {
+@@ -57,6 +57,26 @@
+   )
+ }
+ 
++function JaiprakashLeadershipBlock() {
++  return (
++    <div className="flex min-h-[78px] w-[360px] shrink-0 items-center px-4">
++      <div className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-white/70">
++        <img
++          src="/branding/dr-k-jaiprakash.png"
++          alt="Dr. K. Jaiprakash"
++          className="h-full w-full object-cover object-top"
++        />
++      </div>
++      <div className="ml-3 min-w-0 flex-1">
++        <div className="text-[11px] font-black leading-[14px] text-white">Dr. K. Jaiprakash</div>
++        <div className="mt-0.5 text-[8.5px] font-semibold leading-[11px] text-blue-100">
++          Former Secretary, Government of Karnataka and Chairman, Committee for Studies on Arkavathi River Basin
++        </div>
++      </div>
++    </div>
++  )
++}
++
+ function HeaderDivider() {
+   return <div aria-hidden="true" className="hidden h-14 w-px shrink-0 bg-white/20 xl:block" />
+ }
+@@ -89,12 +109,12 @@
+   if (projectBranding) {
+     return (
+       <header className="bg-gradient-to-r from-navy-950 via-navy-900 to-navy-800 px-4 py-3 text-white md:px-5">
+-        <div className="mx-auto flex max-w-[1700px] flex-wrap items-center gap-y-2 xl:flex-nowrap">
++        <div className="mx-auto flex max-w-[1700px] flex-wrap items-center gap-y-2 min-[1800px]:flex-nowrap">
+           <div className="border-l border-white/20 pl-2">
+             <NakshatechBrandBlock />
+           </div>
+ 
+-          <div className="ml-auto flex flex-wrap items-center xl:flex-nowrap">
++          <div className="ml-auto flex flex-wrap items-center min-[1800px]:flex-nowrap">
+             <HeaderDivider />
+             <LeadershipBlock
+               portrait="/branding/chief-minister.png"
+@@ -108,6 +128,8 @@
+               name="Shri Cheluvaraya Swami"
+             />
+             <HeaderDivider />
++            <JaiprakashLeadershipBlock />
++            <HeaderDivider />
+             <div className="pl-3">
+               <ProjectLogoutButton onLogout={onLogout} />
+             </div>
+@@ -151,4 +173,4 @@
+     </header>
+   )
+ }
+-
++
+--- /mnt/data/arkavathi_patch_work/Sidebar.tsx.before	2026-10-05 10:37:15.267563889 +0000
++++ frontend/src/components/Sidebar.tsx	2026-10-05 10:37:16.149787685 +0000
+@@ -31,7 +31,7 @@
+       </div>
+       <div className="mx-2 h-11 w-px shrink-0 bg-white/20"/>
+       <div className="flex w-12 shrink-0 flex-col items-center justify-center">
+-        <img src="/branding/cnnl-logo.png" alt="CNNL logo" className="h-10 w-10 object-contain"/>
++        <img src="/branding/cnnl-logo.png" alt="CNNL logo" className="h-11 w-11 object-contain"/>
+         <div className="mt-0.5 text-[8px] font-black tracking-wide text-cyan-100">CNNL</div>
+       </div>
+     </div>

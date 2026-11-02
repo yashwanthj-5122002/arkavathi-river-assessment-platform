@@ -1,0 +1,808 @@
+.ark-workspace[data-page='gis-map'] .ark-workspace-main { display: flex; flex-direction: column; height: 100vh; min-height: 0; overflow: hidden; }
+.ark-workspace[data-page='gis-map'] .ark-workspace-main > div:first-child { flex: none; }
+.ark-atlas-host { flex: 1; min-height: 0; min-width: 0; width: 100%; max-width: none; padding: 0; }
+.ark-atlas { position: relative; display: grid; grid-template-columns: 310px minmax(0, 1fr); width: 100%; height: 100%; min-height: 0; background: var(--ark-bg); color: var(--ark-text); }
+.ark-atlas button { cursor: pointer; font: inherit; }
+.ark-atlas button:focus-visible, .ark-atlas input:focus-visible, .ark-atlas a:focus-visible { outline: 2px solid var(--ark-teal); outline-offset: 2px; }
+.ark-atlas-explorer { z-index: 4; display: flex; flex-direction: column; min-width: 0; min-height: 0; border-right: 1px solid var(--ark-border); background: var(--ark-surface); box-shadow: 4px 0 18px rgb(10 37 44 / 5%); }
+.ark-atlas-panel-head { position: relative; flex: none; padding: 23px 20px 18px; border-bottom: 1px solid var(--ark-border); background: linear-gradient(135deg, #f8f8f1, var(--ark-surface)); }
+.ark-atlas-eyebrow { display: flex; align-items: center; gap: 8px; color: var(--ark-green); font-size: 10px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.ark-atlas-panel-head h1 { margin: 10px 0 0; color: var(--ark-text); font: 500 27px/1.12 Georgia, 'Times New Roman', serif; letter-spacing: -.04em; }
+.ark-atlas-panel-head p { margin: 8px 0 0; color: var(--ark-text-muted); font-size: 12px; line-height: 1.45; }
+.ark-atlas-panel-close { display: none; position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-sm); background: white; color: var(--ark-text); }
+.ark-atlas-search { display: flex; align-items: center; gap: 8px; flex: none; margin: 14px 16px 8px; padding: 0 11px; min-height: 39px; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-sm); background: white; color: var(--ark-text-soft); }
+.ark-atlas-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ark-text); font-size: 12px; }
+.ark-atlas-search input:focus-visible { outline: 0; }
+.ark-atlas-group-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 2px 12px 14px; scrollbar-color: var(--ark-border-strong) transparent; scrollbar-width: thin; }
+.ark-atlas-group { margin-top: 8px; }
+.ark-atlas-group-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 34px; padding: 5px 8px; border: 0; border-radius: var(--ark-radius-sm); background: transparent; color: var(--ark-text); font-size: 11px!important; font-weight: 800!important; letter-spacing: .05em; text-align: left; text-transform: uppercase; }
+.ark-atlas-group-toggle:hover { background: var(--ark-surface-soft); }
+.ark-atlas-group-toggle > span { display: flex; align-items: center; gap: 6px; }
+.ark-atlas-group-toggle small { padding: 2px 5px; border-radius: 4px; background: var(--ark-surface-soft); color: var(--ark-text-soft); font-size: 10px; }
+.ark-atlas-layer-list { display: grid; gap: 3px; margin-top: 2px; }
+.ark-atlas-layer { display: flex; align-items: center; gap: 9px; min-height: 35px; padding: 6px 8px 6px 12px; border: 1px solid transparent; border-radius: var(--ark-radius-sm); cursor: pointer; color: var(--ark-text-muted); font-size: 12px; line-height: 1.25; }
+.ark-atlas-layer:hover { background: var(--ark-surface-soft); }
+.ark-atlas-layer.is-active { border-color: #c7d8c9; background: var(--ark-teal-soft); color: var(--ark-green); font-weight: 700; }
+.ark-atlas-layer input { width: 15px; height: 15px; flex: none; margin: 0; accent-color: var(--ark-green); }
+.ark-atlas-swatch { width: 10px; height: 10px; flex: none; border-radius: 50%; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%); }
+.ark-atlas-layer-name { min-width: 0; flex: 1; }
+.ark-atlas-loading, .ark-atlas-layer-error { color: var(--ark-text-soft); font-size: 9px; }
+.ark-atlas-layer-error { color: var(--ark-danger); }
+.ark-atlas-no-results { padding: 20px 8px; color: var(--ark-text-muted); font-size: 12px; }
+.ark-atlas-legend { flex: none; max-height: 29%; overflow-y: auto; padding: 13px 20px 15px; border-top: 1px solid var(--ark-border); background: var(--ark-surface-soft); }
+.ark-atlas-legend h2 { display: flex; justify-content: space-between; margin: 0 0 9px; color: var(--ark-text); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.ark-atlas-legend h2 span { color: var(--ark-text-soft); font-size: 10px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.ark-atlas-legend-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 10px; }
+.ark-atlas-legend-list > div { display: flex; align-items: center; min-width: 0; gap: 7px; color: var(--ark-text-muted); font-size: 10px; line-height: 1.25; }
+.ark-atlas-legend-list > .ark-atlas-legend-sub { padding-left: 7px; }
+.ark-atlas-legend-symbol { display: block; width: 12px; height: 12px; flex: none; border-radius: 3px; }
+.ark-atlas-legend-symbol.line { height: 3px; border-radius: 2px; }
+.ark-atlas-legend-symbol.point { border-radius: 50%; }
+.ark-atlas-legend p { margin: 0; color: var(--ark-text-soft); font-size: 11px; }
+/* ---- Verified Survey card -------------------------------------------------- */
+.ark-atlas-survey { flex: none; display: grid; gap: 8px; padding: 12px 16px 14px; border-top: 1px solid var(--ark-border); background: linear-gradient(180deg, #f6f4fb, var(--ark-surface)); }
+.ark-atlas-survey-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ark-atlas-survey-head h2 { margin: 0; color: var(--ark-text); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.ark-atlas-survey-load { position: relative; display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 10px; overflow: hidden; border: 1px solid var(--ark-green); border-radius: var(--ark-radius-sm); background: var(--ark-green); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; }
+.ark-atlas-survey-load.is-busy { opacity: .7; cursor: progress; }
+.ark-atlas-survey-load input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.ark-atlas-survey-load input:disabled { cursor: not-allowed; }
+.ark-atlas-survey-error { margin: 0; padding: 7px 9px; border: 1px solid #f0c4c4; border-radius: var(--ark-radius-sm); background: #fdf0f0; color: var(--ark-danger); font-size: 11px; line-height: 1.4; overflow-wrap: anywhere; }
+.ark-atlas-survey-select { width: 100%; min-height: 32px; padding: 0 8px; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-sm); background: #fff; color: var(--ark-text); font-size: 11.5px; }
+.ark-atlas-survey-toggles { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.ark-atlas-survey-toggles label { display: inline-flex; align-items: center; gap: 6px; color: var(--ark-text-muted); font-size: 11.5px; font-weight: 600; cursor: pointer; }
+.ark-atlas-survey-toggles input { width: 14px; height: 14px; margin: 0; accent-color: var(--ark-green); }
+.ark-atlas-survey-hint { margin: 0; color: var(--ark-text-soft); font-size: 11px; line-height: 1.45; }
+.ark-atlas-survey-playback { display: grid; gap: 8px; }
+.ark-atlas-survey-controls { display: flex; align-items: center; gap: 6px; }
+.ark-atlas-survey-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-width: 30px; min-height: 30px; padding: 0 8px; border: 1px solid var(--ark-border-strong); border-radius: var(--ark-radius-sm); background: #fff; color: var(--ark-green); font-size: 11px; font-weight: 800; }
+.ark-atlas-survey-controls button:hover:not(:disabled) { background: var(--ark-teal-soft); }
+.ark-atlas-survey-controls button:disabled { opacity: .45; cursor: not-allowed; }
+.ark-atlas-survey-controls .ark-atlas-survey-play { background: var(--ark-green); border-color: var(--ark-green); color: #fff; }
+.ark-atlas-survey-controls .ark-atlas-survey-play:hover:not(:disabled) { background: #1d6b53; }
+.ark-atlas-survey-speeds { display: flex; gap: 3px; margin-left: auto; }
+.ark-atlas-survey-speeds button { min-width: 34px; min-height: 26px; padding: 0 4px; font-size: 10.5px; }
+.ark-atlas-survey-speeds button.is-active { border-color: var(--ark-green); background: var(--ark-teal-soft); color: var(--ark-green); }
+.ark-atlas-survey-slider { width: 100%; margin: 0; accent-color: var(--ark-green); cursor: pointer; }
+.ark-atlas-survey-slider:disabled { cursor: not-allowed; opacity: .5; }
+.ark-atlas-survey-readout { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; color: var(--ark-text-soft); font-size: 10.5px; font-variant-numeric: tabular-nums; }
+.ark-atlas-survey-readout strong { color: var(--ark-text); font-size: 11px; font-weight: 800; }
+.ark-atlas-map-area { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #e6e9df; }
+.ark-atlas-map { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ark-atlas-map-controls { position: absolute; top: 16px; left: 16px; z-index: 2; display: flex; align-items: center; gap: 7px; }
+.ark-atlas-basemap { display: flex; padding: 3px; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-sm); background: var(--ark-surface); box-shadow: var(--ark-shadow-md); }
+.ark-atlas-basemap button { min-height: 34px; padding: 0 11px; border: 0; border-radius: 6px; background: transparent; color: var(--ark-text-muted); font-size: 11px; font-weight: 700; }
+.ark-atlas-basemap button.is-selected { background: var(--ark-green); color: white; }
+.ark-atlas-fit { display: grid; place-items: center; width: 41px; height: 41px; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-sm); background: var(--ark-surface); color: var(--ark-green); box-shadow: var(--ark-shadow-md); }
+.ark-atlas-fit:hover { background: var(--ark-teal-soft); }
+.ark-atlas-naksha-toggle { position: absolute; top: 70px; left: 16px; z-index: 4; display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 12px; border: 1px solid #0e444c; border-radius: var(--ark-radius-sm); background: #123f49; color: white; box-shadow: var(--ark-shadow-md); font-size: 11px; font-weight: 800; letter-spacing: .02em; }
+.ark-atlas-naksha-toggle:hover, .ark-atlas-naksha-toggle[aria-expanded='true'] { background: #1a5960; }
+.ark-atlas-naksha-toggle span { display: grid; place-items: center; min-width: 19px; height: 19px; padding: 0 4px; border-radius: 10px; background: #d6eadc; color: #123f49; font-size: 10px; }
+.ark-atlas-naksha-panel { position: absolute; top: 115px; left: 16px; z-index: 4; display: flex; flex-direction: column; width: min(322px, calc(100% - 32px)); max-height: calc(100% - 135px); overflow: hidden; border: 1px solid var(--ark-border-strong); border-radius: var(--ark-radius-md); background: var(--ark-surface); box-shadow: var(--ark-shadow-lg); }
+.ark-atlas-naksha-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 15px 15px 12px; border-bottom: 1px solid var(--ark-border); background: linear-gradient(135deg, #e9f0e7, #fbfaf5); }
+.ark-atlas-naksha-head small { color: var(--ark-green); font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.ark-atlas-naksha-head h2 { margin: 5px 0 0; color: var(--ark-text); font: 500 20px/1.15 Georgia, 'Times New Roman', serif; }
+.ark-atlas-naksha-head p { margin: 4px 0 0; color: var(--ark-text-muted); font-size: 11px; }
+.ark-atlas-naksha-head button { display: grid; place-items: center; width: 29px; height: 29px; flex: none; border: 1px solid var(--ark-border); border-radius: 6px; background: white; color: var(--ark-text); }
+.ark-atlas-naksha-list { min-height: 0; overflow-y: auto; padding: 8px 11px 12px; scrollbar-width: thin; scrollbar-color: var(--ark-border-strong) transparent; }
+.ark-atlas-naksha-group { margin-top: 9px; }
+.ark-atlas-naksha-group h3 { margin: 0 4px 6px; color: var(--ark-green); font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.ark-atlas-naksha-row { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; min-height: 31px; padding: 5px 7px; border: 1px solid transparent; border-radius: 7px; color: var(--ark-text-muted); cursor: pointer; font-size: 11px; line-height: 1.25; }
+.ark-atlas-naksha-row:hover { background: var(--ark-surface-soft); }
+.ark-atlas-naksha-row.is-active { border-color: #b5d1c8; background: #e9f2ec; color: var(--ark-green); font-weight: 700; }
+.ark-atlas-naksha-row input { width: 14px; height: 14px; flex: none; margin: 0; accent-color: var(--ark-green); }
+.ark-atlas-naksha-row input:disabled { cursor: not-allowed; }
+.ark-atlas-naksha-symbol { width: 10px; height: 10px; flex: none; border-radius: 50%; }
+.ark-atlas-naksha-symbol.LineString { height: 3px; border-radius: 2px; }
+.ark-atlas-naksha-symbol.Polygon { border-radius: 2px; }
+.ark-atlas-naksha-row span { flex: 1; min-width: 0; }
+.ark-atlas-naksha-row small { color: var(--ark-text-soft); font-size: 9px; font-variant-numeric: tabular-nums; }
+.ark-atlas-naksha-row em { flex-basis: 100%; padding-left: 31px; color: var(--ark-danger); font-size: 10px; font-style: normal; overflow-wrap: anywhere; }
+.ark-atlas-naksha-empty, .ark-atlas-naksha-error { margin: 8px 4px; color: var(--ark-text-soft); font-size: 11px; }
+.ark-atlas-naksha-error { color: var(--ark-danger); }
+.ark-atlas-naksha-actions { display: flex; gap: 7px; padding: 11px; border-top: 1px solid var(--ark-border); background: var(--ark-surface-soft); }
+.ark-atlas-naksha-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 34px; padding: 0 10px; border: 1px solid var(--ark-border-strong); border-radius: 7px; background: white; color: var(--ark-green); font-size: 10.5px; font-weight: 800; }
+.ark-atlas-naksha-actions button:first-child { border-color: var(--ark-green); background: var(--ark-green); color: white; }
+.ark-atlas-naksha-actions button:disabled { opacity: .45; cursor: not-allowed; }
+.ark-atlas-naksha-crs { margin: 0; padding: 0 16px 13px; color: var(--ark-text-soft); font-size: 10px; }
+.ark-atlas-map-caption { position: absolute; bottom: 14px; left: 16px; z-index: 2; max-width: calc(100% - 80px); padding: 9px 12px; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-sm); background: rgb(255 254 250 / 92%); color: var(--ark-text); box-shadow: var(--ark-shadow-sm); font-size: 10px; font-weight: 800; letter-spacing: .1em; backdrop-filter: blur(8px); }
+.ark-atlas-map-caption span { margin-inline: 6px; color: var(--ark-teal); }
+.ark-atlas-street-marker {
+  pointer-events: none;
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  transform-origin: center;
+}
+.ark-atlas-street-marker--arrow {
+  position: absolute;
+  top: -10px;
+  left: 18px;
+  transform: translateX(-50%) rotate(var(--sv-heading, 0deg));
+  transform-origin: 50% 80%;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 14px solid #facc15;
+  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, .35));
+  opacity: calc(1 - var(--sv-arrow-hidden, 0));
+  transition: transform .12s linear, opacity .12s linear;
+  will-change: transform;
+}
+.ark-atlas-street-marker--dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 4px solid #fff7cc;
+  background: rgba(251, 191, 36, .9);
+  box-shadow: 0 6px 18px rgba(234, 179, 8, .45), inset 0 1px 0 rgba(255, 255, 255, .65);
+}
+.ark-atlas-street-marker--halo {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: radial-gradient(circle at center, rgba(251, 191, 36, .28) 0%, rgba(251, 191, 36, .14) 40%, rgba(251, 191, 36, 0) 70%);
+}
+.ark-atlas-map-area .maplibregl-ctrl-top-right { top: 61px; right: 13px; }
+.ark-atlas-map-area .maplibregl-ctrl-group { border: 1px solid var(--ark-border); box-shadow: var(--ark-shadow-md); }
+.ark-atlas-detail { position: absolute; right: 16px; bottom: 47px; z-index: 3; width: min(340px, calc(100% - 32px)); max-height: min(520px, calc(100% - 124px)); overflow: auto; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-md); background: var(--ark-surface); box-shadow: var(--ark-shadow-lg); }
+.ark-atlas-detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 16px 16px 12px; border-bottom: 1px solid var(--ark-border); }
+.ark-atlas-detail-head small { color: var(--ark-green); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.ark-atlas-detail-head h2 { margin: 4px 0 0; color: var(--ark-text); font: 500 22px/1.15 Georgia, 'Times New Roman', serif; }
+.ark-atlas-detail-head button { display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--ark-border); border-radius: 7px; background: white; color: var(--ark-text-muted); }
+.ark-atlas-detail-fields { display: grid; gap: 0; padding: 4px 16px; }
+.ark-atlas-detail-fields > div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--ark-border); font-size: 11px; line-height: 1.45; }
+.ark-atlas-detail-fields > div:last-child { border-bottom: 0; }
+.ark-atlas-detail-fields span { color: var(--ark-text-soft); }
+.ark-atlas-detail-fields strong { overflow-wrap: anywhere; color: var(--ark-text); font-weight: 700; }
+.ark-atlas-detail-actions { display: flex; gap: 8px; padding: 12px 16px 16px; }
+.ark-atlas-detail-actions button, .ark-atlas-detail-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 35px; padding: 0 10px; border: 1px solid var(--ark-border-strong); border-radius: 7px; background: white; color: var(--ark-green); font-size: 11px; font-weight: 750; text-decoration: none; }
+.ark-atlas-detail-actions a { border-color: var(--ark-green); background: var(--ark-green); color: white; }
+.ark-atlas-mobile-layers, .ark-atlas-scrim { display: none; }
+@media (max-width: 1199px) {
+  .ark-atlas { display: block; }
+  .ark-atlas-explorer { position: absolute; top: 0; bottom: 0; left: 0; z-index: 8; width: min(320px, 84vw); transform: translateX(-105%); transition: transform .2s ease; }
+  .ark-atlas-explorer.is-open { transform: translateX(0); }
+  .ark-atlas-panel-close { display: flex; }
+  .ark-atlas-scrim { display: block; position: absolute; inset: 0; z-index: 7; border: 0; background: rgb(7 30 36 / 42%); }
+  .ark-atlas-map-area { width: 100%; height: 100%; }
+  .ark-atlas-mobile-layers { position: absolute; top: 15px; left: 15px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; min-height: 41px; padding: 0 11px; border: 1px solid var(--ark-border); border-radius: var(--ark-radius-sm); background: var(--ark-surface); color: var(--ark-green); box-shadow: var(--ark-shadow-md); font-size: 11px; font-weight: 800; }
+  .ark-atlas-map-controls { top: 15px; left: 115px; }
+}
+@media (max-width: 560px) {
+  .ark-atlas-map-controls { top: 64px; left: 15px; }
+  .ark-atlas-naksha-toggle { top: 114px; left: 15px; }
+  .ark-atlas-naksha-panel { top: 158px; left: 8px; width: calc(100% - 16px); max-height: calc(100% - 169px); }
+  .ark-atlas-map-area .maplibregl-ctrl-top-right { top: 112px; }
+  .ark-atlas-detail { right: 8px; bottom: 40px; width: calc(100% - 16px); max-height: 45%; }
+  .ark-atlas-map-caption { bottom: 8px; left: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .ark-atlas-explorer { transition: none; } }
+
+
+/* --------------------------------------------------------------------------
+   GIS FLOATING PANELS PATCH
+   River Layer Explorer + NakshaTech Survey Data are map-overlay tools.
+   Data/loading/map logic is intentionally unchanged.
+   -------------------------------------------------------------------------- */
+
+.ark-atlas {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* The map now owns the complete GIS workspace. */
+.ark-atlas-map-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* River explorer is no longer a permanent 310px grid column. */
+.ark-atlas-explorer {
+  position: absolute;
+  top: 115px;
+  bottom: auto;
+  left: 16px;
+  z-index: 5;
+
+  display: none;
+  flex-direction: column;
+
+  width: min(322px, calc(100% - 32px));
+  max-height: calc(100% - 135px);
+
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+
+  border: 1px solid var(--ark-border-strong);
+  border-radius: var(--ark-radius-md);
+
+  background: var(--ark-surface);
+  box-shadow: var(--ark-shadow-lg);
+
+  transform: none;
+}
+
+.ark-atlas-explorer.is-open {
+  display: flex;
+  transform: none;
+}
+
+/* Close button is available on desktop as well. */
+.ark-atlas-panel-close {
+  display: flex;
+}
+
+/* No dark page-blocking overlay is required for a GIS floating tool. */
+.ark-atlas-scrim {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING BUTTON 1 ? RIVER LAYER EXPLORER
+   -------------------------------------------------------------------------- */
+
+.ark-atlas-mobile-layers {
+  position: absolute;
+  top: 70px;
+  left: 16px;
+  z-index: 4;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  min-height: 38px;
+  padding: 0 12px;
+
+  border: 1px solid var(--ark-border-strong);
+  border-radius: var(--ark-radius-sm);
+
+  background: rgb(255 254 250 / 96%);
+  color: var(--ark-green);
+
+  box-shadow: var(--ark-shadow-md);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  white-space: nowrap;
+
+  backdrop-filter: blur(8px);
+}
+
+.ark-atlas-mobile-layers:hover,
+.ark-atlas-mobile-layers[aria-expanded='true'] {
+  border-color: var(--ark-green);
+  background: var(--ark-teal-soft);
+}
+
+.ark-atlas-mobile-layers span {
+  display: grid;
+  place-items: center;
+
+  min-width: 19px;
+  height: 19px;
+  padding: 0 4px;
+
+  border-radius: 10px;
+
+  background: var(--ark-green);
+  color: white;
+
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING BUTTON 2 ? NAKSHATECH SURVEY DATA
+   Desktop: alongside River Layer Explorer.
+   -------------------------------------------------------------------------- */
+
+.ark-atlas-naksha-toggle {
+  top: 70px;
+  left: 200px;
+}
+
+/* Both floating panels open from the same map-tool position.
+   They are mutually exclusive in React. */
+.ark-atlas-naksha-panel {
+  top: 115px;
+  left: 16px;
+  max-height: calc(100% - 135px);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+
+  /* Stack the two floating tool buttons on narrow screens. */
+  .ark-atlas-mobile-layers {
+    top: 62px;
+    left: 8px;
+  }
+
+  .ark-atlas-naksha-toggle {
+    top: 104px;
+    left: 8px;
+  }
+
+  .ark-atlas-explorer,
+  .ark-atlas-naksha-panel {
+    top: 148px;
+    bottom: auto;
+    left: 8px;
+
+    width: calc(100% - 16px);
+    max-height: calc(100% - 158px);
+
+    transform: none;
+  }
+
+  .ark-atlas-explorer.is-open {
+    display: flex;
+    transform: none;
+  }
+
+  .ark-atlas-map-controls {
+    top: 12px;
+    left: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .ark-atlas-mobile-layers,
+  .ark-atlas-naksha-toggle {
+    max-width: calc(100% - 16px);
+    min-height: 35px;
+    padding: 0 9px;
+
+    font-size: 10px;
+  }
+}
+
+
+/* ==========================================================================
+   GIS FLOATING TOOLBAR ALIGNMENT FIX
+   Both map tool buttons live in one flex toolbar.
+   ========================================================================== */
+
+.ark-atlas-floating-toolbar {
+  position: absolute;
+  top: 70px;
+  left: 16px;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  max-width: calc(100% - 32px);
+}
+
+/*
+ * Buttons are positioned by the toolbar now.
+ * Override their previous independent absolute positioning.
+ */
+.ark-atlas-floating-toolbar .ark-atlas-mobile-layers,
+.ark-atlas-floating-toolbar .ark-atlas-naksha-toggle {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  margin: 0;
+  flex: 0 0 auto;
+
+  min-height: 38px;
+}
+
+/* Keep both controls visually aligned. */
+.ark-atlas-floating-toolbar .ark-atlas-mobile-layers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ark-atlas-floating-toolbar .ark-atlas-naksha-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tablet / small-width protection. */
+@media (max-width: 760px) {
+  .ark-atlas-floating-toolbar {
+    top: 62px;
+    left: 8px;
+    right: 8px;
+
+    max-width: none;
+    gap: 6px;
+
+    flex-wrap: wrap;
+  }
+
+  .ark-atlas-floating-toolbar .ark-atlas-mobile-layers,
+  .ark-atlas-floating-toolbar .ark-atlas-naksha-toggle {
+    min-height: 36px;
+  }
+
+  .ark-atlas-explorer,
+  .ark-atlas-naksha-panel {
+    top: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ark-atlas-floating-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ark-atlas-floating-toolbar .ark-atlas-mobile-layers,
+  .ark-atlas-floating-toolbar .ark-atlas-naksha-toggle {
+    max-width: calc(100vw - 32px);
+  }
+
+  .ark-atlas-explorer,
+  .ark-atlas-naksha-panel {
+    top: 190px;
+  }
+}
+
+
+/* ==========================================================================
+   RIVER EXPLORER CLEAR LAYERS
+   ========================================================================== */
+
+.ark-atlas-river-actions {
+  flex: none;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 16px;
+
+  border-top: 1px solid var(--ark-border);
+  background: var(--ark-surface);
+}
+
+.ark-atlas-river-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 32px;
+  padding: 0 12px;
+
+  border: 1px solid var(--ark-border-strong);
+  border-radius: 7px;
+
+  background: white;
+  color: var(--ark-green);
+
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+.ark-atlas-river-actions button:hover:not(:disabled) {
+  border-color: var(--ark-green);
+  background: var(--ark-teal-soft);
+}
+
+.ark-atlas-river-actions button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+
+/* ==========================================================================
+   STREET VIEW WORKFLOW
+   Selection banner + overlay panel for the GIS atlas map.
+   ========================================================================== */
+
+/* Street View sits in the basemap pill group, right after Satellite. */
+.ark-atlas-basemap .ark-atlas-streetview-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Selection step: banner with a cancel action, clear of the nav control. */
+.ark-atlas-street-banner {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(440px, calc(100% - 32px));
+  padding: 10px 12px;
+  border: 1px solid var(--ark-border-strong);
+  border-radius: var(--ark-radius-sm);
+  background: rgb(255 254 250 / 96%);
+  color: var(--ark-text);
+  box-shadow: var(--ark-shadow-md);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+  backdrop-filter: blur(8px);
+}
+
+.ark-atlas-street-banner span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ark-atlas-street-banner button {
+  flex: none;
+  min-height: 30px;
+  padding: 0 11px;
+  border: 1px solid var(--ark-border-strong);
+  border-radius: 6px;
+  background: white;
+  color: var(--ark-green);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.ark-atlas-street-banner button:hover {
+  border-color: var(--ark-green);
+  background: var(--ark-teal-soft);
+}
+
+/* Viewing step: overlay docked to the right edge of the map area. */
+.ark-atlas-streetview {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  bottom: 47px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(440px, calc(100% - 32px));
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ark-border-strong) transparent;
+}
+
+.ark-atlas-streetview-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--ark-border-strong);
+  border-radius: var(--ark-radius-md);
+  background: var(--ark-surface);
+  box-shadow: var(--ark-shadow-lg);
+}
+
+.ark-atlas-streetview-bar strong {
+  flex: none;
+  color: var(--ark-text);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.ark-atlas-streetview-bar small {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  color: var(--ark-text-soft);
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 10.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ark-atlas-streetview-bar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #a54945;
+  border-radius: 7px;
+  background: #a54945;
+  color: white;
+  box-shadow: var(--ark-shadow-sm);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.ark-atlas-streetview-bar button:hover {
+  background: #8f3b3a;
+}
+
+/* The reused StreetViewPanel is a flex-column child; keep it full width. */
+.ark-atlas-streetview > section {
+  width: 100%;
+  align-self: stretch;
+}
+
+
+/* ==========================================================================
+   ARKAVATHI RIVER DATA PANEL — GROUPED LAYER HIERARCHY
+   Parent checkbox, expand/collapse control and selection counter are three
+   separate targets; only the checkbox ever changes layer visibility.
+   ========================================================================== */
+
+.ark-atlas-naksha-panel .ark-atlas-naksha-list {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 8px 11px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ark-border-strong) transparent;
+}
+
+.ark-atlas-naksha-group.is-expandable {
+  margin-top: 10px;
+}
+
+.ark-atlas-naksha-group-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 33px;
+  padding: 3px 7px;
+  border: 1px solid var(--ark-border);
+  border-radius: 7px;
+  background: var(--ark-surface-soft);
+}
+
+.ark-atlas-naksha-group-head input[type='checkbox'] {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  accent-color: var(--ark-green);
+  cursor: pointer;
+}
+
+.ark-atlas-naksha-group-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  min-height: 26px;
+  padding: 2px;
+  border: 0;
+  background: transparent;
+  color: var(--ark-text);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-align: left;
+}
+
+.ark-atlas-naksha-group-toggle:hover {
+  color: var(--ark-green);
+}
+
+.ark-atlas-naksha-group-toggle span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ark-atlas-naksha-count {
+  flex: none;
+  padding: 2px 6px;
+  border: 1px solid var(--ark-border);
+  border-radius: 4px;
+  background: white;
+  color: var(--ark-text-soft);
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ark-atlas-naksha-children {
+  display: grid;
+  gap: 3px;
+  margin-top: 4px;
+  padding-left: 14px;
+  border-left: 2px solid #cfe0d6;
+}
+
+.ark-atlas-naksha-children .ark-atlas-naksha-row {
+  min-height: 30px;
+}
+
+/* A failed row keeps its message and retry action on their own line. */
+.ark-atlas-naksha-row em.ark-atlas-naksha-row-error {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-left: 31px;
+  color: var(--ark-danger);
+  font-size: 10px;
+  font-style: normal;
+  overflow-wrap: anywhere;
+}
+
+.ark-atlas-naksha-row-error button {
+  flex: none;
+  min-height: 23px;
+  padding: 0 9px;
+  border: 1px solid var(--ark-danger);
+  border-radius: 5px;
+  background: white;
+  color: var(--ark-danger);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.ark-atlas-naksha-row-error button:hover {
+  background: #fdf0f0;
+}
+
+/* Legend notes (elevation band units, etc.). */
+.ark-atlas-legend-note {
+  margin: 9px 0 0;
+  color: var(--ark-text-soft);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+
+/* ==========================================================================
+   STREET VIEW MARKER STATES
+   One marker instance, three states: pending (just clicked), confirmed
+   (imagery resolved) and missing (no imagery). The direction arrow only
+   renders for a confirmed heading, so no direction is ever invented.
+   ========================================================================== */
+
+.ark-atlas-street-marker:not([data-sv-state='confirmed']) .ark-atlas-street-marker--arrow {
+  opacity: 0;
+}
+
+.ark-atlas-street-marker[data-sv-state='pending'] .ark-atlas-street-marker--dot {
+  background: rgb(251 191 36 / 35%);
+  border-color: #fde68a;
+  box-shadow: 0 4px 14px rgb(234 179 8 / 35%), inset 0 1px 0 rgb(255 255 255 / 55%);
+}
+
+.ark-atlas-street-marker[data-sv-state='pending'] .ark-atlas-street-marker--halo {
+  background: radial-gradient(circle at center, rgb(251 191 36 / 32%) 0%, rgb(251 191 36 / 13%) 42%, rgb(251 191 36 / 0) 70%);
+}
+
+.ark-atlas-street-marker[data-sv-state='missing'] .ark-atlas-street-marker--dot {
+  background: rgb(148 163 184 / 88%);
+  border-color: #f1f5f9;
+  box-shadow: 0 6px 18px rgb(15 23 42 / 35%);
+}
+
+.ark-atlas-street-marker[data-sv-state='missing'] .ark-atlas-street-marker--halo {
+  background: radial-gradient(circle at center, rgb(148 163 184 / 35%) 0%, rgb(148 163 184 / 0) 70%);
+}

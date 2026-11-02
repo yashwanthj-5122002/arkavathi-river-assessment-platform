@@ -1,0 +1,12 @@
+import { useEffect, useState } from 'react'
+import { CheckCircle2, RefreshCw } from 'lucide-react'
+import { api } from '../lib/api'
+import type { CivilEntry } from '../lib/types'
+
+export function ApprovedCivilRecords(){
+  const [entries,setEntries]=useState<CivilEntry[]>([])
+  const [error,setError]=useState('')
+  async function load(){setError('');try{setEntries(await api.approvedCivilEntries())}catch(e){setError(e instanceof Error?e.message:String(e))}}
+  useEffect(()=>{load()},[])
+  return <section id="approved-civil" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card"><div className="flex items-center justify-between gap-3"><div><div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-emerald-700"><CheckCircle2 size={15}/> Approved Civil records</div><h2 className="mt-1 text-xl font-black text-slate-900">Institution Data Approved for Monitoring</h2><p className="mt-1 text-sm text-slate-500">Only Company-approved institution submissions are shown here.</p></div><button onClick={load} className="rounded-xl border border-slate-300 p-2"><RefreshCw size={16}/></button></div>{error&&<div className="mt-3 rounded-xl bg-rose-50 p-3 text-sm text-rose-800">{error}</div>}<div className="mt-4 overflow-x-auto rounded-xl border border-slate-200"><table className="w-full min-w-[850px] text-left text-xs"><thead className="bg-slate-50 text-slate-500"><tr><th className="px-3 py-3">Record</th><th className="px-3 py-3">Institution</th><th className="px-3 py-3">Type</th><th className="px-3 py-3">Key Data</th><th className="px-3 py-3">Approved</th></tr></thead><tbody>{entries.map(e=><tr key={e.public_id} className="border-t border-slate-100"><td className="px-3 py-3 font-mono font-bold">{e.public_id}</td><td className="px-3 py-3"><div className="font-bold">{e.institution_name}</div><div className="text-slate-400">{e.institution_id}</div></td><td className="px-3 py-3 font-bold">{e.entry_type.replace(/_/g,' ')}</td><td className="px-3 py-3 text-slate-600">{Object.entries(e.fields).slice(0,4).map(([k,v])=><div key={k}><span className="text-slate-400">{k.replace(/_/g,' ')}:</span> {String(v)}</div>)}</td><td className="px-3 py-3 text-slate-500">{e.reviewed_at?new Date(e.reviewed_at).toLocaleString():'—'}</td></tr>)}{entries.length===0&&<tr><td colSpan={5} className="px-4 py-10 text-center text-sm text-slate-500">No Civil records have been approved yet.</td></tr>}</tbody></table></div></section>
+}

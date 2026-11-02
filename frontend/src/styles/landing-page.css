@@ -1,0 +1,1250 @@
+.ark-landing {
+  --ark-navy: #0a252c;
+  --ark-ink: #16352f;
+  --ark-green: #274e40;
+  --ark-teal: #a6c3b6;
+  --ark-paper: #f3f1e9;
+  --ark-sand: #d9cead;
+  background: var(--ark-paper);
+  color: var(--ark-ink);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: clip;
+}
+.ark-landing a { color: inherit; text-decoration: none; }
+.ark-landing button { cursor: pointer; }
+.ark-landing button, .ark-landing a { -webkit-tap-highlight-color: transparent; }
+.ark-landing :focus-visible { outline: 2px solid #bb9144; outline-offset: 6px; }
+.ark-landing section:focus { outline: none; }
+.ark-landing h1, .ark-landing h2, .ark-landing h3, .ark-landing p, .ark-landing figure { margin: 0; }
+.ark-landing h1, .ark-landing h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.055em; }
+.ark-landing h2 { font-size: clamp(2.8rem, 5.1vw, 5rem); line-height: 1.07; }
+.ark-landing h1 em, .ark-landing h2 em { color: #607e64; font-weight: 400; }
+.ark-landing p { font-size: 15px; line-height: 1.85; }
+.ark-container { width: min(1280px, 88%); margin-inline: auto; }
+.ark-section { padding-block: clamp(78px, 9vw, 140px); scroll-margin-top: 28px; }
+.ark-eyebrow { font-size: 10px !important; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; }
+.ark-status-dot { display: inline-block; width: 6px; height: 6px; margin-right: 9px; border-radius: 50%; background: #bad1ac; }
+.ark-skip { position: absolute; top: -100px; left: 20px; z-index: 10; background: var(--ark-paper); padding: 12px 20px; color: var(--ark-ink) !important; }
+.ark-skip:focus { top: 16px; }
+.ark-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+.ark-header { position: absolute; z-index: 3; left: 6%; right: 6%; top: 28px; display: flex; align-items: center; justify-content: space-between; gap: 25px; padding-bottom: 24px; border-bottom: 1px solid rgb(243 241 233 / 24%); color: var(--ark-paper); }
+.ark-brand { display: flex; align-items: center; gap: 13px; }
+.ark-brand img { width: 34px; height: 43px; object-fit: contain; }
+.ark-brand > span { font-size: 18px; font-weight: 500; letter-spacing: .16em; }
+.ark-brand small { display: block; margin-top: 4px; font-size: 7px; font-weight: 500; letter-spacing: .19em; }
+.ark-nav { display: flex; gap: 32px; margin-left: auto; }
+.ark-nav a { font-size: 12px; padding: 10px 0; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.ark-nav a:hover { border-bottom-color: var(--ark-sand); }
+.ark-header-access { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 43px; background: transparent; color: inherit; border: 1px solid rgb(243 241 233 / 45%); border-radius: 2px; padding: 10px 19px; font-size: 11px; transition: background .2s; }
+.ark-header-access:hover { background: rgb(243 241 233 / 12%); }
+
+.ark-hero { min-height: 780px; height: 100svh; max-height: 1200px; position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; color: var(--ark-paper); background: var(--ark-navy); }
+.ark-hero-media, .ark-hero-shade { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.ark-hero-media { background-position: center; background-size: cover; }
+.ark-hero-media video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.035); }
+.ark-hero-shade { background: linear-gradient(90deg, rgb(6 25 27 / 86%) 0%, rgb(6 25 27 / 46%) 60%, rgb(6 25 27 / 18%) 100%), linear-gradient(0deg, #0a252c 0%, rgb(10 37 44 / 5%) 43%, rgb(10 37 44 / 88%) 100%); }
+.ark-hero-content { padding-top: clamp(185px, 24vh, 275px); position: relative; }
+.ark-hero-content > .ark-eyebrow { color: #d4dfcd; margin-bottom: 30px; }
+.ark-hero h1 { font-size: clamp(3rem, 5.4vw, 5.8rem); line-height: 1.08; max-width: 1000px; }
+.ark-hero h1 em { color: #cfdbbc; }
+.ark-hero-description { margin-top: 24px !important; color: #d7dfd9; font-size: 14px !important; }
+.ark-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+.ark-button { display: inline-flex; justify-content: space-between; align-items: center; gap: 30px; min-height: 49px; padding: 15px 22px; font-size: 11px; font-weight: 600; border: 1px solid transparent; border-radius: 2px; transition: background .25s, border-color .25s, transform .25s; }
+.ark-button:hover { transform: translateY(-2px); }
+.ark-button-light { color: var(--ark-ink) !important; background: var(--ark-paper); }
+.ark-button-light:hover { background: #dedac9; }
+.ark-button-outline { color: var(--ark-paper); background: rgb(10 37 44 / 25%); border-color: rgb(243 241 233 / 50%); }
+.ark-button-outline:hover { background: rgb(243 241 233 / 12%); border-color: var(--ark-paper); }
+.ark-hero-foot { padding-top: 36px; padding-bottom: 24px; }
+.ark-hero-wordmark { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(4rem, 14.65vw, 14.7rem); letter-spacing: -.055em; line-height: .9; margin-left: -.035em; color: #e6e9dc; }
+.ark-hero-caption { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 27px; border-top: 1px solid rgb(243 241 233 / 25%); padding-top: 18px; font-size: 8px; letter-spacing: .13em; color: #c5d2cc; }
+.ark-motion-control { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; color: var(--ark-paper); font-size: 10px; padding: 7px 0; }
+.ark-motion-note { font-size: 9px; letter-spacing: 0; }
+
+.ark-section-marker { display: flex; align-items: center; gap: 18px; margin-bottom: 65px; }
+.ark-section-marker > span:first-child { font-size: 10px; opacity: .7; }
+.ark-marker-line { flex: 1; height: 1px; margin-left: 18px; background: currentColor; opacity: .17; }
+.ark-story-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 9%; }
+.ark-story h2 { font-size: clamp(3.5rem, 6.5vw, 6.7rem); }
+.ark-story-intro { margin-top: 34px !important; color: #52685c; font-size: 18px !important; }
+.ark-story-right > p { max-width: 470px; color: #526258; margin-top: 25px; }
+.ark-river-diagram { position: relative; height: 285px; margin: -15px -10px 40px; overflow: hidden; }
+.ark-river-diagram svg { width: 100%; height: 100%; }
+.ark-river-bank { stroke: #dbe1d4; stroke-width: 30; }
+.ark-river-thread { stroke: #678d7a; stroke-width: 1.5; stroke-dasharray: 5 10; animation: ark-current-flow 30s linear infinite; }
+.ark-river-tributary { stroke: #b6c3ae; stroke-width: 1; }
+.ark-river-diagram circle { fill: #315a48; stroke: var(--ark-paper); stroke-width: 3; }
+.ark-diagram-label { position: absolute; background: var(--ark-paper); padding: 5px 8px; font-size: 8px; letter-spacing: .12em; color: #566f5f; }
+.ark-label-land { top: 20%; left: 0; }
+.ark-label-water { top: 45%; right: 0; }
+.ark-label-pressure { bottom: 12%; left: 0; }
+.ark-diagram-caption { position: absolute; bottom: 0; right: 0; font-size: 7px; letter-spacing: .15em; color: #617666; }
+.ark-landscape-words { display: flex; justify-content: space-between; gap: 20px; margin-top: 90px; padding-top: 25px; border-top: 1px solid #ccd2c5; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.1rem, 2.2vw, 2rem); color: #667866; }
+
+.ark-process { background: #e7e9dd; }
+.ark-section-heading { display: grid; grid-template-columns: 1.3fr 1fr; gap: 13%; align-items: end; margin-bottom: 58px; }
+.ark-section-heading > p { max-width: 360px; color: #53655a; padding-bottom: 4px; }
+.ark-stages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; list-style: none; margin: 65px 0 0; padding: 0; }
+.ark-stage-track { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #abb9a5; padding-top: 20px; color: #536f59; }
+.ark-stage-number { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; border: 1px solid #a5b69d; font-size: 10px; }
+.ark-stages h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 29px; font-weight: 400; margin-top: 30px; letter-spacing: -.025em; }
+.ark-stages p { margin-top: 15px; font-size: 13px; color: #53655a; }
+.ark-process-note { display: flex; align-items: center; gap: 10px; margin-top: 55px !important; font-size: 10px !important; color: #546c58; }
+
+.ark-intelligence { background: var(--ark-navy); color: var(--ark-paper); }
+.ark-intelligence h2 em { color: #a5bea5; }
+.ark-intelligence .ark-section-heading > p { color: #b9ccc1; }
+.ark-intelligence .ark-section-marker { color: #a5bea5; }
+.ark-signals { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #37524f; }
+.ark-signal { padding: 35px 30px 40px 0; border-bottom: 1px solid #37524f; transition: background .25s; }
+.ark-signal:not(:nth-child(3n + 1)) { border-left: 1px solid #37524f; padding-left: 30px; }
+.ark-signal:hover { background: rgb(166 195 182 / 4%); }
+.ark-signal-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #abc3ac; }
+.ark-signal-top > span { font-size: 7px; letter-spacing: .14em; }
+.ark-signal h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 25px; font-weight: 400; letter-spacing: -.02em; margin-top: 38px; }
+.ark-signal p { font-size: 13px; color: #b9ccc1; max-width: 320px; margin-top: 14px; }
+
+.ark-study { background: #edeade; }
+.ark-study-layout { display: grid; grid-template-columns: .8fr 1.4fr; gap: 8%; align-items: center; }
+.ark-study-copy h2 { font-size: clamp(2.8rem, 4.5vw, 4.5rem); }
+.ark-study-copy > p { font-size: 13px; color: #546359; margin-top: 27px; max-width: 310px; }
+.ark-map-facts { margin: 32px 0; font-size: 10px; }
+.ark-map-facts > div { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-bottom: 1px solid #cdd0c0; }
+.ark-map-facts dt { color: #546359; }
+.ark-map-facts dd { margin: 0; text-align: right; font-weight: 500; }
+.ark-text-link { display: inline-flex; gap: 24px; align-items: center; font-size: 11px; padding-bottom: 9px; border-bottom: 1px solid #758972; }
+.ark-text-link:hover { color: #517448; }
+.ark-map-frame { border: 1px solid #c1c8b6; background: #f9f8f3; box-shadow: 0 25px 65px rgb(34 57 40 / 7%); position: relative; }
+.ark-map-top, .ark-map-frame figcaption { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 18px 22px; font-size: 8px; letter-spacing: .09em; }
+.ark-map-top { background: #e4e8db; border-bottom: 1px solid #cdd3c2; }
+.ark-map-top .ark-status-dot { background: #547b4e; width: 5px; height: 5px; }
+.ark-map-image { position: relative; overflow: hidden; padding: 14px; background: white; }
+.ark-map-image img { display: block; width: 100%; height: auto; }
+.ark-map-scan { position: absolute; left: 14px; right: 14px; top: 0; height: 12%; background: linear-gradient(0deg, rgb(89 132 116 / 9%), transparent); border-bottom: 1px solid rgb(62 110 87 / 20%); animation: ark-map-scan 12s ease-in-out infinite; pointer-events: none; }
+.ark-map-frame figcaption { border-top: 1px solid #d2d7c9; color: #56694f; letter-spacing: .04em; }
+
+.ark-current { background: #244838; color: var(--ark-paper); text-align: center; position: relative; }
+.ark-current::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 100%, rgb(147 178 144 / 12%), transparent 65%); }
+.ark-current h2 { margin-top: 30px; font-size: clamp(3rem, 5.4vw, 5.5rem); }
+.ark-current h2 em { color: #c7d3b0; }
+.ark-current > .ark-container { position: relative; }
+.ark-current .ark-eyebrow { color: #c7d3b0; }
+.ark-evidence-flow { display: flex; list-style: none; padding: 0; margin: 65px auto 0; max-width: 980px; border-top: 1px solid #78907a; }
+.ark-evidence-flow li { flex: 1; position: relative; padding-top: 25px; text-align: left; }
+.ark-evidence-flow li::before { content: ''; position: absolute; width: 5px; height: 5px; top: -3px; left: 0; border-radius: 50%; background: #c7d3b0; }
+.ark-evidence-flow li > span { display: block; font-size: 8px; color: #bccdb7; margin-bottom: 10px; }
+.ark-evidence-flow strong { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: 25px; }
+.ark-evidence-flow svg { position: absolute; right: 18px; bottom: 7px; color: #a7b99e; }
+.ark-current-copy { max-width: 480px; margin: 45px auto 0 !important; color: #c5d3bf; font-size: 13px !important; }
+
+.ark-portal { position: relative; isolation: isolate; min-height: 540px; display: flex; align-items: center; text-align: center; color: var(--ark-paper); overflow: hidden; background: var(--ark-navy); }
+.ark-portal-image, .ark-portal-shade { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.ark-portal-image { object-fit: cover; object-position: center 65%; }
+.ark-portal-shade { background: linear-gradient(0deg, rgb(10 37 44 / 91%), rgb(10 37 44 / 72%)); }
+.ark-portal-content { padding-block: 85px; }
+.ark-portal .ark-eyebrow { color: #cfdbbc; }
+.ark-portal h2 { font-size: clamp(2.5rem, 4.3vw, 4.5rem); margin-top: 28px; }
+.ark-portal h2 em { color: #cfdbbc; }
+.ark-portal-content > p:not(.ark-eyebrow) { margin-top: 24px; color: #d3ded5; font-size: 13px; }
+.ark-portal .ark-button { margin-top: 32px; }
+.ark-secure-note { display: flex; justify-content: center; align-items: center; gap: 7px; margin-top: 18px; font-size: 9px; color: #c3d3c8; }
+
+.ark-footer { padding-top: 50px; padding-bottom: 23px; }
+.ark-footer-top { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-bottom: 42px; }
+.ark-footer-name { font-family: Georgia, 'Times New Roman', serif; font-size: 32px; letter-spacing: -.04em; }
+.ark-footer-top p { font-size: 11px; color: #566b59; margin-top: 7px; }
+.ark-partners { display: flex; align-items: center; gap: 34px; }
+.ark-partners img { object-fit: contain; }
+.ark-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid #cdd2c5; padding-top: 22px; font-size: 8px; letter-spacing: .08em; color: #546359; }
+.ark-footer-bottom a { display: inline-flex; gap: 12px; align-items: center; letter-spacing: 0; font-size: 10px; }
+.ark-login-return { background: #021b38; padding: 10px 24px; }
+.ark-login-return button { background: transparent; border: 0; color: #e5edf5; font-size: 12px; cursor: pointer; padding: 5px; }
+.ark-login-return button:focus-visible { outline: 2px solid #e5edf5; outline-offset: 4px; }
+
+.ark-landing[data-reveal-ready] [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+.ark-landing[data-reveal-ready] [data-reveal].ark-is-visible { opacity: 1; transform: none; }
+.ark-landing[data-motion-paused='true'] *, .ark-landing[data-motion-paused='true'] *::before { animation-play-state: paused !important; }
+@keyframes ark-current-flow { to { stroke-dashoffset: -300; } }
+@keyframes ark-map-scan { 0%, 100% { top: -12%; opacity: 0; } 10% { opacity: 1; } 85% { top: 100%; opacity: .5; } 90% { opacity: 0; } }
+
+@media (min-width: 1800px) {
+  .ark-header { left: calc((100% - 1580px) / 2); right: calc((100% - 1580px) / 2); }
+  .ark-hero-content, .ark-hero-foot { width: min(1580px, 88%); }
+}
+@media (max-width: 1000px) {
+  .ark-nav { gap: 22px; }
+  .ark-header { gap: 20px; }
+  .ark-hero { min-height: 760px; }
+  .ark-hero h1 { font-size: clamp(3rem, 6.3vw, 4.5rem); }
+  .ark-story-layout { gap: 5%; }
+  .ark-story-intro { font-size: 16px !important; }
+  .ark-section-heading { gap: 6%; grid-template-columns: 1.25fr 1fr; }
+  .ark-stages { gap: 20px; }
+  .ark-signals { grid-template-columns: repeat(2, 1fr); }
+  .ark-signal:not(:nth-child(3n + 1)) { border-left: 0; padding-left: 0; }
+  .ark-signal:nth-child(even) { border-left: 1px solid #37524f; padding-left: 30px; }
+  .ark-study-layout { grid-template-columns: .8fr 1.2fr; gap: 5%; }
+  .ark-map-frame figcaption { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .ark-evidence-flow strong { font-size: 21px; }
+  .ark-evidence-flow svg { right: 10px; width: 13px; }
+}
+@media (max-width: 700px) {
+  .ark-container { width: 88%; }
+  .ark-header { top: 20px; gap: 12px; padding-bottom: 17px; flex-wrap: wrap; }
+  .ark-brand { gap: 8px; }
+  .ark-brand img { width: 27px; height: 36px; }
+  .ark-brand > span { font-size: 14px; letter-spacing: .12em; }
+  .ark-brand small { font-size: 6px; letter-spacing: .09em; }
+  .ark-header-access { margin-left: auto; font-size: 10px; padding: 9px 12px; min-height: 38px; gap: 9px; }
+  .ark-nav { order: 3; width: 100%; margin-left: 0; justify-content: space-between; gap: 15px; }
+  .ark-nav a { font-size: 10px; padding: 7px 0 0; }
+  .ark-hero { height: 100svh; min-height: 720px; max-height: 1050px; }
+  .ark-hero-content { padding-top: 200px; }
+  .ark-hero-content > .ark-eyebrow { font-size: 8px !important; letter-spacing: .1em; margin-bottom: 25px; }
+  .ark-hero h1 { font-size: clamp(2.5rem, 7.8vw, 3.5rem); line-height: 1.13; }
+  .ark-hero-description { font-size: 12px !important; margin-top: 23px !important; }
+  .ark-actions { gap: 10px; margin-top: 26px; }
+  .ark-button { min-height: 47px; font-size: 10px; padding: 13px 17px; gap: 18px; }
+  .ark-hero-wordmark { font-size: 14.5vw; }
+  .ark-hero-caption { font-size: 7px; letter-spacing: .04em; margin-top: 20px; gap: 12px; }
+  .ark-footage-label { display: none; }
+  .ark-motion-control { font-size: 9px; white-space: nowrap; }
+  .ark-section-marker { margin-bottom: 40px; gap: 12px; }
+  .ark-section-marker .ark-eyebrow { font-size: 8px !important; letter-spacing: .12em; }
+  .ark-marker-line { margin-left: 5px; }
+  .ark-story-layout, .ark-section-heading, .ark-study-layout { grid-template-columns: 1fr; gap: 40px; }
+  .ark-story h2 { font-size: clamp(3.3rem, 12vw, 4.8rem); }
+  .ark-story-right { max-width: 500px; }
+  .ark-river-diagram { margin-top: 0; margin-bottom: 25px; height: 265px; }
+  .ark-story-right > p { font-size: 14px; }
+  .ark-landscape-words { margin-top: 45px; gap: 12px; font-size: 17px; flex-wrap: wrap; }
+  .ark-section-heading > p { max-width: 450px; font-size: 14px; }
+  .ark-section-heading { gap: 25px; margin-bottom: 40px; }
+  .ark-landing h2 { font-size: clamp(2.65rem, 8.3vw, 4rem); }
+  .ark-stages { grid-template-columns: repeat(2, 1fr); column-gap: 25px; row-gap: 37px; margin-top: 40px; }
+  .ark-stages h3 { margin-top: 20px; font-size: 26px; }
+  .ark-stages p { font-size: 12px; margin-top: 10px; }
+  .ark-process-note { margin-top: 36px !important; font-size: 9px !important; align-items: flex-start; }
+  .ark-process-note svg { flex-shrink: 0; margin-top: 2px; }
+  .ark-signals { grid-template-columns: 1fr; }
+  .ark-signal, .ark-signal:nth-child(even) { padding: 29px 0; border-left: 0; }
+  .ark-signal h3 { margin-top: 21px; font-size: 25px; }
+  .ark-signal p { max-width: 450px; }
+  .ark-signal-top > span { font-size: 8px; }
+  .ark-study-copy > p { max-width: 450px; font-size: 14px; }
+  .ark-map-facts { max-width: 450px; }
+  .ark-map-top, .ark-map-frame figcaption { padding: 15px; font-size: 7px; }
+  .ark-map-image { padding: 6px; }
+  .ark-evidence-flow { flex-direction: column; border-top: 0; border-left: 1px solid #78907a; max-width: 280px; margin-top: 40px; gap: 26px; }
+  .ark-evidence-flow li { padding: 0 0 0 24px; display: flex; align-items: center; gap: 18px; }
+  .ark-evidence-flow li::before { left: -3px; top: 13px; }
+  .ark-evidence-flow li > span { margin: 0; }
+  .ark-evidence-flow strong { font-size: 25px; }
+  .ark-evidence-flow svg { right: 0; bottom: 8px; }
+  .ark-current-copy { max-width: 340px; font-size: 12px !important; }
+  .ark-current .ark-eyebrow { font-size: 8px !important; letter-spacing: .1em; }
+  .ark-portal { min-height: 500px; }
+  .ark-portal-content { padding-block: 70px; }
+  .ark-portal h2 { font-size: clamp(2.4rem, 7.8vw, 3.6rem); }
+  .ark-desktop-break { display: none; }
+  .ark-footer-top { flex-direction: column; align-items: flex-start; gap: 30px; padding-bottom: 35px; }
+  .ark-partners { gap: 30px; }
+  .ark-footer-bottom { flex-wrap: wrap; gap: 20px; font-size: 7px; }
+  .ark-footer-bottom > span:first-child { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ark-landing *, .ark-landing *::before, .ark-landing *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .ark-landing[data-reveal-ready] [data-reveal] { opacity: 1; transform: none; }
+  .ark-landing .ark-button:hover { transform: none; }
+  .ark-map-scan { display: none; }
+}
+
+
+/* ==========================================================================
+   ARKAVATHI INSTITUTIONAL HEADER + PROJECT FOOTER
+   CNNL / Government of Karnataka / NakshaTech
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   LANDING HEADER - CNNL + GOVERNMENT OF KARNATAKA
+   -------------------------------------------------------------------------- */
+
+.ark-institution-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 365px;
+}
+
+.ark-institution-brand .ark-brand-cnnl-logo {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.ark-brand > .ark-brand-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  line-height: 1.15;
+}
+
+.ark-brand-copy strong {
+  color: var(--ark-paper);
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .015em;
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+.ark-brand-copy small {
+  display: block;
+  margin-top: 5px;
+
+  color: #c7d5ce;
+
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  line-height: 1.2;
+
+  text-transform: uppercase;
+}
+
+.ark-brand-divider {
+  display: block;
+
+  width: 1px;
+  height: 38px;
+
+  flex: 0 0 auto;
+
+  background: rgb(243 241 233 / 25%);
+
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+}
+
+.ark-institution-brand .ark-brand-karnataka-logo {
+  width: 34px;
+  height: 44px;
+
+  flex: 0 0 auto;
+
+  object-fit: contain;
+}
+
+
+/* --------------------------------------------------------------------------
+   EXPANDED INSTITUTIONAL FOOTER
+   -------------------------------------------------------------------------- */
+
+.ark-footer-expanded {
+  padding-top: 68px;
+  padding-bottom: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e7e9dd 0%,
+      #eef0e7 100%
+    );
+
+  color: var(--ark-ink);
+}
+
+.ark-footer-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(150px, .48fr)
+    minmax(270px, .82fr);
+
+  gap: clamp(38px, 5vw, 74px);
+
+  align-items: start;
+
+  padding-bottom: 55px;
+}
+
+
+/* Project authority */
+
+.ark-footer-authority {
+  min-width: 0;
+}
+
+.ark-footer-authority-row {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding-bottom: 28px;
+
+  border-bottom: 1px solid #c8cec1;
+}
+
+.ark-footer-cnnl-logo {
+  width: 62px;
+  height: 62px;
+
+  object-fit: contain;
+}
+
+.ark-footer-state-logo {
+  width: 47px;
+  height: 58px;
+
+  object-fit: contain;
+}
+
+.ark-footer-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #607165;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+}
+
+.ark-footer-authority-copy h3 {
+  margin: 0;
+
+  color: var(--ark-ink);
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: clamp(1.25rem, 1.7vw, 1.65rem);
+
+  font-weight: 400;
+
+  letter-spacing: -.025em;
+
+  line-height: 1.12;
+}
+
+.ark-footer-authority-copy p {
+  margin-top: 7px !important;
+
+  color: #617066;
+
+  font-size: 10px !important;
+
+  letter-spacing: .035em;
+}
+
+.ark-footer-project-identity {
+  padding-top: 27px;
+}
+
+.ark-footer-project-identity .ark-footer-name {
+  display: block;
+
+  color: var(--ark-ink);
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 36px;
+
+  letter-spacing: -.045em;
+}
+
+.ark-footer-project-identity strong {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #456153;
+
+  font-size: 9px;
+
+  letter-spacing: .14em;
+
+  text-transform: uppercase;
+}
+
+.ark-footer-project-identity p {
+  margin-top: 12px !important;
+
+  color: #627267;
+
+  font-size: 11px !important;
+}
+
+
+/* Quick links */
+
+.ark-footer-links {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 14px;
+}
+
+.ark-footer-links > a {
+  position: relative;
+
+  padding-bottom: 3px;
+
+  color: #435c4f;
+
+  font-size: 11px;
+
+  transition:
+    color .2s ease,
+    transform .2s ease;
+}
+
+.ark-footer-links > a:hover {
+  color: var(--ark-green);
+
+  transform: translateX(3px);
+}
+
+.ark-footer-portal-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 7px;
+
+  padding: 0 0 7px;
+
+  border: 0;
+  border-bottom: 1px solid #799080;
+
+  background: transparent;
+
+  color: var(--ark-green);
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* NakshaTech */
+
+.ark-footer-partner {
+  min-width: 0;
+}
+
+.ark-footer-naksha-brand {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 57px;
+}
+
+.ark-footer-naksha-brand img {
+  display: block;
+
+  width: 176px;
+  max-width: 100%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+.ark-footer-partner-tagline {
+  margin-top: 6px !important;
+
+  color: #557064;
+
+  font-size: 8px !important;
+  font-weight: 700;
+
+  letter-spacing: .11em;
+
+  text-transform: uppercase;
+}
+
+.ark-footer-contact {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin-top: 22px;
+}
+
+.ark-footer-contact a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #405c4f;
+
+  font-size: 10.5px;
+
+  transition: color .2s ease;
+}
+
+.ark-footer-contact a:hover {
+  color: #1f4938;
+}
+
+.ark-footer-address {
+  margin-top: 21px;
+
+  color: #607066;
+
+  font-size: 10px;
+
+  font-style: normal;
+
+  line-height: 1.7;
+}
+
+
+/* Bottom legal/project strip */
+
+.ark-footer-expanded .ark-footer-bottom {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    auto;
+
+  align-items: center;
+
+  gap: 28px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid #c8cec1;
+
+  color: #5c6e62;
+
+  font-size: 8px;
+
+  letter-spacing: .055em;
+}
+
+.ark-footer-expanded .ark-footer-bottom > span:first-child {
+  line-height: 1.6;
+}
+
+.ark-footer-expanded .ark-footer-bottom a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #425f50;
+
+  font-size: 9px;
+
+  letter-spacing: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1180px) {
+
+  .ark-institution-brand {
+    min-width: 315px;
+  }
+
+  .ark-brand-copy strong {
+    font-size: 11.5px;
+  }
+
+  .ark-brand-copy small {
+    font-size: 6.5px;
+  }
+
+}
+
+
+@media (max-width: 1000px) {
+
+  .ark-footer-grid {
+    grid-template-columns:
+      minmax(0, 1.2fr)
+      minmax(160px, .65fr);
+  }
+
+  .ark-footer-partner {
+    grid-column: 1 / -1;
+
+    padding-top: 32px;
+
+    border-top: 1px solid #c8cec1;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .ark-institution-brand {
+    width: calc(100% - 116px);
+    min-width: 0;
+
+    gap: 6px;
+  }
+
+  .ark-institution-brand .ark-brand-cnnl-logo {
+    width: 31px;
+    height: 33px;
+  }
+
+  .ark-institution-brand .ark-brand-karnataka-logo {
+    width: 25px;
+    height: 32px;
+  }
+
+  .ark-brand-divider {
+    height: 29px;
+  }
+
+  .ark-brand > .ark-brand-copy {
+    min-width: 0;
+  }
+
+  .ark-brand-copy strong {
+    font-size: 9.5px;
+
+    line-height: 1.15;
+
+    white-space: normal;
+  }
+
+  .ark-brand-copy small {
+    margin-top: 3px;
+
+    font-size: 6px;
+
+    letter-spacing: .08em;
+  }
+
+  /*
+   * The institutional identity is taller than the old compact ARKAVATHI mark,
+   * so give the mobile hero slightly more header clearance.
+   */
+  .ark-hero-content {
+    padding-top: 220px;
+  }
+
+
+  .ark-footer-expanded {
+    padding-top: 55px;
+  }
+
+  .ark-footer-grid {
+    grid-template-columns: 1fr;
+
+    gap: 37px;
+
+    padding-bottom: 42px;
+  }
+
+  .ark-footer-partner {
+    grid-column: auto;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #c8cec1;
+  }
+
+  .ark-footer-links {
+    padding-top: 28px;
+
+    border-top: 1px solid #c8cec1;
+  }
+
+  .ark-footer-authority-row {
+    gap: 10px;
+  }
+
+  .ark-footer-cnnl-logo {
+    width: 49px;
+    height: 49px;
+  }
+
+  .ark-footer-state-logo {
+    width: 37px;
+    height: 47px;
+  }
+
+  .ark-footer-authority-copy h3 {
+    font-size: 18px;
+  }
+
+  .ark-footer-project-identity .ark-footer-name {
+    font-size: 31px;
+  }
+
+  .ark-footer-expanded .ark-footer-bottom {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+}
+
+
+
+/* ==========================================================================
+   NAKSHATECH THEME BRAND INTEGRATION V2 FIXED
+   Theme-native NakshaTech identity for header and footer.
+   ========================================================================== */
+
+
+/* =========================
+   HEADER NAKSHATECH
+   ========================= */
+
+.ark-institution-brand {
+  min-width: 535px;
+}
+
+.ark-brand-partner-divider {
+  margin-left: 2px;
+}
+
+.ark-header-naksha {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  flex: 0 0 auto;
+
+  min-width: 138px;
+}
+
+.ark-header-naksha-mark {
+  display: block;
+
+  width: 31px !important;
+  height: 31px !important;
+
+  flex: 0 0 auto;
+
+  object-fit: contain;
+
+  background: transparent;
+
+  filter:
+    saturate(1.08)
+    brightness(1.15);
+}
+
+.ark-header-naksha-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-width: 0;
+
+  line-height: 1;
+}
+
+.ark-header-naksha-copy strong {
+  color: #f3f1e9;
+
+  font-size: 10.5px;
+  font-weight: 650;
+
+  letter-spacing: .17em;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.ark-header-naksha-copy small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #9fc1b5;
+
+  font-size: 5.3px;
+  font-weight: 700;
+
+  letter-spacing: .10em;
+
+  line-height: 1.1;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   FOOTER NAKSHATECH
+   ========================= */
+
+.ark-footer-naksha-brand {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  min-height: 78px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent !important;
+
+  color: var(--ark-ink);
+
+  box-shadow: none !important;
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease;
+}
+
+.ark-footer-naksha-brand:hover {
+  opacity: .9;
+
+  transform: translateY(-1px);
+}
+
+
+/*
+ * Transparent NakshaTech symbol only.
+ * No white rectangle.
+ * No dark rectangle.
+ * No background panel.
+ */
+.ark-footer-naksha-mark {
+  display: block;
+
+  width: 57px !important;
+  height: 57px !important;
+
+  flex: 0 0 auto;
+
+  object-fit: contain;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.ark-footer-naksha-copy {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.ark-footer-naksha-copy strong {
+  color: #08778e;
+
+  font-size: 23px;
+  font-weight: 600;
+
+  letter-spacing: .18em;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.ark-footer-naksha-copy small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #557168;
+
+  font-size: 6.7px;
+  font-weight: 700;
+
+  letter-spacing: .18em;
+
+  line-height: 1.1;
+
+  white-space: nowrap;
+}
+
+
+/* Give partner block better balance. */
+
+.ark-footer-partner .ark-footer-label {
+  margin-bottom: 16px;
+}
+
+.ark-footer-contact {
+  margin-top: 26px;
+}
+
+.ark-footer-address {
+  margin-top: 24px;
+}
+
+
+/* =========================
+   RESPONSIVE HEADER
+   ========================= */
+
+@media (max-width: 1350px) {
+
+  .ark-institution-brand {
+    min-width: 500px;
+  }
+
+  .ark-header-naksha {
+    min-width: 120px;
+  }
+
+  .ark-header-naksha-copy strong {
+    font-size: 9px;
+  }
+
+  .ark-header-naksha-copy small {
+    font-size: 4.8px;
+  }
+
+}
+
+
+@media (max-width: 1120px) {
+
+  .ark-institution-brand {
+    min-width: 445px;
+  }
+
+  .ark-header-naksha-mark {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .ark-header-naksha {
+    min-width: 100px;
+    gap: 5px;
+  }
+
+  .ark-header-naksha-copy strong {
+    font-size: 7.8px;
+
+    letter-spacing: .12em;
+  }
+
+  .ark-header-naksha-copy small {
+    font-size: 4.2px;
+  }
+
+}
+
+
+@media (max-width: 850px) {
+
+  .ark-institution-brand {
+    min-width: 390px;
+  }
+
+  .ark-header-naksha-copy small {
+    display: none;
+  }
+
+  .ark-header-naksha {
+    min-width: auto;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .ark-institution-brand {
+    width: calc(100% - 116px);
+
+    min-width: 0;
+  }
+
+  .ark-brand-partner-divider {
+    height: 27px;
+  }
+
+  .ark-header-naksha {
+    gap: 3px;
+  }
+
+  .ark-header-naksha-mark {
+    width: 19px !important;
+    height: 19px !important;
+  }
+
+  .ark-header-naksha-copy strong {
+    font-size: 6.3px;
+
+    letter-spacing: .07em;
+  }
+
+
+  .ark-footer-naksha-brand {
+    min-height: 66px;
+
+    gap: 12px;
+  }
+
+  .ark-footer-naksha-mark {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .ark-footer-naksha-copy strong {
+    font-size: 18px;
+
+    letter-spacing: .14em;
+  }
+
+  .ark-footer-naksha-copy small {
+    margin-top: 6px;
+
+    font-size: 5.5px;
+
+    letter-spacing: .12em;
+  }
+
+}
+
+
+/* ==========================================================================
+   KARNATAKA CIRCULAR EMBLEM CLEANUP
+   Removes the old square-background appearance in header and footer.
+   ========================================================================== */
+
+
+/* Header Karnataka emblem */
+
+.ark-institution-brand .ark-brand-karnataka-logo {
+  display: block;
+
+  width: 41px !important;
+  height: 41px !important;
+
+  flex: 0 0 41px;
+
+  object-fit: contain;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  border-radius: 50%;
+
+  box-shadow: none !important;
+
+  padding: 0 !important;
+
+  /*
+   * Final circular crop protects against any remaining
+   * transparent-canvas corners.
+   */
+  clip-path: circle(49% at 50% 50%);
+}
+
+
+/* Footer Karnataka emblem */
+
+.ark-footer-state-logo {
+  display: block;
+
+  width: 54px !important;
+  height: 54px !important;
+
+  object-fit: contain;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  border-radius: 50%;
+
+  box-shadow: none !important;
+
+  padding: 0 !important;
+
+  clip-path: circle(49% at 50% 50%);
+}
+
+
+/* Preserve clean vertical alignment with CNNL identity */
+
+.ark-footer-authority-row {
+  align-items: center;
+}
+
+.ark-brand-karnataka-logo,
+.ark-footer-state-logo {
+  vertical-align: middle;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1120px) {
+
+  .ark-institution-brand .ark-brand-karnataka-logo {
+    width: 36px !important;
+    height: 36px !important;
+
+    flex-basis: 36px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .ark-institution-brand .ark-brand-karnataka-logo {
+    width: 29px !important;
+    height: 29px !important;
+
+    flex-basis: 29px;
+  }
+
+  .ark-footer-state-logo {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+}

@@ -1,0 +1,13 @@
+import { useEffect, useState } from 'react'
+import { Bell, Check, RefreshCw } from 'lucide-react'
+import { api } from '../lib/api'
+import type { WorkflowNotification } from '../lib/types'
+import { fmtDate } from './WorkflowCommon'
+
+export function NotificationsCentre(){
+  const [items,setItems]=useState<WorkflowNotification[]>([]);const [unreadOnly,setUnreadOnly]=useState(false);const [error,setError]=useState('')
+  async function load(){setError('');try{setItems(await api.notifications(unreadOnly))}catch(e){setError(e instanceof Error?e.message:String(e))}}
+  useEffect(()=>{load()},[unreadOnly])
+  async function mark(id:string){try{await api.markNotificationRead(id);await load()}catch(e){setError(e instanceof Error?e.message:String(e))}}
+  return <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card"><div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><div className="flex items-center gap-2 text-xs font-black uppercase tracking-[.16em] text-navy-700"><Bell size={15}/>Workflow Alerts</div><h2 className="mt-1 text-2xl font-black">Notifications</h2><p className="mt-1 text-sm text-slate-500">Task assignments, correction requests, approvals and integration alerts for this account.</p></div><div className="flex gap-2"><label className="flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-xs font-bold"><input type="checkbox" checked={unreadOnly} onChange={e=>setUnreadOnly(e.target.checked)}/>Unread only</label><button onClick={load} className="rounded-xl border border-slate-300 p-2.5"><RefreshCw size={17}/></button></div></div>{error&&<div className="mt-4 rounded-xl bg-rose-50 p-3 text-sm font-semibold text-rose-800">{error}</div>}<div className="mt-5 space-y-2">{items.map(n=><div key={n.public_id} className={`rounded-2xl border p-4 ${n.is_read?'border-slate-200 bg-white':'border-blue-200 bg-blue-50'}`}><div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"><div><div className="text-[10px] font-black uppercase tracking-wider text-slate-400">{n.notification_type.replace(/_/g,' ')}</div><div className="mt-1 font-black text-slate-900">{n.title}</div><p className="mt-1 text-sm leading-6 text-slate-600">{n.message}</p><div className="mt-2 text-[11px] text-slate-400">{fmtDate(n.created_at)}{n.related_ref?` · ${n.related_ref}`:''}</div></div>{!n.is_read&&<button onClick={()=>mark(n.public_id)} className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-navy-950 px-3 py-2 text-xs font-black text-white"><Check size={14}/>Mark read</button>}</div></div>)}{items.length===0&&<div className="py-10 text-center text-sm text-slate-500">No notifications.</div>}</div></section>
+}

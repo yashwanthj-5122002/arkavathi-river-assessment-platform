@@ -1,0 +1,94 @@
+{
+  "project": "Arkavathi River Pollution Assessment",
+  "generated_at": "2026-10-15T09:53:31+00:00",
+  "note": "The supplied originals are read-only inputs and are never modified. Re-running the commands below regenerates every generated file from the same sources.",
+  "reproducible_commands": [
+    "backend\\.venv\\Scripts\\python.exe scripts\\prepare_arkavathi_gis_data.py drainage",
+    "python scripts\\prepare_arkavathi_gis_data.py elevation",
+    "python scripts\\prepare_arkavathi_gis_data.py manifest"
+  ],
+  "datasets": [
+    {
+      "dataset_id": "drainage-network",
+      "panel_row": "Arkavathi River Data / Drainage Network",
+      "frontend_layer_key": "drainage",
+      "source_path": "C:\\Users\\NT01231\\Downloads\\AI Team\\Drainage network",
+      "source_files": [
+        {
+          "file_name": "Drainage_Network.shp",
+          "size_bytes": 1660740,
+          "sha256": "d958f31c27f21a5643d08cb64503925dfa68e5adb5b8b0e1bb3285b0cda19ed8"
+        },
+        {
+          "file_name": "Drainage_Network.shx",
+          "size_bytes": 104564,
+          "sha256": "1c6e04fb86abc0b9977b96c3a0687c65f56f4e65754a719cf3e774cbb26a2bcb"
+        },
+        {
+          "file_name": "Drainage_Network.dbf",
+          "size_bytes": 1057956,
+          "sha256": "1a83ad4ede6c0122d73a97e0cf096a8ffdc743846a2f4532727f8c8963dc2c02"
+        },
+        {
+          "file_name": "Drainage_Network.prj",
+          "size_bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "file_name": "Drainage_Network.cpg",
+          "size_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        }
+      ],
+      "generated_outputs": [
+        {
+          "path": "frontend/public/gis/arkavathi/drainage-network.geojson"
+        }
+      ],
+      "legacy_source_preserved": {
+        "path": "frontend/public/gis/arkavathi/drainage.geojson",
+        "note": "Previous drainage renderer. Kept on disk, no longer referenced by the atlas layer."
+      }
+    },
+    {
+      "dataset_id": "elevation-bands",
+      "panel_row": "Arkavathi River Data / Elevation Bands",
+      "frontend_layer_key": "elevation",
+      "source_path": "C:\\Users\\NT01231\\Downloads\\AI Team\\Elevation Band\\Arkavathi_Dem1.tif",
+      "source_files": [
+        {
+          "file_name": "Arkavathi_Dem1.tif",
+          "size_bytes": 29364198,
+          "sha256": "170c070a29691ca1a89baa47f2ed09423fe51cd7a249ecb21335f6c638e6ec08"
+        },
+        {
+          "file_name": "Arkavathi_Dem1.tfw",
+          "size_bytes": 81,
+          "sha256": "63692926fbbff527523a5aba1790ee08951d4cfb8b92939cac772f12210693d5"
+        },
+        {
+          "file_name": "Arkavathi_Dem1.tif.aux.xml",
+          "size_bytes": 570,
+          "sha256": "2623878c4d43df5f5105e54d45adbcd24cfe1820480352d7f7a364779afafe28"
+        },
+        {
+          "file_name": "Arkavathi_Dem1.tif.ovr",
+          "size_bytes": 1547150,
+          "sha256": "3d16c04907d24322d32f402cbc64580b0526be6abba701170a0318c6abb4dbb6"
+        }
+      ],
+      "generated_outputs": [
+        {
+          "path": "frontend/public/gis/arkavathi/elevation-dem1.png"
+        },
+        {
+          "path": "frontend/public/gis/arkavathi/elevation-dem1.manifest.json"
+        }
+      ],
+      "legacy_source_preserved": {
+        "path": "frontend/public/gis/arkavathi/elevation-bands.geojson",
+        "note": "Previous 7-band polygon layer. Kept on disk, no longer rendered."
+      }
+    }
+  ]
+}

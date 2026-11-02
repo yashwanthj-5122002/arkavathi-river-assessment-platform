@@ -1,0 +1,224 @@
+/* Phase 2: operational surfaces. Keep this layer inside authenticated modules.
+   The public pages and the approved project overview remain on Phase 1. */
+.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content,
+.ark-role-portal {
+  color: var(--ark-text);
+}
+.ark-role-portal { background: var(--ark-bg); }
+.ark-role-portal > div { gap: var(--ark-content-gap); }
+.ark-role-portal > div > aside {
+  background: var(--ark-deep);
+  border: 1px solid rgb(217 206 173 / 20%);
+  border-radius: var(--ark-radius-md);
+  box-shadow: var(--ark-shadow-sm);
+}
+.ark-role-portal > div > aside nav button {
+  min-height: 44px;
+  border-radius: var(--ark-radius-sm);
+  color: #d7e3da;
+}
+.ark-role-portal > div > aside nav button:hover { background: rgb(166 195 182 / 13%); color: #fff; }
+.ark-role-portal > div > aside nav button.bg-white { background: #315446; color: #fff; box-shadow: inset 3px 0 0 var(--ark-sand); }
+.ark-role-portal > div > aside .text-blue-200,
+.ark-role-portal > div > aside .text-blue-100 { color: #c9dace; }
+
+/* Shared content geometry and type. No map or video canvas dimensions change. */
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) {
+  min-width: 0;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) h2,
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) h3 {
+  letter-spacing: -.025em;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(section, article, form, div)[class*='rounded-2xl'][class*='bg-white'] {
+  border-color: var(--ark-border);
+  background-color: transparent;
+  box-shadow: none;
+}
+/* Keep operational panels see-through while retaining the existing typography.
+   Inputs and buttons are separate controls and keep their own surfaces. */
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(section, article, form, div)[class*='rounded-'][class*='bg-white']:not([class*='rounded-full']) {
+  background-color: transparent;
+  box-shadow: none;
+}
+/* Apply the same panel treatment to the overview and authenticated modules. */
+:is(.ark-workspace .ark-workspace-content, .ark-role-portal main) :is(section, article, form, div)[class*='rounded-'][class*='bg-white']:not([class*='rounded-full']) {
+  background-color: transparent;
+  box-shadow: none;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) [class*='rounded-2xl'][class*='bg-slate-50'] {
+  border-color: var(--ark-border);
+  background-color: var(--ark-surface-soft);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(.bg-blue-50, .bg-cyan-50, .bg-sky-50, .bg-violet-50) {
+  background-color: var(--ark-teal-soft);
+  border-color: var(--ark-border);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(.text-blue-700, .text-blue-800, .text-cyan-800, .text-sky-950, .text-violet-700, .text-violet-800) {
+  color: var(--ark-green);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(.bg-gradient-to-r, .bg-gradient-to-br).from-navy-950,
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) .bg-gradient-to-r.from-slate-950 {
+  background-image: linear-gradient(110deg, var(--ark-deep), var(--ark-navy-soft));
+}
+
+/* Table treatment retains each module's scrolling container and column widths. */
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) table {
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--ark-text);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) thead {
+  background: var(--ark-surface-soft);
+  color: var(--ark-text-muted);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) th {
+  min-height: 42px;
+  padding-block: 11px;
+  border-bottom: 1px solid var(--ark-border);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) td {
+  min-height: 46px;
+  padding-block: 11px;
+  border-bottom: 1px solid var(--ark-border);
+  line-height: 1.45;
+  vertical-align: middle;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) tbody tr:hover:not(:has(> td[colspan])) {
+  background-color: var(--ark-surface-soft);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) tbody tr:is(.bg-blue-50, .bg-violet-50) {
+  background-color: var(--ark-teal-soft);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) tbody tr:last-child > td {
+  border-bottom: 0;
+}
+
+/* Forms and filters share the gateway's control geometry without changing values. */
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) label {
+  color: var(--ark-text-muted);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']), select, textarea) {
+  min-height: 40px;
+  max-width: 100%;
+  border: 1px solid var(--ark-border-strong);
+  border-radius: var(--ark-radius-sm);
+  background: var(--ark-surface-elevated);
+  color: var(--ark-text);
+  box-shadow: none;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) textarea {
+  min-height: 96px;
+  line-height: 1.5;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(input, select, textarea)::placeholder {
+  color: var(--ark-text-soft);
+  opacity: 1;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(input, select, textarea):focus-visible {
+  border-color: var(--ark-teal-hover);
+  outline: 2px solid var(--ark-teal-soft);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(input[type='checkbox'], input[type='radio']) {
+  accent-color: var(--ark-green);
+}
+
+/* Operational actions: compact table controls keep their existing size. */
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) button {
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) button:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-blue-600, .bg-blue-700, .bg-violet-800) {
+  background-color: var(--ark-green);
+  color: #fff;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) button:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-blue-600, .bg-blue-700, .bg-violet-800):hover {
+  background-color: var(--ark-teal-hover);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) button:is(.bg-white, .bg-slate-50):not(.maplibregl-control-container *) {
+  border-color: var(--ark-border-strong);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) button:is(.bg-white, .bg-slate-50):hover {
+  background-color: var(--ark-teal-soft);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) button:focus-visible,
+.ark-role-portal > div > aside button:focus-visible {
+  outline: 2px solid var(--ark-teal);
+  outline-offset: 2px;
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+/* Cards, badges, messages, empty states, and overlay surfaces. */
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(.rounded-full, .rounded-lg)[class*='bg-slate-100'] {
+  background: var(--ark-surface-soft);
+  color: var(--ark-text-muted);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(.rounded-full, .rounded-lg)[class*='bg-blue-100'],
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(.rounded-full, .rounded-lg)[class*='bg-violet-100'] {
+  background: var(--ark-teal-soft);
+  color: var(--ark-green);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) [class*='border-dashed'][class*='bg-slate-50'] {
+  border-color: var(--ark-border-strong);
+  background: var(--ark-surface-soft);
+  color: var(--ark-text-muted);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) .fixed.inset-0 > :is(div, form)[class*='bg-white'] {
+  border: 1px solid var(--ark-border);
+  border-radius: var(--ark-radius-lg);
+  background: transparent;
+  box-shadow: var(--ark-shadow-lg);
+}
+:is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) .fixed.inset-0[class*='bg-slate-950'] {
+  background-color: rgb(7 30 36 / 68%);
+}
+
+/* GIS and Street View: tune surrounding tools while leaving map/video space intact. */
+.ark-workspace[data-page='gis-map'] .ark-workspace-content > section,
+.ark-workspace[data-page='street-view'] .ark-workspace-content > section {
+  border-color: var(--ark-border);
+}
+.ark-workspace[data-page='gis-map'] .ark-workspace-content > section > div:first-child button,
+.ark-workspace[data-page='street-view'] .ark-workspace-content > section > div:first-child button {
+  min-height: 36px;
+  border-radius: var(--ark-radius-sm);
+}
+.ark-workspace[data-page='gis-map'] .ark-workspace-content > section > div:first-child button.bg-navy-900 {
+  background: var(--ark-green);
+  border-color: var(--ark-green);
+}
+.ark-workspace[data-page='street-view'] .ark-workspace-content > section > div:first-child {
+  border-color: var(--ark-border);
+}
+
+@media (min-width: 1366px) and (max-width: 1535px) {
+  .ark-workspace[data-page='street-view'] .ark-workspace-content > section > div:nth-child(2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ark-workspace[data-page='street-view'] .ark-workspace-content > section > div:nth-child(2) > div:nth-child(2) > section > div:first-child {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 1439px) {
+  .ark-workspace[data-page='gis-map'] .ark-workspace-content,
+  .ark-workspace[data-page='street-view'] .ark-workspace-content { padding: 14px; }
+  .ark-workspace[data-page='gis-map'] .ark-workspace-content > section { padding: 14px; }
+}
+@media (max-width: 767px) {
+  .ark-role-portal > div { padding: 14px; }
+  .ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content { padding: 14px; }
+  :is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) :is(section, article)[class*='p-5'] { padding: 16px; }
+  :is(.ark-workspace[data-page]:not([data-page='overview']) .ark-workspace-content, .ark-role-portal main) .fixed.inset-0 { padding: 10px; }
+}
